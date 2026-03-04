@@ -1,164 +1,160 @@
-const express = require("express");
-const crypto  = require("crypto");
-const cors    = require("cors");
+const express  = require("express");
+const crypto   = require("crypto");
+const cors     = require("cors");
+const { Pool } = require("pg");
 
 const app = express();
 app.use(express.json());
-app.use(cors()); // permet au CRM (front-end) d'appeler ce serveur
+app.use(cors());
 
-// ─── Stockage en mémoire (remplacé par une vraie DB si besoin) ────────────────
-// Pour Railway : les données persistent tant que le serveur tourne.
-// Pour une vraie persistance, connectez une DB Postgres via Railway.
-const orders = [];
+// ─── PostgreSQL ───────────────────────────────────────────────────────────────
+// Railway injecte DATABASE_URL automatiquement quand vous liez la DB
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+});
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-function uid() {
-  return crypto.randomUUID();
+async function initDB() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS orders (
+      id                   TEXT PRIMARY KEY,
+      created_at           TIMESTAMPTZ DEFAULT NOW(),
+      source               TEXT,
+      typeform_response_id TEXT UNIQUE,
+      status               TEXT DEFAULT 'new',
+      freelance_id         TEXT,
+      deadline             TEXT,
+      project_type         TEXT,
+      client_name          TEXT,
+      client_email         TEXT,
+      client_phone         TEXT,
+      company              TEXT,
+      description          TEXT,
+      landing_objective    TEXT,
+      offers               TEXT,
+      assets               TEXT,
+      colors               TEXT,
+      inspiration          TEXT
+    )
+  `);
+  console.log("✅ Table orders prête");
 }
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 function deadline7() {
   return new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
 }
 
-/**
- * Récupère la valeur d'une réponse Typeform à partir du ref du champ.
- * Les "ref" sont définis dans Typeform → Builder → chaque question a un ref.
- */
-function getAnswer(answers, fields, ref) {
-  const fieldIdx = fields.findIndex(f => f.ref === ref);
-  if (fieldIdx === -1) return "";
+function getAnswer(answers, ref) {
   const ans = answers.find(a => a.field && a.field.ref === ref);
   if (!ans) return "";
-
-  switch (ans.type) {
-    case "text":
-    case "long_text":
-    case "short_text":
-      return ans.text || "";
-    case "url":
-      return ans.url || "";
-    case "email":
-      return ans.email || "";
-    case "phone_number":
-      return ans.phone_number || "";
-    case "choice":
-      return ans.choice?.label || "";
-    case "choices":
-      return ans.choices?.labels?.join(", ") || "";
-    case "date":
-      return ans.date || "";
-    default:
-      return JSON.stringify(ans);
-  }
+  return ans.text || ans.email || ans.phone_number || ans.url
+    || ans.choice?.label || ans.choices?.labels?.join(", ") || "";
 }
 
-// ─── Webhook Typeform ─────────────────────────────────────────────────────────
-// URL à coller dans Typeform → Connect → Webhooks :
-// https://VOTRE-APP.railway.app/webhook/typeform
-app.post("/webhook/typeform", (req, res) => {
+function getByIndex(answers, idx) {
+  const ans = answers[idx];
+  if (!ans) return "";
+  return ans.text || ans.email || ans.phone_number || ans.url
+    || ans.choice?.label || ans.choices?.labels?.join(", ") || "";
+}
+
+// ─── POST /webhook/typeform ───────────────────────────────────────────────────
+app.post("/webhook/typeform", async (req, res) => {
   try {
     const { form_response } = req.body;
     if (!form_response) return res.sendStatus(400);
 
     const answers = form_response.answers || [];
-    const fields  = form_response.definition?.fields || [];
 
-    // ──────────────────────────────────────────────────────────────────────────
-    // MAPPING DES CHAMPS — Formulaire Openshore (rJdfntNq)
-    //
-    // Pour trouver les vrais refs de vos champs :
-    // 1. Allez sur https://api.typeform.com/forms/rJdfntNq
-    //    (avec votre Personal Token dans le header Authorization)
-    // 2. Cherchez "ref" dans chaque objet "field"
-    // 3. Remplacez les valeurs ci-dessous par vos vrais refs
-    //
-    // En attendant, ce code tente de parser par position (order) comme fallback.
-    // ──────────────────────────────────────────────────────────────────────────
+    // Champ 2 : identité client (texte libre multi-ligne)
+    const identity = getAnswer(answers, "client_identity") || getByIndex(answers, 1);
+    const lines    = identity.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
 
-    // Fallback : récupérer par index si les refs ne correspondent pas encore
-    function getByIndex(idx) {
-      const ans = answers[idx];
-      if (!ans) return "";
-      if (ans.text)         return ans.text;
-      if (ans.email)        return ans.email;
-      if (ans.phone_number) return ans.phone_number;
-      if (ans.url)          return ans.url;
-      if (ans.choice)       return ans.choice.label;
-      if (ans.choices)      return ans.choices.labels.join(", ");
-      return "";
-    }
+    const id = crypto.randomUUID();
 
-    // Champ 2 : "Présentez vous Prénom, nom, numéro de téléphone email entreprise"
-    // C'est souvent un champ texte libre — on essaie de l'identifier
-    const identity    = getAnswer(answers, fields, "client_identity") || getByIndex(1);
-    const lines       = identity.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
+    await pool.query(`
+      INSERT INTO orders (
+        id, source, typeform_response_id, status, freelance_id, deadline, project_type,
+        client_name, client_email, client_phone, company, description,
+        landing_objective, offers, assets, colors, inspiration
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
+      ON CONFLICT (typeform_response_id) DO NOTHING
+    `, [
+      id,
+      "typeform",
+      form_response.token,
+      "new",
+      null,
+      deadline7(),
+      "Landing page",
+      getAnswer(answers,"client_name")       || lines[0] || identity,
+      getAnswer(answers,"client_email")      || lines[3] || "",
+      getAnswer(answers,"client_phone")      || lines[2] || "",
+      getAnswer(answers,"client_company")    || lines[4] || "",
+      getAnswer(answers,"landing_dream")     || getByIndex(answers,0),
+      getAnswer(answers,"landing_objective") || getByIndex(answers,2),
+      getAnswer(answers,"offers_description")|| getByIndex(answers,3),
+      getAnswer(answers,"assets_link")       || getByIndex(answers,4),
+      getAnswer(answers,"brand_colors")      || getByIndex(answers,5),
+      getAnswer(answers,"inspiration_url")   || getByIndex(answers,6),
+    ]);
 
-    const order = {
-      id:                 uid(),
-      createdAt:          new Date().toISOString(),
-      source:             "typeform",
-      typeformResponseId: form_response.token,
-      status:             "new",
-      freelanceId:        null,
-      deadline:           deadline7(),
-      projectType:        "Landing page",
-
-      // Champ 1 — "Décrivez nous votre landing page de rêve"
-      description:        getAnswer(answers, fields, "landing_dream")        || getByIndex(0),
-
-      // Champ 2 — "Présentez vous Prénom, nom, numéro de téléphone email entreprise"
-      clientName:         getAnswer(answers, fields, "client_name")          || lines[0] || identity,
-      clientPhone:        getAnswer(answers, fields, "client_phone")         || lines[2] || "",
-      clientEmail:        getAnswer(answers, fields, "client_email")         || lines[3] || "",
-      company:            getAnswer(answers, fields, "client_company")       || lines[4] || "",
-
-      // Champ 3 — "Objectif de la landing page"
-      landingObjective:   getAnswer(answers, fields, "landing_objective")    || getByIndex(2),
-
-      // Champ 4 — "Décrivez vos offres"
-      offers:             getAnswer(answers, fields, "offers_description")   || getByIndex(3),
-
-      // Champ 5 — "Ajoutez vos documents (logos, photos…)"
-      assets:             getAnswer(answers, fields, "assets_link")          || getByIndex(4),
-
-      // Champ 6 — "Choisissez 3 couleurs"
-      colors:             getAnswer(answers, fields, "brand_colors")         || getByIndex(5),
-
-      // Champ 7 — "Une inspiration web ?"
-      inspiration:        getAnswer(answers, fields, "inspiration_url")      || getByIndex(6),
-    };
-
-    orders.unshift(order); // ajoute en tête de liste
-    console.log(`✅ Nouvelle commande reçue : ${order.clientName} (${order.id})`);
+    console.log(`✅ Commande reçue depuis Typeform (token: ${form_response.token})`);
     res.sendStatus(200);
-
   } catch (err) {
-    console.error("❌ Erreur webhook :", err);
+    console.error("❌ Erreur webhook :", err.message);
     res.sendStatus(500);
   }
 });
 
-// ─── API — récupérer les nouvelles commandes (appelée par le CRM) ─────────────
-// Le CRM envoie un GET /orders?since=ISO_DATE pour ne récupérer que les nouvelles
-app.get("/orders", (req, res) => {
-  const since = req.query.since ? new Date(req.query.since) : null;
-  const result = since
-    ? orders.filter(o => new Date(o.createdAt) > since)
-    : orders;
-  res.json(result);
+// ─── GET /orders ──────────────────────────────────────────────────────────────
+app.get("/orders", async (req, res) => {
+  try {
+    const { rows } = await pool.query("SELECT * FROM orders ORDER BY created_at DESC");
+    res.json(rows.map(r => ({
+      id:                 r.id,
+      createdAt:          r.created_at,
+      source:             r.source,
+      typeformResponseId: r.typeform_response_id,
+      status:             r.status,
+      freelanceId:        r.freelance_id,
+      deadline:           r.deadline,
+      projectType:        r.project_type,
+      clientName:         r.client_name,
+      clientEmail:        r.client_email,
+      clientPhone:        r.client_phone,
+      company:            r.company,
+      description:        r.description,
+      landingObjective:   r.landing_objective,
+      offers:             r.offers,
+      assets:             r.assets,
+      colors:             r.colors,
+      inspiration:        r.inspiration,
+    })));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// ─── Health check ─────────────────────────────────────────────────────────────
-app.get("/", (req, res) => {
-  res.json({
-    status:  "✅ Openshore Webhook Server running",
-    orders:  orders.length,
-    uptime:  Math.floor(process.uptime()) + "s",
-  });
+// ─── GET / — health check ─────────────────────────────────────────────────────
+app.get("/", async (req, res) => {
+  try {
+    const { rows } = await pool.query("SELECT COUNT(*) FROM orders");
+    res.json({
+      status: "✅ Openshore Webhook Server running",
+      db:     "✅ PostgreSQL connecté",
+      orders: parseInt(rows[0].count),
+      uptime: Math.floor(process.uptime()) + "s",
+    });
+  } catch (err) {
+    res.json({ status: "✅ Server running", db: "❌ DB non connectée", error: err.message });
+  }
 });
 
-// ─── Démarrage ────────────────────────────────────────────────────────────────
+// ─── Start ────────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Openshore Webhook Server démarré sur le port ${PORT}`);
-});
+initDB()
+  .then(() => app.listen(PORT, () => console.log(`🚀 Port ${PORT}`)))
+  .catch(err => { console.error("❌ DB init failed:", err); process.exit(1); });
+

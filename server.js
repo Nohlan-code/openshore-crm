@@ -7,8 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// ─── PostgreSQL ───────────────────────────────────────────────────────────────
-// Railway injecte DATABASE_URL automatiquement quand vous liez la DB
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
@@ -40,23 +38,22 @@ async function initDB() {
   console.log("✅ Table orders prête");
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 function deadline7() {
   return new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
 }
 
-function getAnswer(answers, ref) {
-  const ans = answers.find(a => a.field && a.field.ref === ref);
-  if (!ans) return "";
-  return ans.text || ans.email || ans.phone_number || ans.url
-    || ans.choice?.label || ans.choices?.labels?.join(", ") || "";
-}
-
+// Récupère la valeur d'une réponse par son index
 function getByIndex(answers, idx) {
   const ans = answers[idx];
   if (!ans) return "";
-  return ans.text || ans.email || ans.phone_number || ans.url
-    || ans.choice?.label || ans.choices?.labels?.join(", ") || "";
+  return ans.text
+    || ans.email
+    || ans.phone_number
+    || ans.url
+    || ans.choice?.label
+    || ans.choices?.labels?.join(", ")
+    || ans.number?.toString()
+    || "";
 }
 
 // ─── POST /webhook/typeform ───────────────────────────────────────────────────
@@ -67,16 +64,24 @@ app.post("/webhook/typeform", async (req, res) => {
 
     const answers = form_response.answers || [];
 
-    // Champ 2 : identité client (texte libre multi-ligne)
-    const identity = getAnswer(answers, "client_identity") || getByIndex(answers, 1);
-    const lines    = identity.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
+    // Mapping par index — ordre réel du formulaire Openshore (rJdfntNq) :
+    // 0 → Décrivez votre landing page de rêve
+    // 1 → Prénom / Nom
+    // 2 → Numéro de téléphone
+    // 3 → Email
+    // 4 → Entreprise
+    // 5 → Objectif de la landing page
+    // 6 → Décrivez vos offres
+    // 7 → Documents (lien)
+    // 8 → 3 couleurs de marque
+    // 9 → Inspiration web (URL)
 
     const id = crypto.randomUUID();
 
     await pool.query(`
       INSERT INTO orders (
         id, source, typeform_response_id, status, freelance_id, deadline, project_type,
-        client_name, client_email, client_phone, company, description,
+        description, client_name, client_phone, client_email, company,
         landing_objective, offers, assets, colors, inspiration
       ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
       ON CONFLICT (typeform_response_id) DO NOTHING
@@ -88,20 +93,21 @@ app.post("/webhook/typeform", async (req, res) => {
       null,
       deadline7(),
       "Landing page",
-      getAnswer(answers,"client_name")       || lines[0] || identity,
-      getAnswer(answers,"client_email")      || lines[3] || "",
-      getAnswer(answers,"client_phone")      || lines[2] || "",
-      getAnswer(answers,"client_company")    || lines[4] || "",
-      getAnswer(answers,"landing_dream")     || getByIndex(answers,0),
-      getAnswer(answers,"landing_objective") || getByIndex(answers,2),
-      getAnswer(answers,"offers_description")|| getByIndex(answers,3),
-      getAnswer(answers,"assets_link")       || getByIndex(answers,4),
-      getAnswer(answers,"brand_colors")      || getByIndex(answers,5),
-      getAnswer(answers,"inspiration_url")   || getByIndex(answers,6),
+      getByIndex(answers, 0),  // description
+      getByIndex(answers, 1),  // clientName
+      getByIndex(answers, 2),  // clientPhone
+      getByIndex(answers, 3),  // clientEmail
+      getByIndex(answers, 4),  // company
+      getByIndex(answers, 5),  // landingObjective
+      getByIndex(answers, 6),  // offers
+      getByIndex(answers, 7),  // assets
+      getByIndex(answers, 8),  // colors
+      getByIndex(answers, 9),  // inspiration
     ]);
 
-    console.log(`✅ Commande reçue depuis Typeform (token: ${form_response.token})`);
+    console.log(`✅ Commande reçue : ${getByIndex(answers, 1)} (${getByIndex(answers, 3)})`);
     res.sendStatus(200);
+
   } catch (err) {
     console.error("❌ Erreur webhook :", err.message);
     res.sendStatus(500);
@@ -157,4 +163,3 @@ const PORT = process.env.PORT || 3000;
 initDB()
   .then(() => app.listen(PORT, () => console.log(`🚀 Port ${PORT}`)))
   .catch(err => { console.error("❌ DB init failed:", err); process.exit(1); });
-

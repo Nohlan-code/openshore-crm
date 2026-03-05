@@ -5,7 +5,15 @@ const { Pool } = require("pg");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// CORS — autorise toutes les origines (nécessaire pour Claude.ai)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") return res.sendStatus(200);
+  next();
+});
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -42,7 +50,6 @@ function deadline7() {
   return new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
 }
 
-// Récupère la valeur d'une réponse par son index
 function getByIndex(answers, idx) {
   const ans = answers[idx];
   if (!ans) return "";
@@ -63,19 +70,6 @@ app.post("/webhook/typeform", async (req, res) => {
     if (!form_response) return res.sendStatus(400);
 
     const answers = form_response.answers || [];
-
-    // Mapping par index — ordre réel du formulaire Openshore (rJdfntNq) :
-    // 0 → Décrivez votre landing page de rêve
-    // 1 → Prénom / Nom
-    // 2 → Numéro de téléphone
-    // 3 → Email
-    // 4 → Entreprise
-    // 5 → Objectif de la landing page
-    // 6 → Décrivez vos offres
-    // 7 → Documents (lien)
-    // 8 → 3 couleurs de marque
-    // 9 → Inspiration web (URL)
-
     const id = crypto.randomUUID();
 
     await pool.query(`
@@ -86,13 +80,7 @@ app.post("/webhook/typeform", async (req, res) => {
       ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
       ON CONFLICT (typeform_response_id) DO NOTHING
     `, [
-      id,
-      "typeform",
-      form_response.token,
-      "new",
-      null,
-      deadline7(),
-      "Landing page",
+      id, "typeform", form_response.token, "new", null, deadline7(), "Landing page",
       getByIndex(answers, 0),  // description
       getByIndex(answers, 1),  // clientName
       getByIndex(answers, 2),  // clientPhone
@@ -105,9 +93,8 @@ app.post("/webhook/typeform", async (req, res) => {
       getByIndex(answers, 9),  // inspiration
     ]);
 
-    console.log(`✅ Commande reçue : ${getByIndex(answers, 1)} (${getByIndex(answers, 3)})`);
+    console.log(`✅ Commande reçue : ${getByIndex(answers, 1)}`);
     res.sendStatus(200);
-
   } catch (err) {
     console.error("❌ Erreur webhook :", err.message);
     res.sendStatus(500);
@@ -158,7 +145,6 @@ app.get("/", async (req, res) => {
   }
 });
 
-// ─── Start ────────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 initDB()
   .then(() => app.listen(PORT, () => console.log(`🚀 Port ${PORT}`)))

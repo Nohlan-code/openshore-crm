@@ -14,42 +14,28 @@
   --text:#E6EDF3;--muted:#7D8590;--dim:#21262D;
 }
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;font-size:14px}
-*{box-sizing:border-box}
 button,input,select,textarea{font-family:inherit}
 a{color:inherit;text-decoration:none}
-
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 
-/* ══ AUTH ══════════════════════════════════════════════════════ */
-#auth{
-  position:fixed;inset:0;z-index:999;
-  background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:20px;
-}
+/* AUTH */
+#auth{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 #auth.hidden{display:none}
 .auth-box{width:100%;max-width:380px}
 .auth-logo{text-align:center;margin-bottom:32px}
-.auth-logo-icon{
-  width:68px;height:68px;background:var(--accent);border-radius:20px;
-  margin:0 auto 14px;display:flex;align-items:center;justify-content:center;
-  font-size:32px;box-shadow:0 0 50px rgba(240,165,0,.4);
-}
+.auth-logo-icon{width:68px;height:68px;background:var(--accent);border-radius:20px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 0 50px rgba(240,165,0,.4)}
 .auth-logo h1{font-size:28px;font-weight:900;letter-spacing:-0.5px}
 .auth-logo p{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:5px}
 .auth-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;margin-bottom:12px}
 .auth-card h2{font-size:18px;font-weight:800;margin-bottom:4px}
 .auth-card .sub{color:var(--muted);font-size:12px;margin-bottom:22px}
-.auth-fields{display:flex;flex-direction:column;gap:13px}
 
-/* ══ APP SHELL ═════════════════════════════════════════════════ */
+/* APP SHELL */
 #app{display:none;height:100vh;overflow:hidden}
 #app.visible{display:flex}
 
-/* DESKTOP: sidebar + content */
 @media(min-width:900px){
   #app{flex-direction:row}
   #sidebar{display:flex!important;flex-direction:column;width:230px;min-width:230px;background:var(--surface);border-right:1px solid var(--border);height:100vh;flex-shrink:0}
@@ -58,8 +44,6 @@ a{color:inherit;text-decoration:none}
   #content{flex:1;overflow-y:auto;height:100vh}
   #page{padding:28px 32px 40px;max-width:820px;margin:0 auto}
 }
-
-/* TABLET: topbar + content + bottomnav */
 @media(min-width:600px) and (max-width:899px){
   #app{flex-direction:column}
   #sidebar{display:none!important}
@@ -68,8 +52,6 @@ a{color:inherit;text-decoration:none}
   #content{flex:1;overflow-y:auto}
   #page{padding:20px 20px 90px;max-width:700px;margin:0 auto}
 }
-
-/* MOBILE: topbar + content + bottomnav */
 @media(max-width:599px){
   #app{flex-direction:column}
   #sidebar{display:none!important}
@@ -79,19 +61,14 @@ a{color:inherit;text-decoration:none}
   #page{padding:14px 14px 90px}
 }
 
-/* ── SIDEBAR ── */
+/* SIDEBAR */
 #sidebar{display:none}
 .sb-logo{padding:20px 16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
 .sb-logo-icon{width:34px;height:34px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .sb-logo h1{font-size:14px;font-weight:900;line-height:1.1}
 .sb-logo p{font-size:8px;color:var(--accent);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:2px}
 .sb-nav{padding:10px 8px;flex:1;overflow-y:auto}
-.sb-btn{
-  width:100%;display:flex;align-items:center;gap:10px;
-  padding:9px 12px;border:none;background:transparent;border-radius:10px;
-  color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;
-  transition:all .15s;margin-bottom:2px;text-align:left;
-}
+.sb-btn{width:100%;display:flex;align-items:center;gap:10px;padding:9px 12px;border:none;background:transparent;border-radius:10px;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;margin-bottom:2px;text-align:left}
 .sb-btn:hover{background:var(--card);color:var(--text)}
 .sb-btn.active{background:var(--adim);color:var(--accent);font-weight:800}
 .sb-btn .si{font-size:16px;width:22px;text-align:center;flex-shrink:0}
@@ -100,47 +77,22 @@ a{color:inherit;text-decoration:none}
 .sb-user{display:flex;align-items:center;gap:10px;padding:8px 12px;margin-bottom:8px}
 .sb-langs{display:flex;gap:5px;padding:0 4px;margin-bottom:6px}
 
-/* ── TOPBAR ── */
-#topbar{
-  display:none;
-  align-items:center;justify-content:space-between;
-  padding:0 14px;height:52px;flex-shrink:0;
-  background:rgba(14,17,23,.95);backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;
-}
+/* TOPBAR */
+#topbar{display:none;align-items:center;justify-content:space-between;padding:0 14px;height:52px;flex-shrink:0;background:rgba(14,17,23,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
 .tb-logo{display:flex;align-items:center;gap:8px}
 .tb-logo-icon{width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
-.tb-logo h1{font-size:13px;font-weight:900;line-height:1}
-.tb-logo p{font-size:8px;color:var(--accent);font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
 .tb-right{display:flex;align-items:center;gap:7px}
 
-/* ── BOTTOM NAV ── */
-#bottomnav{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;z-index:10;
-  background:rgba(14,17,23,.97);backdrop-filter:blur(20px);
-  border-top:1px solid var(--border);
-  padding-bottom:env(safe-area-inset-bottom,0px);
-}
-.bn-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:3px;padding:8px 4px;border:none;background:transparent;
-  border-top:2px solid transparent;cursor:pointer;transition:all .15s;
-}
+/* BOTTOM NAV */
+#bottomnav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:10;background:rgba(14,17,23,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom,0px)}
+.bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border:none;background:transparent;border-top:2px solid transparent;cursor:pointer;transition:all .15s}
 .bn-btn.active{background:var(--adim);border-top-color:var(--accent)}
 .bn-icon{font-size:20px;position:relative}
-.bn-badge{
-  position:absolute;top:-4px;right:-8px;
-  background:var(--red);color:#fff;border-radius:10px;
-  width:15px;height:15px;display:flex;align-items:center;justify-content:center;
-  font-size:8px;font-weight:900;
-}
+.bn-badge{position:absolute;top:-4px;right:-8px;background:var(--red);color:#fff;border-radius:10px;width:15px;height:15px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900}
 .bn-label{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
 .bn-btn.active .bn-label{color:var(--accent)}
 
-/* ══ COMPONENTS ════════════════════════════════════════════════ */
-
-/* Buttons */
+/* COMPONENTS */
 .btn{border-radius:9px;font-weight:700;letter-spacing:.3px;white-space:nowrap;cursor:pointer;border:none;transition:opacity .15s;font-size:13px;padding:10px 18px;display:inline-flex;align-items:center;gap:6px}
 .btn:hover{opacity:.82}
 .btn:active{opacity:.65}
@@ -154,7 +106,6 @@ a{color:inherit;text-decoration:none}
 .btn-wa{background:rgba(37,211,102,.12);color:var(--wa);border:1px solid rgba(37,211,102,.3)!important}
 .btn-purple{background:rgba(188,140,255,.12);color:var(--purple);border:1px solid rgba(188,140,255,.3)!important}
 
-/* Inputs */
 .field{display:flex;flex-direction:column;gap:5px}
 .lbl{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase}
 .inp{background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--text);padding:10px 12px;font-size:13px;outline:none;width:100%;transition:border-color .2s}
@@ -162,27 +113,21 @@ a{color:inherit;text-decoration:none}
 textarea.inp{resize:vertical;min-height:80px}
 select.inp{cursor:pointer}
 
-/* Cards */
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
 .card-h{padding:13px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}
 .card-b{padding:14px 16px}
 .card-f{padding:10px 14px 13px;border-top:1px solid var(--border);display:flex;gap:6px;flex-wrap:wrap}
 
-/* Badges */
 .badge{border-radius:6px;padding:3px 9px;font-size:10px;font-weight:700}
 .pill{border-radius:20px;padding:2px 9px;font-size:10px;font-weight:700}
-
-/* Avatar */
 .av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;flex-shrink:0;background:linear-gradient(135deg,rgba(240,165,0,.8),rgba(188,140,255,.8));border:2px solid rgba(240,165,0,.2)}
 
-/* Alerts */
 .alert{border-radius:8px;padding:9px 13px;font-size:12px;font-weight:700}
 .alert-e{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);color:var(--red)}
 .alert-s{background:rgba(63,185,80,.1);border:1px solid rgba(63,185,80,.3);color:var(--green)}
 .alert-i{background:rgba(88,166,255,.1);border:1px solid rgba(88,166,255,.3);color:var(--blue)}
 .alert-w{background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.3);color:var(--accent)}
 
-/* Stats */
 .stats-grid{display:grid;gap:10px;margin-bottom:16px}
 @media(min-width:600px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:599px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
@@ -191,7 +136,6 @@ select.inp{cursor:pointer}
 .stat-val{font-size:26px;font-weight:900;line-height:1}
 .stat-lbl{color:var(--muted);font-size:10px;margin-top:4px;font-weight:700}
 
-/* Tools */
 .tools-grid{display:grid;gap:10px}
 @media(min-width:700px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:500px) and (max-width:699px){.tools-grid{grid-template-columns:repeat(2,1fr)}}
@@ -200,17 +144,14 @@ select.inp{cursor:pointer}
 .tool-card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .tool-ico{width:36px;height:36px;background:var(--adim);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 
-/* Filters */
 .filters{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;margin-bottom:12px}
 .filters::-webkit-scrollbar{display:none}
 .fbtn{background:var(--card);color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
 .fbtn.active{background:var(--accent);color:#000;border-color:var(--accent)}
 
-/* Two col grid */
 .two-col{display:grid;gap:10px}
 @media(min-width:480px){.two-col{grid-template-columns:1fr 1fr}}
 
-/* Sheet */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:flex;align-items:flex-end;justify-content:center;animation:fadein .2s}
 @media(min-width:600px){.overlay{align-items:center}}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
@@ -224,27 +165,26 @@ select.inp{cursor:pointer}
 .sheet-body{padding:16px 20px 36px;display:flex;flex-direction:column;gap:12px}
 .sheet-x{background:none;border:none;color:var(--muted);font-size:26px;line-height:1;cursor:pointer;padding:4px}
 
-/* Modal */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;width:100%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,.9)}
 
-/* Section title */
 .section-title{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin:16px 0 10px}
-
-/* Sync */
 .sdot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
 .sdot-ok{background:var(--green);box-shadow:0 0 6px var(--green)}
 .sdot-sync{background:var(--accent);animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* Page animation */
 .screen{animation:pagein .18s ease}
 @keyframes pagein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Loading spinner */
+.spinner{display:flex;align-items:center;justify-content:center;padding:60px;flex-direction:column;gap:14px}
+.spin{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
-<!-- ══ AUTH ════════════════════════════════════════════════════════ -->
+<!-- AUTH -->
 <div id="auth">
   <div style="position:absolute;top:16px;right:16px;display:flex;gap:5px">
     <button class="btn btn-sm btn-p" id="al-fr" onclick="setLang('fr')">FR</button>
@@ -259,7 +199,7 @@ select.inp{cursor:pointer}
     <div class="auth-card">
       <h2 id="a-title"></h2>
       <div class="sub" id="a-sub"></div>
-      <div class="auth-fields">
+      <div style="display:flex;flex-direction:column;gap:13px">
         <div class="field"><label class="lbl" id="a-el"></label><input id="a-email" class="inp" type="email" placeholder="votre@email.com" onkeydown="if(event.key==='Enter')tryLogin()"/></div>
         <div class="field"><label class="lbl" id="a-pl"></label>
           <div style="position:relative">
@@ -275,7 +215,7 @@ select.inp{cursor:pointer}
   </div>
 </div>
 
-<!-- ══ ADMIN MODAL ══════════════════════════════════════════════════ -->
+<!-- ADMIN MODAL -->
 <div id="admin-modal" class="modal-bg" style="display:none">
   <div class="modal">
     <div style="text-align:center;margin-bottom:20px">
@@ -295,9 +235,8 @@ select.inp{cursor:pointer}
   </div>
 </div>
 
-<!-- ══ APP ══════════════════════════════════════════════════════════ -->
+<!-- APP -->
 <div id="app">
-  <!-- SIDEBAR -->
   <nav id="sidebar">
     <div class="sb-logo">
       <div class="sb-logo-icon">⚡</div>
@@ -313,14 +252,11 @@ select.inp{cursor:pointer}
       <button class="btn btn-ghost btn-full btn-sm" onclick="logout()">⎋ <span id="sb-logout"></span></button>
     </div>
   </nav>
-
-  <!-- CONTENT -->
   <div id="content">
-    <!-- TOPBAR -->
     <div id="topbar">
       <div class="tb-logo">
         <div class="tb-logo-icon">⚡</div>
-        <div><h1 class="tb-logo">Openshore</h1><p class="tb-logo">Workspace</p></div>
+        <div style="line-height:1.1"><div style="font-size:13px;font-weight:900">Openshore</div><div style="font-size:8px;color:var(--accent);font-weight:700;letter-spacing:1.5px;text-transform:uppercase">Workspace</div></div>
       </div>
       <div class="tb-right">
         <button class="btn btn-sm btn-p" id="tl-fr" onclick="setLang('fr')">FR</button>
@@ -329,16 +265,11 @@ select.inp{cursor:pointer}
         <button onclick="logout()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px">⎋</button>
       </div>
     </div>
-
-    <!-- PAGE -->
     <div id="page"></div>
   </div>
-
-  <!-- BOTTOM NAV -->
-  <nav id="bottomnav" id="bn"></nav>
+  <nav id="bottomnav"></nav>
 </div>
 
-<!-- SHEET -->
 <div id="sheet-wrap"></div>
 
 <script>
@@ -346,45 +277,19 @@ select.inp{cursor:pointer}
 // CONFIG
 // ════════════════════════════════════════
 const ADMIN_PW = "Openshore37.";
-const RAILWAY  = "https://openshore-webhook-production.up.railway.app";
+const API      = "https://openshore-webhook-production.up.railway.app";
 const FORM_URL = "https://form.typeform.com/to/rJdfntNq";
 const STATUS_COLORS = {new:"#58A6FF",assigned:"#BC8CFF",inprogress:"#F0A500",review:"#FF9800",delivered:"#3FB950",cancelled:"#F85149"};
 
 // ════════════════════════════════════════
 // STATE
 // ════════════════════════════════════════
-const DEF_FL = [
-  {id:"f1",name:"Sophie Martin",email:"sophie@example.com",password:"sophie123",specialty:"WordPress",phone:"+33600000001",avatar:"SM",active:true},
-  {id:"f2",name:"Lucas Bernard",email:"lucas@example.com",password:"lucas123",specialty:"Shopify",phone:"+33600000002",avatar:"LB",active:true},
-  {id:"f3",name:"Emma Dupont",email:"emma@example.com",password:"emma123",specialty:"React/Next.js",phone:"+33600000003",avatar:"ED",active:true},
-];
-const DEF_TL = [
-  {id:"t1",category:"Fonts",name:"Fonts",url:"https://docs.google.com/document/d/13hSWUderWjJANRQYFqInfckQLtnC1l2wJCjkwyTCkKM/edit?usp=drive_link",description:"Typographies approuvées",icon:"🔤"},
-  {id:"t2",category:"Icons",name:"Icons",url:"https://docs.google.com/document/d/1_ONUWb15xvWOAQsru_OrJ28GhOIo_gKQYCZv28CLWWw/edit?usp=drive_link",description:"Bibliothèque d'icônes",icon:"✨"},
-  {id:"t3",category:"Plugins",name:"Plugins",url:"https://docs.google.com/document/d/1azomTQDR8mJDBf6jBUKRZ7I49n9dTEq5wSVlejKtB3Y/edit?usp=drive_link",description:"Plugins essentiels",icon:"🔌"},
-  {id:"t4",category:"Copywriting",name:"Copywriting",url:"https://openshore.eu/tools",description:"Outils de copywriting",icon:"✍️"},
-  {id:"t5",category:"Checklist",name:"Checklist Website",url:"https://claude.ai/public/artifacts/baf00510-0c04-449a-b15e-ca3778d68cd9",description:"Checklist avant livraison",icon:"✅"},
-  {id:"t6",category:"How to Deliver",name:"How to Deliver",url:"https://www.loom.com/share/bb1e54bd460b446eb38da575532e0cf4",description:"Tutoriel vidéo livraison",icon:"🎬"},
-];
-
 let S = {
-  role:null,me:null,lang:"fr",tab:"dashboard",
-  oFilter:"all",oSearch:"",
-  orders:      load("os:orders")  || [],
-  freelancers: load("os:fl")      || DEF_FL,
-  tools:       load("os:tools")   || DEF_TL,
-  syncStatus:"idle",lastSync:null,
+  role:null, me:null, lang:"fr", tab:"dashboard",
+  oFilter:"all", oSearch:"",
+  orders:[], freelancers:[], tools:[],
+  loading:false, syncTimer:null,
 };
-let syncTimer = null;
-
-function load(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch{return null}}
-function save(){
-  try{
-    localStorage.setItem("os:orders",JSON.stringify(S.orders));
-    localStorage.setItem("os:fl",JSON.stringify(S.freelancers));
-    localStorage.setItem("os:tools",JSON.stringify(S.tools));
-  }catch(e){}
-}
 
 // ════════════════════════════════════════
 // TRANSLATIONS
@@ -413,8 +318,7 @@ fr:{
   toolsLib:"Ressources partagées avec vos freelances.",
   icon:"Icône",name:"Nom",url:"URL",cat:"Catégorie",shortDesc:"Description",
   myOnly:"Vous ne voyez que vos missions assignées.",
-  syncNow:"🔄 Sync maintenant",syncing:"⏳ Sync…",connected:"Connecté ✅",
-  autoSync:"Sync automatique toutes les 60s",newTF:"Nouvelles commandes TF",
+  loading:"Chargement...",
   sl:{new:"Nouveau",assigned:"Assigné",inprogress:"En cours",review:"En révision",delivered:"Livré",cancelled:"Annulé"},
   ptypes:["Landing page","Site vitrine","E-commerce","Site professionnel","Blog","App web"],
   cats:["Fonts","Icons","Plugins","Copywriting","Checklist","How to Deliver","Autre"],
@@ -444,8 +348,7 @@ en:{
   toolsLib:"Resources shared with your freelancers.",
   icon:"Icon",name:"Name",url:"URL",cat:"Category",shortDesc:"Description",
   myOnly:"You only see your assigned missions.",
-  syncNow:"🔄 Sync now",syncing:"⏳ Syncing…",connected:"Connected ✅",
-  autoSync:"Auto-sync every 60s",newTF:"New TF orders",
+  loading:"Loading...",
   sl:{new:"New",assigned:"Assigned",inprogress:"In progress",review:"In review",delivered:"Delivered",cancelled:"Cancelled"},
   ptypes:["Landing page","Showcase site","E-commerce","Pro site","Blog","Web app"],
   cats:["Fonts","Icons","Plugins","Copywriting","Checklist","How to Deliver","Other"],
@@ -464,18 +367,43 @@ function d7(){return new Date(Date.now()+7*864e5).toISOString().slice(0,10)}
 function fmt(iso){return iso?new Date(iso).toLocaleDateString("fr-FR",{day:"2-digit",month:"short"}):"—"}
 function showErr(id,msg){const e=el(id);e.textContent=msg;e.style.display="block";setTimeout(()=>e.style.display="none",3000)}
 function togglePw(id,btn){const i=el(id);i.type=i.type==="password"?"text":"password";btn.textContent=i.type==="password"?"👁":"🙈"}
-
 function mkAv(ini,sz=36){return`<div class="av" style="width:${sz}px;height:${sz}px;font-size:${sz*.33}px">${ini}</div>`}
 function mkBadge(sk){const c=STATUS_COLORS[sk]||"#58A6FF";return`<span class="badge" style="background:${c}20;color:${c};border:1px solid ${c}40">${t().sl[sk]||sk}</span>`}
 function mkPill(lbl,c="#F0A500"){return`<span class="pill" style="background:${c}18;color:${c};border:1px solid ${c}33">${lbl}</span>`}
-function flName(id){const f=S.freelancers.find(x=>x.id===id);return f?f.name:"—"}
 function daysLeft(iso){if(!iso)return null;return Math.ceil((new Date(iso)-Date.now())/864e5)}
 function deadlineHtml(iso){
   if(!iso)return"";
   const d=daysLeft(iso);
   const c=d<=0?"var(--red)":d<=2?"var(--accent)":"var(--muted)";
-  const lbl=d<=0?"Dépassé":`J-${d}`;
-  return`<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:${c};font-weight:${d<=2?"700":"400"}">⏱ Deadline : ${fmt(iso)} (${lbl})</div>`;
+  return`<div style="font-size:11px;color:${c};font-weight:${d<=2?"700":"400"}">⏱ Deadline : ${fmt(iso)} (${d<=0?"Dépassé":"J-"+d})</div>`;
+}
+function showLoading(){el("page").innerHTML=`<div class="spinner"><div class="spin"></div><div style="color:var(--muted);font-size:13px">${t().loading}</div></div>`}
+
+// ════════════════════════════════════════
+// API CALLS
+// ════════════════════════════════════════
+async function api(method, path, body){
+  const opts={method,headers:{"Content-Type":"application/json"}};
+  if(body)opts.body=JSON.stringify(body);
+  const res=await fetch(API+path, opts);
+  if(!res.ok)throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function loadAll(){
+  showLoading();
+  try{
+    const [orders, freelancers, tools] = await Promise.all([
+      api("GET","/orders"),
+      api("GET","/freelancers"),
+      api("GET","/tools"),
+    ]);
+    S.orders=orders;
+    S.freelancers=freelancers;
+    S.tools=tools;
+  }catch(e){
+    console.error("loadAll error:",e);
+  }
 }
 
 // ════════════════════════════════════════
@@ -483,7 +411,6 @@ function deadlineHtml(iso){
 // ════════════════════════════════════════
 function setLang(l){
   S.lang=l;
-  // Update all lang buttons
   ["al","sl","tl"].forEach(p=>{
     const fr=el(`${p}-fr`),en=el(`${p}-en`);
     if(!fr||!en)return;
@@ -493,7 +420,6 @@ function setLang(l){
   updateAuthUI();
   if(S.role)renderApp();
 }
-
 function updateAuthUI(){
   const tr=t();
   el("a-title").textContent=tr.login;
@@ -508,28 +434,47 @@ function updateAuthUI(){
   el("am-cancel").textContent=tr.cancel;
 }
 
-function tryLogin(){
+async function tryLogin(){
   const email=el("a-email").value.trim().toLowerCase();
   const pw=el("a-pw").value;
-  const fl=S.freelancers.find(f=>f.email.toLowerCase()===email&&f.password===pw&&f.active);
-  if(fl){doLogin("freelancer",fl);}
-  else{showErr("a-err",t().wrongPw);}
+  el("a-btn").textContent="⏳...";
+  el("a-btn").disabled=true;
+  try{
+    const fls=await api("GET","/freelancers");
+    S.freelancers=fls;
+    const fl=fls.find(f=>f.email.toLowerCase()===email&&f.password===pw&&f.active);
+    if(fl){doLogin("freelancer",fl);}
+    else{showErr("a-err",t().wrongPw);}
+  }catch(e){showErr("a-err","Erreur de connexion au serveur.");}
+  el("a-btn").textContent=t().loginBtn;
+  el("a-btn").disabled=false;
 }
 function openAdminModal(){el("admin-modal").style.display="flex";el("am-pw").value="";}
 function tryAdmin(){
   if(el("am-pw").value===ADMIN_PW){el("admin-modal").style.display="none";doLogin("admin",null);}
   else{showErr("am-err",t().wrongAdmin);}
 }
-function doLogin(role,me){
+async function doLogin(role,me){
   S.role=role;S.me=me;S.tab="dashboard";
   el("auth").classList.add("hidden");
   el("app").classList.add("visible");
+  await loadAll();
   buildNav();renderPage();
-  if(role==="admin")syncOrders();
+  if(role==="admin"){
+    S.syncTimer=setInterval(async()=>{
+      try{
+        const orders=await api("GET","/orders");
+        S.orders=orders;
+        if(S.tab==="orders")renderOrders();
+        if(S.tab==="dashboard")renderDash();
+        buildNav();
+      }catch(e){}
+    },60000);
+  }
 }
 function logout(){
   S.role=null;S.me=null;
-  if(syncTimer)clearInterval(syncTimer);
+  if(S.syncTimer)clearInterval(S.syncTimer);
   el("app").classList.remove("visible");
   el("auth").classList.remove("hidden");
   el("a-email").value="";el("a-pw").value="";
@@ -539,30 +484,23 @@ function logout(){
 // NAV
 // ════════════════════════════════════════
 const ADM_TABS=[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"freelancers",i:"👥"},{k:"tools",i:"🧰"},{k:"typeform",i:"🔗"}];
-const FL_TABS =[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"tools",i:"🧰"}];
+const FL_TABS=[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"tools",i:"🧰"}];
 
 function buildNav(){
   const tabs=S.role==="admin"?ADM_TABS:FL_TABS;
   const newCnt=S.orders.filter(o=>o.status==="new").length;
   const tr=t();
-
-  // Sidebar
   el("sb-nav").innerHTML=tabs.map(tb=>`
     <button class="sb-btn${S.tab===tb.k?" active":""}" onclick="goTab('${tb.k}')">
       <span class="si">${tb.i}</span>${tr[tb.k]}
       ${tb.k==="orders"&&S.role==="admin"&&newCnt>0?`<span class="sb-badge">${newCnt}</span>`:""}
     </button>`).join("");
-
   el("sb-logout").textContent=tr.logout;
   const me=S.me;
   el("sb-user").innerHTML=me
     ?`${mkAv(me.avatar,32)}<div><div style="font-size:12px;font-weight:700">${me.name}</div><div style="font-size:10px;color:var(--muted)">${me.specialty}</div></div>`
     :`<div style="font-weight:800;color:var(--accent)">⚡ Admin</div>`;
-
-  // Topbar role
   el("tb-role").innerHTML=mkPill(S.role==="admin"?tr.admin:(me?me.name.split(" ")[0]:tr.freelancer),S.role==="admin"?"#F0A500":"#BC8CFF");
-
-  // Bottom nav
   el("bottomnav").innerHTML=tabs.map(tb=>`
     <button class="bn-btn${S.tab===tb.k?" active":""}" onclick="goTab('${tb.k}')">
       <div class="bn-icon">${tb.i}${tb.k==="orders"&&S.role==="admin"&&newCnt>0?`<div class="bn-badge">${newCnt}</div>`:""}</div>
@@ -570,22 +508,15 @@ function buildNav(){
     </button>`).join("");
 }
 
-function goTab(k){
-  S.tab=k;buildNav();renderPage();
-  el("content").scrollTo(0,0);
-}
-
-// ════════════════════════════════════════
-// RENDER
-// ════════════════════════════════════════
+function goTab(k){S.tab=k;buildNav();renderPage();el("content").scrollTo(0,0);}
 function renderApp(){buildNav();renderPage();}
 function renderPage(){
   const k=S.tab;
-  if(k==="dashboard")   renderDash();
-  else if(k==="orders") renderOrders();
-  else if(k==="freelancers"&&S.role==="admin") renderFL();
-  else if(k==="tools")  renderTools();
-  else if(k==="typeform"&&S.role==="admin") renderTF();
+  if(k==="dashboard")renderDash();
+  else if(k==="orders")renderOrders();
+  else if(k==="freelancers"&&S.role==="admin")renderFL();
+  else if(k==="tools")renderTools();
+  else if(k==="typeform"&&S.role==="admin")renderTF();
 }
 
 // ════════════════════════════════════════
@@ -605,30 +536,18 @@ function renderDash(){
     {l:tr.delivered,v:my.filter(o=>o.status==="delivered").length,c:"var(--green)",i:"✅"},
   ];
   const recent=[...my].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5);
-
   let h=`<div class="screen">`;
-  if(S.me){h+=`<div style="background:linear-gradient(135deg,rgba(240,165,0,.08),rgba(188,140,255,.08));border:1px solid rgba(240,165,0,.18);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">${mkAv(S.me.avatar,42)}<div><div style="font-weight:800;font-size:14px">👋 ${S.me.name}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${S.me.specialty}</div></div></div>`;}
-
+  if(S.me)h+=`<div style="background:linear-gradient(135deg,rgba(240,165,0,.08),rgba(188,140,255,.08));border:1px solid rgba(240,165,0,.18);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">${mkAv(S.me.avatar,42)}<div><div style="font-weight:800;font-size:14px">👋 ${S.me.name}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${S.me.specialty}</div></div></div>`;
   h+=`<div class="stats-grid">${stats.map(s=>`<div class="stat"><div class="stat-ico">${s.i}</div><div class="stat-val" style="color:${s.c}">${s.v}</div><div class="stat-lbl">${s.l}</div></div>`).join("")}</div>`;
-
   h+=`<div class="card" style="margin-bottom:14px"><div class="card-h"><span style="font-size:13px;font-weight:800">${tr.recentOrders}</span></div>`;
   if(!recent.length)h+=`<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">${tr.noOrders}</div>`;
-  recent.forEach(o=>{
-    h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border);gap:8px">
-      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.clientName}</div>
-      <div style="font-size:10px;color:var(--muted)">${o.projectType||""} · ${fmt(o.createdAt)}</div></div>
-      ${mkBadge(o.status)}</div>`;
-  });
+  recent.forEach(o=>{h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border);gap:8px"><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${o.projectType||""} · ${fmt(o.createdAt)}</div></div>${mkBadge(o.status)}</div>`;});
   h+=`</div>`;
-
   if(S.role==="admin"){
     h+=`<div class="card"><div class="card-h"><span style="font-size:13px;font-weight:800">${tr.flLoad}</span></div>`;
     S.freelancers.filter(f=>f.active).forEach(f=>{
       const cnt=S.orders.filter(o=>o.freelanceId===f.id&&!["delivered","cancelled"].includes(o.status)).length;
-      h+=`<div style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border)">
-        ${mkAv(f.avatar,30)}<div style="flex:1"><div style="font-size:12px;font-weight:700">${f.name}</div><div style="font-size:10px;color:var(--muted)">${f.specialty}</div></div>
-        <div style="background:${cnt>2?"rgba(248,81,73,.12)":cnt>0?"rgba(240,165,0,.12)":"var(--dim)"};color:${cnt>2?"var(--red)":cnt>0?"var(--accent)":"var(--muted)"};border-radius:20px;padding:2px 10px;font-size:11px;font-weight:800">${cnt} projet${cnt!==1?"s":""}</div>
-      </div>`;
+      h+=`<div style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border)">${mkAv(f.avatar,30)}<div style="flex:1"><div style="font-size:12px;font-weight:700">${f.name}</div><div style="font-size:10px;color:var(--muted)">${f.specialty}</div></div><div style="background:${cnt>2?"rgba(248,81,73,.12)":cnt>0?"rgba(240,165,0,.12)":"var(--dim)"};color:${cnt>2?"var(--red)":cnt>0?"var(--accent)":"var(--muted)"};border-radius:20px;padding:2px 10px;font-size:11px;font-weight:800">${cnt} proj.</div></div>`;
     });
     h+=`</div>`;
   }
@@ -647,32 +566,25 @@ function renderOrders(){
     if(S.oSearch&&!o.clientName.toLowerCase().includes(S.oSearch.toLowerCase()))return false;
     return true;
   });
-
   let h=`<div class="screen">`;
   if(S.role==="freelancer")h+=`<div class="alert alert-i" style="margin-bottom:12px">ℹ️ ${tr.myOnly}</div>`;
-
-  h+=`<div style="display:flex;gap:8px;margin-bottom:10px">
-    <input class="inp" style="flex:1" placeholder="${tr.search}" value="${S.oSearch}" oninput="S.oSearch=this.value;renderOrders()"/>
-    ${S.role==="admin"?`<button class="btn btn-p" onclick="openOrderSheet(null)" style="flex-shrink:0;white-space:nowrap">${tr.addOrder}</button>`:""}
+  h+=`<div style="display:flex;gap:8px;margin-bottom:10px"><input class="inp" style="flex:1" placeholder="${tr.search}" value="${S.oSearch}" oninput="S.oSearch=this.value;renderOrders()"/>
+    ${S.role==="admin"?`<button class="btn btn-p" onclick="openOrderSheet(null)">${tr.addOrder}</button>`:""}
   </div>
   <div class="filters">${["all",...Object.keys(tr.sl)].map(s=>`<button class="fbtn${S.oFilter===s?" active":""}" onclick="S.oFilter='${s}';renderOrders()">${s==="all"?tr.all:tr.sl[s]}</button>`).join("")}</div>`;
-
   if(!list.length)h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted);font-size:13px">${S.role==="freelancer"?tr.noMissions:tr.noOrders}</div></div>`;
-
   list.forEach(o=>{
     const fl=S.freelancers.find(f=>f.id===o.freelanceId);
     h+=`<div class="card" style="margin-bottom:10px">
-      <div class="card-h">
-        <div style="flex:1;min-width:0">
-          <div style="font-weight:800;font-size:14px">${o.clientName}</div>
-          ${o.company?`<div style="font-size:10px;color:var(--accent);font-weight:700;margin-top:1px">${o.company}</div>`:""}
-          <div style="font-size:10px;color:var(--muted);margin-top:1px">${[o.clientEmail,o.clientPhone].filter(Boolean).join(" · ")}</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
-          ${o.source==="typeform"?mkPill("TF","#58A6FF"):""}
-          ${o.budget?`<span style="font-weight:900;color:var(--accent);font-size:13px">${o.budget}</span>`:""}
-        </div>
+      <div class="card-h"><div style="flex:1;min-width:0">
+        <div style="font-weight:800;font-size:14px">${o.clientName}</div>
+        ${o.company?`<div style="font-size:10px;color:var(--accent);font-weight:700;margin-top:1px">${o.company}</div>`:""}
+        <div style="font-size:10px;color:var(--muted);margin-top:1px">${[o.clientEmail,o.clientPhone].filter(Boolean).join(" · ")}</div>
       </div>
+      <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
+        ${o.source==="typeform"?mkPill("TF","#58A6FF"):""}
+        ${o.budget?`<span style="font-weight:900;color:var(--accent);font-size:13px">${o.budget}</span>`:""}
+      </div></div>
       <div class="card-b">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
           <span style="font-size:11px;color:var(--muted);background:var(--dim);border-radius:5px;padding:2px 8px">${o.projectType||""}</span>
@@ -681,7 +593,7 @@ function renderOrders(){
             :mkBadge(o.status)}
         </div>
         ${o.description?`<p style="font-size:11px;color:var(--muted);margin-bottom:7px;line-height:1.5">${o.description.slice(0,120)}${o.description.length>120?"…":""}</p>`:""}
-        ${o.landingObjective?`<div style="font-size:11px;margin-bottom:4px;display:flex;gap:5px;align-items:center">🎯 <span style="color:var(--text);font-weight:600">${o.landingObjective}</span></div>`:""}
+        ${o.landingObjective?`<div style="font-size:11px;margin-bottom:4px">🎯 <span style="color:var(--text);font-weight:600">${o.landingObjective}</span></div>`:""}
         ${o.colors?`<div style="font-size:10px;color:var(--muted);margin-bottom:4px">🎨 ${o.colors}</div>`:""}
         ${o.inspiration?`<div style="font-size:10px;margin-bottom:4px">🔗 <a href="${o.inspiration}" target="_blank" style="color:var(--blue)">${o.inspiration.slice(0,45)}${o.inspiration.length>45?"…":""}</a></div>`:""}
         ${o.assets?`<div style="font-size:10px;margin-bottom:7px">📁 <a href="${o.assets}" target="_blank" style="color:var(--purple)">${o.assets.slice(0,45)}${o.assets.length>45?"…":""}</a></div>`:""}
@@ -703,8 +615,21 @@ function renderOrders(){
   el("page").innerHTML=h;
 }
 
-function chgStatus(id,s){S.orders=S.orders.map(o=>o.id===id?{...o,status:s}:o);save();renderOrders();buildNav();}
-function delOrder(id){if(!confirm("Supprimer cette commande ?"))return;S.orders=S.orders.filter(o=>o.id!==id);save();renderOrders();buildNav();}
+async function chgStatus(id,status){
+  try{
+    const updated=await api("PUT",`/orders/${id}`,{...S.orders.find(o=>o.id===id),status});
+    S.orders=S.orders.map(o=>o.id===id?updated:o);
+    renderOrders();buildNav();
+  }catch(e){alert("Erreur lors de la mise à jour");}
+}
+async function delOrder(id){
+  if(!confirm("Supprimer cette commande ?"))return;
+  try{
+    await api("DELETE",`/orders/${id}`);
+    S.orders=S.orders.filter(o=>o.id!==id);
+    renderOrders();buildNav();
+  }catch(e){alert("Erreur lors de la suppression");}
+}
 function sendWA(oid){
   const o=S.orders.find(x=>x.id===oid);
   const fl=S.freelancers.find(f=>f.id===o?.freelanceId);
@@ -731,18 +656,30 @@ function openOrderSheet(id){
       <div class="field"><label class="lbl">${tr.deadline}</label><input class="inp" type="date" id="of-d" value="${f.deadline}"/></div>
     </div>
     <div class="field"><label class="lbl">${tr.desc}</label><textarea class="inp" id="of-ds">${f.description}</textarea></div>
+    <div id="of-err" class="alert alert-e" style="display:none"></div>
     <div class="two-col">
       <button class="btn btn-ghost btn-full" onclick="closeSheet()">${tr.cancel}</button>
-      <button class="btn btn-p btn-full" onclick="saveOrder('${id||""}')">${o?tr.save:tr.create}</button>
+      <button class="btn btn-p btn-full" id="of-save" onclick="saveOrder('${id||""}')">${o?tr.save:tr.create}</button>
     </div>`);
 }
-function saveOrder(id){
+async function saveOrder(id){
   const n=el("of-n").value.trim();if(!n)return;
+  const btn=el("of-save");btn.textContent="⏳...";btn.disabled=true;
   const form={clientName:n,clientEmail:el("of-e").value,projectType:el("of-t").value,
     budget:el("of-b").value,deadline:el("of-d").value||d7(),description:el("of-ds").value};
-  if(id){S.orders=S.orders.map(o=>o.id===id?{...o,...form}:o);}
-  else{S.orders=[{...form,id:uid(),status:"new",freelanceId:null,createdAt:nowISO(),source:"manual",typeformResponseId:null},...S.orders];}
-  save();closeSheet();renderOrders();buildNav();
+  try{
+    if(id){
+      const updated=await api("PUT",`/orders/${id}`,{...S.orders.find(o=>o.id===id),...form});
+      S.orders=S.orders.map(o=>o.id===id?updated:o);
+    }else{
+      const created=await api("POST","/orders",{...form,id:uid(),status:"new",freelanceId:null,source:"manual"});
+      S.orders=[created,...S.orders];
+    }
+    closeSheet();renderOrders();buildNav();
+  }catch(e){
+    if(el("of-err")){el("of-err").textContent="Erreur de sauvegarde.";el("of-err").style.display="block";}
+    btn.textContent=t().save;btn.disabled=false;
+  }
 }
 
 // ════════════════════════════════════════
@@ -764,18 +701,21 @@ function openAssign(oid){
       <div style="color:${load>2?"var(--red)":load>0?"var(--accent)":"var(--green)"};font-size:11px;font-weight:800">${load} proj.</div>
     </div>`;
   });
-  if(o?.freelanceId)h+=`<button class="btn btn-red btn-full" onclick="doAssign('${oid}','')" style="margin-top:6px">${tr.unassign}</button>`;
+  if(o?.freelanceId)h+=`<button class="btn btn-red btn-full" onclick="doAssign('${oid}','')">${tr.unassign}</button>`;
   openSheet(`${tr.assignTo} — ${o?.clientName||""}`,h);
 }
-function doAssign(oid,fid){
-  S.orders=S.orders.map(o=>o.id===oid?{...o,freelanceId:fid||null,status:fid?"assigned":"new"}:o);
-  save();closeSheet();
-  if(fid){
-    const fl=S.freelancers.find(f=>f.id===fid);
-    const o=S.orders.find(x=>x.id===oid);
-    if(fl?.phone&&o){const msg=t().wa(fl.name,o.clientName,o.projectType);window.open(`https://wa.me/${fl.phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`,"_blank");}
-  }
-  renderOrders();buildNav();
+async function doAssign(oid,fid){
+  const o=S.orders.find(x=>x.id===oid);
+  try{
+    const updated=await api("PUT",`/orders/${oid}`,{...o,freelanceId:fid||null,status:fid?"assigned":"new"});
+    S.orders=S.orders.map(x=>x.id===oid?updated:x);
+    closeSheet();
+    if(fid){
+      const fl=S.freelancers.find(f=>f.id===fid);
+      if(fl?.phone){const msg=t().wa(fl.name,o.clientName,o.projectType);window.open(`https://wa.me/${fl.phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`,"_blank");}
+    }
+    renderOrders();buildNav();
+  }catch(e){alert("Erreur lors de l'assignation");}
 }
 
 // ════════════════════════════════════════
@@ -803,7 +743,7 @@ function renderFL(){
         </div>
         <div style="display:flex;gap:7px;flex-wrap:wrap">
           <button class="btn btn-sm btn-ghost" onclick="openFlSheet('${f.id}')">✏️ ${tr.edit}</button>
-          <button class="btn btn-sm ${f.active?"btn-red":"btn-green"}" onclick="toggleFl('${f.id}')">${f.active?tr.deactivate:tr.reactivate}</button>
+          <button class="btn btn-sm ${f.active?"btn-red":"btn-green"}" onclick="toggleFl('${f.id}','${f.active}')">${f.active?tr.deactivate:tr.reactivate}</button>
           <button class="btn btn-sm btn-red" onclick="delFl('${f.id}')">🗑️</button>
         </div>
       </div>
@@ -812,8 +752,22 @@ function renderFL(){
   h+=`</div>`;
   el("page").innerHTML=h;
 }
-function toggleFl(id){S.freelancers=S.freelancers.map(f=>f.id===id?{...f,active:!f.active}:f);save();renderFL();}
-function delFl(id){if(!confirm("Supprimer ?"))return;S.freelancers=S.freelancers.filter(f=>f.id!==id);save();renderFL();}
+async function toggleFl(id,active){
+  const f=S.freelancers.find(x=>x.id===id);
+  try{
+    const updated=await api("PUT",`/freelancers/${id}`,{...f,active:active==="true"?false:true});
+    S.freelancers=S.freelancers.map(x=>x.id===id?updated:x);
+    renderFL();
+  }catch(e){alert("Erreur");}
+}
+async function delFl(id){
+  if(!confirm("Supprimer ce freelance ?"))return;
+  try{
+    await api("DELETE",`/freelancers/${id}`);
+    S.freelancers=S.freelancers.filter(f=>f.id!==id);
+    renderFL();
+  }catch(e){alert("Erreur");}
+}
 function openFlSheet(id){
   const tr=t();const f=id?S.freelancers.find(x=>x.id===id):null;
   openSheet(f?tr.editFl:tr.newFl,`
@@ -822,18 +776,30 @@ function openFlSheet(id){
     <div class="field"><label class="lbl">${tr.pwFl}</label><input class="inp" id="ff-p" value="${f?.password||""}"/></div>
     <div class="field"><label class="lbl">${tr.phone}</label><input class="inp" id="ff-ph" value="${f?.phone||""}" placeholder="+33 6 00 00 00 00"/></div>
     <select class="inp" id="ff-s">${tr.specs.map(x=>`<option${x===f?.specialty?" selected":""}>${x}</option>`).join("")}</select>
+    <div id="ff-err" class="alert alert-e" style="display:none"></div>
     <div class="two-col">
       <button class="btn btn-ghost btn-full" onclick="closeSheet()">${tr.cancel}</button>
-      <button class="btn btn-p btn-full" onclick="saveFl('${id||""}')">${f?tr.save:tr.add}</button>
+      <button class="btn btn-p btn-full" id="ff-save" onclick="saveFl('${id||""}')">${f?tr.save:tr.add}</button>
     </div>`);
 }
-function saveFl(id){
+async function saveFl(id){
   const n=el("ff-n").value.trim();if(!n)return;
+  const btn=el("ff-save");btn.textContent="⏳...";btn.disabled=true;
   const ini=n.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
-  const form={name:n,email:el("ff-e").value,password:el("ff-p").value,phone:el("ff-ph").value,specialty:el("ff-s").value,avatar:ini};
-  if(id){S.freelancers=S.freelancers.map(f=>f.id===id?{...f,...form}:f);}
-  else{S.freelancers=[...S.freelancers,{...form,id:uid(),active:true}];}
-  save();closeSheet();renderFL();
+  const form={name:n,email:el("ff-e").value,password:el("ff-p").value,phone:el("ff-ph").value,specialty:el("ff-s").value,avatar:ini,active:true};
+  try{
+    if(id){
+      const updated=await api("PUT",`/freelancers/${id}`,{...S.freelancers.find(f=>f.id===id),...form});
+      S.freelancers=S.freelancers.map(f=>f.id===id?updated:f);
+    }else{
+      const created=await api("POST","/freelancers",{...form,id:uid()});
+      S.freelancers=[...S.freelancers,created];
+    }
+    closeSheet();renderFL();
+  }catch(e){
+    if(el("ff-err")){el("ff-err").textContent="Erreur de sauvegarde.";el("ff-err").style.display="block";}
+    btn.textContent=t().save;btn.disabled=false;
+  }
 }
 
 // ════════════════════════════════════════
@@ -842,18 +808,17 @@ function saveFl(id){
 function renderTools(){
   const tr=t();
   const cats=[...new Set(S.tools.map(x=>x.category))];
-  let h=`<div class="screen">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-      <p style="color:var(--muted);font-size:12px">${tr.toolsLib}</p>
-      ${S.role==="admin"?`<button class="btn btn-p btn-sm" onclick="openToolSheet()">${tr.addTool}</button>`:""}
-    </div>`;
+  let h=`<div class="screen"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+    <p style="color:var(--muted);font-size:12px">${tr.toolsLib}</p>
+    ${S.role==="admin"?`<button class="btn btn-p btn-sm" onclick="openToolSheet()">${tr.addTool}</button>`:""}
+  </div>`;
   cats.forEach(cat=>{
     h+=`<div class="section-title">${cat}</div><div class="tools-grid" style="margin-bottom:20px">`;
-    S.tools.filter(x=>x.category===cat).forEach(tool=>{
-      h+=`<a href="${tool.url}" target="_blank"><div class="tool-card">
-        <div class="tool-ico">${tool.icon}</div>
-        <div style="min-width:0"><div style="font-weight:700;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${tool.name}</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.3">${tool.description}</div></div>
+    S.tools.filter(x=>x.category===cat).forEach(tl=>{
+      h+=`<a href="${tl.url}" target="_blank"><div class="tool-card">
+        <div class="tool-ico">${tl.icon}</div>
+        <div style="min-width:0"><div style="font-weight:700;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${tl.name}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.3">${tl.description}</div></div>
       </div></a>`;
     });
     h+=`</div>`;
@@ -876,92 +841,54 @@ function openToolSheet(){
       <button class="btn btn-p btn-full" onclick="saveTool()">${tr.add}</button>
     </div>`);
 }
-function saveTool(){
+async function saveTool(){
   const n=el("tl-n").value.trim();if(!n)return;
-  S.tools=[...S.tools,{id:uid(),icon:el("tl-i").value,name:n,url:el("tl-u").value,category:el("tl-c").value,description:el("tl-d").value}];
-  save();closeSheet();renderTools();
-}
-
-// ════════════════════════════════════════
-// TYPEFORM SYNC
-// ════════════════════════════════════════
-async function syncOrders(){
-  S.syncStatus="syncing";updateSyncUI();
   try{
-    const res=await fetch(`${RAILWAY}/orders`);
-    if(!res.ok)throw new Error(`HTTP ${res.status}`);
-    const remote=await res.json();
-    const exTF=new Set(S.orders.map(o=>o.typeformResponseId).filter(Boolean));
-    const exId=new Set(S.orders.map(o=>o.id));
-    const toAdd=remote.filter(o=>o.clientName&&!exTF.has(o.typeformResponseId)&&!exId.has(o.id));
-    if(toAdd.length){S.orders=[...toAdd,...S.orders];save();}
-    S.syncStatus="ok";S.lastSync=new Date().toLocaleTimeString("fr-FR");
-    if(S.tab==="orders")renderOrders();
-    if(S.tab==="dashboard")renderDash();
-    buildNav();
-  }catch(e){S.syncStatus="error";}
-  updateSyncUI();
-  setTimeout(()=>{if(S.syncStatus==="error")S.syncStatus="ok";updateSyncUI();},4000);
-}
-function updateSyncUI(){
-  const dot=el("sync-dot");const lbl=el("sync-lbl");const btn=el("sync-btn");
-  if(!dot)return;
-  if(S.syncStatus==="syncing"){dot.className="sdot sdot-sync";lbl.textContent=t().syncing;if(btn)btn.disabled=true;}
-  else if(S.syncStatus==="error"){dot.style.cssText="background:var(--red);box-shadow:0 0 6px var(--red)";dot.className="sdot";lbl.textContent="❌ Erreur";if(btn){btn.disabled=false;btn.textContent=t().syncNow;}}
-  else{dot.className="sdot sdot-ok";lbl.textContent=S.lastSync?"Dernière sync : "+S.lastSync:t().connected;if(btn){btn.disabled=false;btn.textContent=t().syncNow;}}
-  const cnt=el("tf-cnt");
-  if(cnt)cnt.textContent=S.orders.filter(o=>o.source==="typeform"&&o.status==="new").length;
+    const created=await api("POST","/tools",{id:uid(),icon:el("tl-i").value,name:n,url:el("tl-u").value,category:el("tl-c").value,description:el("tl-d").value});
+    S.tools=[...S.tools,created];
+    closeSheet();renderTools();
+  }catch(e){alert("Erreur de sauvegarde");}
 }
 
+// ════════════════════════════════════════
+// TYPEFORM
+// ════════════════════════════════════════
 function renderTF(){
-  const tr=t();
   const newTF=S.orders.filter(o=>o.source==="typeform"&&o.status==="new").length;
   el("page").innerHTML=`<div class="screen">
     <div style="background:linear-gradient(135deg,rgba(88,166,255,.08),rgba(188,140,255,.06));border:1px solid rgba(88,166,255,.25);border-radius:14px;padding:16px;margin-bottom:14px">
       <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">
         <span style="font-size:24px">🔗</span>
         <div><h3 style="font-size:14px;font-weight:800">Connexion Typeform → Openshore CRM</h3>
-        <p style="font-size:10px;color:var(--muted);margin-top:3px">${tr.autoSync}</p></div>
+        <p style="font-size:10px;color:var(--muted);margin-top:3px">Sync automatique toutes les 60s</p></div>
       </div>
       <a href="${FORM_URL}" target="_blank"><button class="btn btn-blue btn-sm">🔗 Ouvrir le formulaire</button></a>
     </div>
-
     <div class="card" style="border:2px solid rgba(240,165,0,.3);margin-bottom:14px">
       <div class="card-b">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <div style="display:flex;align-items:center;gap:10px">
-            <span style="font-size:22px">🔄</span>
-            <div>
-              <h3 style="font-size:14px;font-weight:800">${tr.syncNow.replace("🔄 ","")}</h3>
-              <p style="color:var(--muted);font-size:11px;margin-top:3px;display:flex;align-items:center;gap:6px">
-                <span class="sdot sdot-ok" id="sync-dot"></span>
-                <span id="sync-lbl">${S.lastSync?"Dernière sync : "+S.lastSync:tr.connected}</span>
-              </p>
-            </div>
-          </div>
-          <button class="btn btn-p btn-sm" id="sync-btn" onclick="syncOrders()">${tr.syncNow}</button>
+          <div><h3 style="font-size:14px;font-weight:800">🔄 Synchronisation</h3>
+          <p style="color:var(--green);font-size:11px;margin-top:3px">✅ Toutes les données sont synchronisées avec Railway</p></div>
+          <button class="btn btn-p btn-sm" onclick="refreshAll()">🔄 Actualiser</button>
         </div>
-        <div class="two-col" style="margin-bottom:12px">
-          <div style="background:var(--bg);border-radius:10px;padding:12px;display:flex;align-items:center;gap:8px">
-            <div class="sdot sdot-ok"></div>
-            <div><div style="font-size:10px;color:var(--muted)">Serveur Railway</div><div style="font-size:12px;font-weight:700">Connecté ✅</div></div>
+        <div class="two-col">
+          <div style="background:var(--bg);border-radius:10px;padding:12px">
+            <div style="font-size:10px;color:var(--muted)">Commandes totales</div>
+            <div style="font-size:26px;font-weight:900;color:var(--blue)">${S.orders.length}</div>
           </div>
           <div style="background:var(--bg);border-radius:10px;padding:12px">
-            <div style="font-size:10px;color:var(--muted)">${tr.newTF}</div>
-            <div style="font-size:26px;font-weight:900;color:${newTF>0?"var(--accent)":"var(--muted)"}" id="tf-cnt">${newTF}</div>
+            <div style="font-size:10px;color:var(--muted)">Nouvelles commandes TF</div>
+            <div style="font-size:26px;font-weight:900;color:${newTF>0?"var(--accent)":"var(--muted)"}">${newTF}</div>
           </div>
         </div>
-        <p style="color:var(--muted);font-size:10px">ℹ️ Synchronisation automatique toutes les 60s.</p>
       </div>
     </div>
-
     <div style="background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.2);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px">
       <span>⏱</span><div>
         <div style="font-weight:800;font-size:12px;color:var(--green)">Deadline automatique J+7</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px">Chaque commande Typeform reçoit une deadline à 7 jours.</div>
       </div>
     </div>
-
     <div class="card"><div class="card-b">
       <h3 style="font-size:12px;font-weight:800;margin-bottom:13px">🗂 Champs Typeform → CRM</h3>
       ${[["Décrivez votre landing page de rêve","description"],["Prénom + Nom","clientName"],["Téléphone","clientPhone"],["Email","clientEmail"],["Entreprise","company"],["Objectif de la landing page","landingObjective"],["Décrivez vos offres","offers"],["Documents (lien)","assets"],["3 couleurs de marque","colors"],["Inspiration web","inspiration"]]
@@ -972,10 +899,12 @@ function renderTF(){
         </div>`).join("")}
     </div></div>
   </div>`;
+}
 
-  if(syncTimer)clearInterval(syncTimer);
-  syncTimer=setInterval(syncOrders,60000);
-  updateSyncUI();
+async function refreshAll(){
+  showLoading();
+  await loadAll();
+  renderPage();buildNav();
 }
 
 // ════════════════════════════════════════

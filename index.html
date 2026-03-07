@@ -273,7 +273,7 @@ select.inp{cursor:pointer}
 const ADMIN_PW   = "Openshore37.";
 const API        = "https://openshore-webhook-production.up.railway.app";
 const FORM_ORDERS    = "https://form.typeform.com/to/rJdfntNq";
-const FORM_REVISIONS = "https://form.typeform.com/to/EG6Yc827#project_id=xxxxx"; // ← Colle ici l'URL de ton formulaire révisions
+const FORM_REVISIONS = ""; // ← Colle ici l'URL de ton formulaire révisions
 
 const STATUS_COLORS = {
   new:"#58A6FF", assigned:"#BC8CFF", inprogress:"#F0A500",
@@ -332,7 +332,7 @@ fr:{
   rl:{new:"Nouveau",assigned:"Assigné",inprogress:"En cours",done:"Terminé",cancelled:"Annulé"},
   ptypes:["Landing page","Site vitrine","E-commerce","Site professionnel","Blog","App web"],
   cats:["Fonts","Icons","Plugins","Copywriting","Checklist","How to Deliver","Autre"],
-  specs:["WordPress","Shopify","React/Next.js","Webflow","Wix","Full-stack"],
+  specs:["Niveau 1","Niveau 2","Niveau 3"],
   waOrder:(n,c,p)=>`Bonjour ${n} 👋\n\nNouvelle mission sur Openshore :\n\n🎯 *Client :* ${c}\n📦 *Projet :* ${p}\n\nConnectez-vous pour voir les détails.\n\n— Openshore`,
   waRevision:(n,c,p)=>`Bonjour ${n} 👋\n\nNouvelle révision à traiter sur Openshore :\n\n🎯 *Client :* ${c}\n📝 *Projet :* ${p}\n\n⏰ *Deadline : 24h*\n\nConnectez-vous pour voir les détails.\n\n— Openshore`,
 },
@@ -373,7 +373,7 @@ en:{
   rl:{new:"New",assigned:"Assigned",inprogress:"In progress",done:"Done",cancelled:"Cancelled"},
   ptypes:["Landing page","Showcase site","E-commerce","Pro site","Blog","Web app"],
   cats:["Fonts","Icons","Plugins","Copywriting","Checklist","How to Deliver","Other"],
-  specs:["WordPress","Shopify","React/Next.js","Webflow","Wix","Full-stack"],
+  specs:["Level 1","Level 2","Level 3"],
   waOrder:(n,c,p)=>`Hello ${n} 👋\n\nNew mission on Openshore:\n\n🎯 *Client:* ${c}\n📦 *Project:* ${p}\n\nLog in to see the details.\n\n— Openshore`,
   waRevision:(n,c,p)=>`Hello ${n} 👋\n\nNew revision on Openshore:\n\n🎯 *Client:* ${c}\n📝 *Project:* ${p}\n\n⏰ *Deadline: 24h*\n\nLog in to see the details.\n\n— Openshore`,
 }};
@@ -490,19 +490,21 @@ async function doLogin(role, me){
   el("app").classList.add("visible");
   await loadAll();
   buildNav(); renderPage();
-  // Auto-refresh toutes les 30s — cross-device sync
-  S.syncTimer = setInterval(async()=>{
-    try {
-      const [orders, revisions] = await Promise.all([
-        api("GET","/orders"), api("GET","/revisions")
-      ]);
-      S.orders=orders; S.revisions=revisions;
-      if(S.tab==="orders")    renderOrders();
-      if(S.tab==="revisions") renderRevisions();
-      if(S.tab==="dashboard") renderDash();
-      buildNav();
-    } catch(e){}
-  }, 30000);
+  // Auto-refresh toutes les 10s — sync multi-appareils
+  S.syncTimer = setInterval(syncData, 10000);
+  // Refresh immédiat quand l'onglet du navigateur redevient visible
+  document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) syncData(); });
+}
+async function syncData(){
+  if(!S.role) return;
+  try {
+    const [orders, revisions] = await Promise.all([
+      api("GET","/orders"), api("GET","/revisions")
+    ]);
+    S.orders=orders; S.revisions=revisions;
+    buildNav();
+    renderPage();
+  } catch(e){}
 }
 function logout(){
   S.role=null; S.me=null;
@@ -520,8 +522,12 @@ const FL_TABS  = [{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",
 
 function buildNav(){
   const tabs = S.role==="admin" ? ADM_TABS : FL_TABS;
-  const newO  = S.orders.filter(o=>o.status==="new").length;
-  const newRV = S.revisions.filter(r=>r.status==="new").length;
+  const newO  = S.role==="admin"
+    ? S.orders.filter(o=>o.status==="new").length
+    : S.orders.filter(o=>o.freelanceId===S.me?.id && o.status==="assigned").length;
+  const newRV = S.role==="admin"
+    ? S.revisions.filter(r=>r.status==="new").length
+    : S.revisions.filter(r=>r.freelanceId===S.me?.id && r.status==="assigned").length;
   const tr = t();
   el("sb-nav").innerHTML = tabs.map(tb=>`
     <button class="sb-btn${S.tab===tb.k?" active":""}" onclick="goTab('${tb.k}')">

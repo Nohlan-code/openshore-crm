@@ -903,7 +903,7 @@ async function doAssign(itemId, type, fid){
     }
     if(isRev) renderRevisions(); else renderOrders();
     buildNav();
-  }catch(e){ alert("Erreur lors de l'assignation"); }
+  }catch(e){ alert("Erreur lors de l'assignation : " + (e.message||e)); }
 }
 function sendWA(type, id){
   const isRev = type==="revision";

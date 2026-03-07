@@ -10,7 +10,8 @@
 :root{
   --bg:#08090C;--surface:#0E1117;--card:#13171F;--border:#1E2430;
   --accent:#F0A500;--adim:rgba(240,165,0,.1);
-  --green:#3FB950;--red:#F85149;--blue:#58A6FF;--purple:#BC8CFF;--wa:#25D366;
+  --green:#3FB950;--red:#F85149;--blue:#58A6FF;--purple:#BC8CFF;
+  --wa:#25D366;--teal:#26C6DA;
   --text:#E6EDF3;--muted:#7D8590;--dim:#21262D;
 }
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;font-size:14px}
@@ -20,7 +21,7 @@ a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 
-/* AUTH */
+/* ── AUTH ── */
 #auth{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
 #auth.hidden{display:none}
 .auth-box{width:100%;max-width:380px}
@@ -32,36 +33,32 @@ a{color:inherit;text-decoration:none}
 .auth-card h2{font-size:18px;font-weight:800;margin-bottom:4px}
 .auth-card .sub{color:var(--muted);font-size:12px;margin-bottom:22px}
 
-/* APP SHELL */
+/* ── APP SHELL ── */
 #app{display:none;height:100vh;overflow:hidden}
 #app.visible{display:flex}
-
 @media(min-width:900px){
   #app{flex-direction:row}
   #sidebar{display:flex!important;flex-direction:column;width:230px;min-width:230px;background:var(--surface);border-right:1px solid var(--border);height:100vh;flex-shrink:0}
-  #topbar{display:none!important}
-  #bottomnav{display:none!important}
+  #topbar,#bottomnav{display:none!important}
   #content{flex:1;overflow-y:auto;height:100vh}
   #page{padding:28px 32px 40px;max-width:820px;margin:0 auto}
 }
 @media(min-width:600px) and (max-width:899px){
   #app{flex-direction:column}
   #sidebar{display:none!important}
-  #topbar{display:flex!important}
-  #bottomnav{display:flex!important}
+  #topbar,#bottomnav{display:flex!important}
   #content{flex:1;overflow-y:auto}
   #page{padding:20px 20px 90px;max-width:700px;margin:0 auto}
 }
 @media(max-width:599px){
   #app{flex-direction:column}
   #sidebar{display:none!important}
-  #topbar{display:flex!important}
-  #bottomnav{display:flex!important}
+  #topbar,#bottomnav{display:flex!important}
   #content{flex:1;overflow-y:auto}
   #page{padding:14px 14px 90px}
 }
 
-/* SIDEBAR */
+/* ── SIDEBAR ── */
 #sidebar{display:none}
 .sb-logo{padding:20px 16px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
 .sb-logo-icon{width:34px;height:34px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
@@ -77,25 +74,22 @@ a{color:inherit;text-decoration:none}
 .sb-user{display:flex;align-items:center;gap:10px;padding:8px 12px;margin-bottom:8px}
 .sb-langs{display:flex;gap:5px;padding:0 4px;margin-bottom:6px}
 
-/* TOPBAR */
+/* ── TOPBAR ── */
 #topbar{display:none;align-items:center;justify-content:space-between;padding:0 14px;height:52px;flex-shrink:0;background:rgba(14,17,23,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
-.tb-logo{display:flex;align-items:center;gap:8px}
-.tb-logo-icon{width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
 .tb-right{display:flex;align-items:center;gap:7px}
 
-/* BOTTOM NAV */
+/* ── BOTTOM NAV ── */
 #bottomnav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:10;background:rgba(14,17,23,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom,0px)}
-.bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border:none;background:transparent;border-top:2px solid transparent;cursor:pointer;transition:all .15s}
+.bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:7px 2px;border:none;background:transparent;border-top:2px solid transparent;cursor:pointer;transition:all .15s}
 .bn-btn.active{background:var(--adim);border-top-color:var(--accent)}
-.bn-icon{font-size:20px;position:relative}
+.bn-icon{font-size:18px;position:relative}
 .bn-badge{position:absolute;top:-4px;right:-8px;background:var(--red);color:#fff;border-radius:10px;width:15px;height:15px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900}
-.bn-label{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+.bn-label{font-size:8px;font-weight:700;color:var(--muted);letter-spacing:.3px;text-transform:uppercase}
 .bn-btn.active .bn-label{color:var(--accent)}
 
-/* COMPONENTS */
+/* ── COMPONENTS ── */
 .btn{border-radius:9px;font-weight:700;letter-spacing:.3px;white-space:nowrap;cursor:pointer;border:none;transition:opacity .15s;font-size:13px;padding:10px 18px;display:inline-flex;align-items:center;gap:6px}
-.btn:hover{opacity:.82}
-.btn:active{opacity:.65}
+.btn:hover{opacity:.82}.btn:active{opacity:.65}
 .btn-sm{font-size:11px;padding:5px 11px;border-radius:7px}
 .btn-full{width:100%;justify-content:center}
 .btn-p{background:var(--accent);color:#000}
@@ -104,13 +98,14 @@ a{color:inherit;text-decoration:none}
 .btn-green{background:rgba(63,185,80,.12);color:var(--green);border:1px solid rgba(63,185,80,.3)!important}
 .btn-red{background:rgba(248,81,73,.12);color:var(--red);border:1px solid rgba(248,81,73,.3)!important}
 .btn-wa{background:rgba(37,211,102,.12);color:var(--wa);border:1px solid rgba(37,211,102,.3)!important}
+.btn-teal{background:rgba(38,198,218,.12);color:var(--teal);border:1px solid rgba(38,198,218,.3)!important}
 .btn-purple{background:rgba(188,140,255,.12);color:var(--purple);border:1px solid rgba(188,140,255,.3)!important}
 
 .field{display:flex;flex-direction:column;gap:5px}
 .lbl{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase}
 .inp{background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--text);padding:10px 12px;font-size:13px;outline:none;width:100%;transition:border-color .2s}
 .inp:focus{border-color:var(--accent)}
-textarea.inp{resize:vertical;min-height:80px}
+textarea.inp{resize:vertical;min-height:70px}
 select.inp{cursor:pointer}
 
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
@@ -155,7 +150,7 @@ select.inp{cursor:pointer}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:flex;align-items:flex-end;justify-content:center;animation:fadein .2s}
 @media(min-width:600px){.overlay{align-items:center}}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
-.sheet{background:var(--card);border:1px solid var(--border);width:100%;max-width:520px;max-height:92vh;overflow-y:auto;box-shadow:0 -20px 60px rgba(0,0,0,.8);animation:slideup .25s ease;border-radius:20px 20px 0 0}
+.sheet{background:var(--card);border:1px solid var(--border);width:100%;max-width:540px;max-height:92vh;overflow-y:auto;box-shadow:0 -20px 60px rgba(0,0,0,.8);animation:slideup .25s ease;border-radius:20px 20px 0 0}
 @media(min-width:600px){.sheet{border-radius:20px;margin:20px}}
 @keyframes slideup{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 .sheet-handle{display:flex;justify-content:center;padding:12px 0 0}
@@ -169,17 +164,19 @@ select.inp{cursor:pointer}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;width:100%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,.9)}
 
 .section-title{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin:16px 0 10px}
-.sdot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
-.sdot-ok{background:var(--green);box-shadow:0 0 6px var(--green)}
-.sdot-sync{background:var(--accent);animation:pulse 1s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .screen{animation:pagein .18s ease}
 @keyframes pagein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-/* Loading spinner */
 .spinner{display:flex;align-items:center;justify-content:center;padding:60px;flex-direction:column;gap:14px}
 .spin{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* Deadline urgence */
+.dl-urgent{color:var(--red)!important;font-weight:800!important}
+.dl-soon{color:var(--accent)!important;font-weight:700!important}
+.dl-ok{color:var(--muted)}
+
+/* Révision type tags */
+.rv-tag{display:inline-flex;align-items:center;gap:4px;background:rgba(38,198,218,.1);border:1px solid rgba(38,198,218,.25);border-radius:6px;padding:3px 8px;font-size:10px;font-weight:700;color:var(--teal);margin:2px 2px 2px 0}
 </style>
 </head>
 <body>
@@ -193,12 +190,10 @@ select.inp{cursor:pointer}
   <div class="auth-box">
     <div class="auth-logo">
       <div class="auth-logo-icon">⚡</div>
-      <h1>Openshore</h1>
-      <p>Workspace</p>
+      <h1>Openshore</h1><p>Workspace</p>
     </div>
     <div class="auth-card">
-      <h2 id="a-title"></h2>
-      <div class="sub" id="a-sub"></div>
+      <h2 id="a-title"></h2><div class="sub" id="a-sub"></div>
       <div style="display:flex;flex-direction:column;gap:13px">
         <div class="field"><label class="lbl" id="a-el"></label><input id="a-email" class="inp" type="email" placeholder="votre@email.com" onkeydown="if(event.key==='Enter')tryLogin()"/></div>
         <div class="field"><label class="lbl" id="a-pl"></label>
@@ -254,8 +249,8 @@ select.inp{cursor:pointer}
   </nav>
   <div id="content">
     <div id="topbar">
-      <div class="tb-logo">
-        <div class="tb-logo-icon">⚡</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px">⚡</div>
         <div style="line-height:1.1"><div style="font-size:13px;font-weight:900">Openshore</div><div style="font-size:8px;color:var(--accent);font-weight:700;letter-spacing:1.5px;text-transform:uppercase">Workspace</div></div>
       </div>
       <div class="tb-right">
@@ -269,312 +264,392 @@ select.inp{cursor:pointer}
   </div>
   <nav id="bottomnav"></nav>
 </div>
-
 <div id="sheet-wrap"></div>
 
 <script>
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // CONFIG
-// ════════════════════════════════════════
-const ADMIN_PW = "Openshore37.";
-const API      = "https://openshore-webhook-production.up.railway.app";
-const FORM_URL = "https://form.typeform.com/to/rJdfntNq";
-const STATUS_COLORS = {new:"#58A6FF",assigned:"#BC8CFF",inprogress:"#F0A500",review:"#FF9800",delivered:"#3FB950",cancelled:"#F85149"};
+// ══════════════════════════════════════════════════════════════════
+const ADMIN_PW   = "Openshore37.";
+const API        = "https://openshore-webhook-production.up.railway.app";
+const FORM_ORDERS    = "https://form.typeform.com/to/rJdfntNq";
+const FORM_REVISIONS = "https://form.typeform.com/to/EG6Yc827#project_id=xxxxx"; // ← Colle ici l'URL de ton formulaire révisions
 
-// ════════════════════════════════════════
+const STATUS_COLORS = {
+  new:"#58A6FF", assigned:"#BC8CFF", inprogress:"#F0A500",
+  review:"#FF9800", done:"#3FB950", cancelled:"#F85149"
+};
+
+// ══════════════════════════════════════════════════════════════════
 // STATE
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 let S = {
   role:null, me:null, lang:"fr", tab:"dashboard",
   oFilter:"all", oSearch:"",
-  orders:[], freelancers:[], tools:[],
-  loading:false, syncTimer:null,
+  rvFilter:"all", rvSearch:"",
+  orders:[], freelancers:[], tools:[], revisions:[],
+  syncTimer:null,
 };
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // TRANSLATIONS
-// ════════════════════════════════════════
-const T={
+// ══════════════════════════════════════════════════════════════════
+const T = {
 fr:{
-  login:"Bienvenue",loginSub:"Connectez-vous à votre espace freelance",
-  emailL:"Email",pwL:"Mot de passe",loginBtn:"Se connecter",
-  adminBtn:"Accès Administrateur",adminTitle:"Espace Administrateur",adminSub:"Entrez le mot de passe",
-  wrongPw:"Identifiants incorrects.",wrongAdmin:"Mot de passe incorrect.",
-  cancel:"Annuler",save:"Sauvegarder",create:"Créer",add:"Ajouter",edit:"Modifier",del:"Supprimer",
-  logout:"Déconnexion",admin:"Admin",freelancer:"Freelance",
-  dashboard:"Dashboard",orders:"Commandes",freelancers:"Freelances",tools:"Outils",typeform:"Typeform",
-  totalOrders:"Commandes",inProgress:"En cours",delivered:"Livrées",activeFl:"Freelances actifs",
-  recentOrders:"Commandes récentes",flLoad:"Charge freelances",
-  noOrders:"Aucune commande.",noMissions:"Aucune mission assignée.",
-  addOrder:"+ Nouvelle commande",addFl:"+ Ajouter",addTool:"+ Ajouter un outil",
-  search:"🔍 Rechercher...",all:"Tous",
-  assign:"Assigner",unassign:"Désassigner",assignTo:"Assigner à",assignSub:"Choisissez un freelance :",
-  newOrder:"Nouvelle commande",editOrder:"Modifier la commande",
-  newFl:"Nouveau freelance",editFl:"Modifier le freelance",
-  clientN:"Nom client",clientE:"Email client",projType:"Type de projet",
-  budget:"Budget",deadline:"Deadline",desc:"Description",
-  deactivate:"Désactiver",reactivate:"Réactiver",
-  fullName:"Nom complet",email:"Email",spec:"Spécialité",phone:"WhatsApp",pwFl:"Mot de passe (login)",
-  toolsLib:"Ressources partagées avec vos freelances.",
-  icon:"Icône",name:"Nom",url:"URL",cat:"Catégorie",shortDesc:"Description",
-  myOnly:"Vous ne voyez que vos missions assignées.",
+  login:"Bienvenue", loginSub:"Connectez-vous à votre espace",
+  emailL:"Email", pwL:"Mot de passe", loginBtn:"Se connecter",
+  adminBtn:"Accès Administrateur", adminTitle:"Espace Admin", adminSub:"Entrez le mot de passe",
+  wrongPw:"Identifiants incorrects.", wrongAdmin:"Mot de passe incorrect.",
+  cancel:"Annuler", save:"Sauvegarder", create:"Créer", add:"Ajouter", edit:"Modifier",
+  logout:"Déconnexion", admin:"Admin", freelancer:"Freelance",
+  dashboard:"Dashboard", orders:"Commandes", revisions:"Révisions",
+  freelancers:"Freelances", tools:"Outils", typeform:"Typeform",
+  totalOrders:"Commandes", inProgress:"En cours", delivered:"Livrées", activeFl:"Freelances",
+  totalRevisions:"Révisions", rvOpen:"En attente", rvDone:"Terminées",
+  recentOrders:"Commandes récentes", recentRevisions:"Révisions urgentes",
+  flLoad:"Charge freelances",
+  noOrders:"Aucune commande.", noRevisions:"Aucune révision.", noMissions:"Aucune mission assignée.",
+  addOrder:"+ Commande", addRevision:"+ Révision",
+  addFl:"+ Ajouter", addTool:"+ Outil",
+  search:"🔍 Rechercher...", all:"Tous",
+  assign:"Assigner", unassign:"Désassigner", assignTo:"Assigner à", assignSub:"Choisissez un freelance :",
+  newOrder:"Nouvelle commande", editOrder:"Modifier la commande",
+  newRevision:"Nouvelle révision", editRevision:"Modifier la révision",
+  newFl:"Nouveau freelance", editFl:"Modifier le freelance",
+  clientN:"Nom client", clientE:"Email client", projType:"Type de projet",
+  budget:"Budget", deadline:"Deadline", desc:"Description",
+  projectName:"Nom du projet / site",
+  revAspect:"Révision aspect du site", revContent:"Révision contenu du site",
+  revText:"Révision contenu textuel", revOther:"Autre chose",
+  deactivate:"Désactiver", reactivate:"Réactiver",
+  fullName:"Nom complet", email:"Email", spec:"Spécialité",
+  phone:"WhatsApp", pwFl:"Mot de passe (login)",
+  toolsLib:"Ressources partagées avec les freelances.",
+  icon:"Icône", name:"Nom", url:"URL", cat:"Catégorie", shortDesc:"Description",
+  myOnlyRev:"Vous ne voyez que les révisions qui vous sont assignées.",
   loading:"Chargement...",
-  sl:{new:"Nouveau",assigned:"Assigné",inprogress:"En cours",review:"En révision",delivered:"Livré",cancelled:"Annulé"},
+  sl:{new:"Nouveau",assigned:"Assigné",inprogress:"En cours",review:"En révision",done:"Terminé",cancelled:"Annulé"},
+  rl:{new:"Nouveau",assigned:"Assigné",inprogress:"En cours",done:"Terminé",cancelled:"Annulé"},
   ptypes:["Landing page","Site vitrine","E-commerce","Site professionnel","Blog","App web"],
   cats:["Fonts","Icons","Plugins","Copywriting","Checklist","How to Deliver","Autre"],
   specs:["WordPress","Shopify","React/Next.js","Webflow","Wix","Full-stack"],
-  wa:(n,c,p)=>`Bonjour ${n} 👋\n\nNouvelle mission sur Openshore Workspace :\n\n🎯 *Client :* ${c}\n📦 *Projet :* ${p}\n\nConnectez-vous pour voir les détails.\n\n— Openshore`,
+  waOrder:(n,c,p)=>`Bonjour ${n} 👋\n\nNouvelle mission sur Openshore :\n\n🎯 *Client :* ${c}\n📦 *Projet :* ${p}\n\nConnectez-vous pour voir les détails.\n\n— Openshore`,
+  waRevision:(n,c,p)=>`Bonjour ${n} 👋\n\nNouvelle révision à traiter sur Openshore :\n\n🎯 *Client :* ${c}\n📝 *Projet :* ${p}\n\n⏰ *Deadline : 24h*\n\nConnectez-vous pour voir les détails.\n\n— Openshore`,
 },
 en:{
-  login:"Welcome",loginSub:"Log in to your freelancer space",
-  emailL:"Email",pwL:"Password",loginBtn:"Sign in",
-  adminBtn:"Administrator Access",adminTitle:"Administrator Space",adminSub:"Enter the password",
-  wrongPw:"Incorrect credentials.",wrongAdmin:"Incorrect password.",
-  cancel:"Cancel",save:"Save",create:"Create",add:"Add",edit:"Edit",del:"Delete",
-  logout:"Log out",admin:"Admin",freelancer:"Freelancer",
-  dashboard:"Dashboard",orders:"Orders",freelancers:"Freelancers",tools:"Tools",typeform:"Typeform",
-  totalOrders:"Orders",inProgress:"In progress",delivered:"Delivered",activeFl:"Active freelancers",
-  recentOrders:"Recent orders",flLoad:"Freelancer workload",
-  noOrders:"No orders yet.",noMissions:"No missions assigned.",
-  addOrder:"+ New order",addFl:"+ Add",addTool:"+ Add tool",
-  search:"🔍 Search...",all:"All",
-  assign:"Assign",unassign:"Unassign",assignTo:"Assign to",assignSub:"Choose a freelancer:",
-  newOrder:"New order",editOrder:"Edit order",
-  newFl:"New freelancer",editFl:"Edit freelancer",
-  clientN:"Client name",clientE:"Client email",projType:"Project type",
-  budget:"Budget",deadline:"Deadline",desc:"Description",
-  deactivate:"Deactivate",reactivate:"Reactivate",
-  fullName:"Full name",email:"Email",spec:"Specialty",phone:"WhatsApp",pwFl:"Password (login)",
-  toolsLib:"Resources shared with your freelancers.",
-  icon:"Icon",name:"Name",url:"URL",cat:"Category",shortDesc:"Description",
-  myOnly:"You only see your assigned missions.",
+  login:"Welcome", loginSub:"Log in to your workspace",
+  emailL:"Email", pwL:"Password", loginBtn:"Sign in",
+  adminBtn:"Administrator Access", adminTitle:"Admin Space", adminSub:"Enter the password",
+  wrongPw:"Incorrect credentials.", wrongAdmin:"Incorrect password.",
+  cancel:"Cancel", save:"Save", create:"Create", add:"Add", edit:"Edit",
+  logout:"Log out", admin:"Admin", freelancer:"Freelancer",
+  dashboard:"Dashboard", orders:"Orders", revisions:"Revisions",
+  freelancers:"Freelancers", tools:"Tools", typeform:"Typeform",
+  totalOrders:"Orders", inProgress:"In progress", delivered:"Delivered", activeFl:"Freelancers",
+  totalRevisions:"Revisions", rvOpen:"Pending", rvDone:"Done",
+  recentOrders:"Recent orders", recentRevisions:"Urgent revisions",
+  flLoad:"Freelancer workload",
+  noOrders:"No orders.", noRevisions:"No revisions.", noMissions:"No missions assigned.",
+  addOrder:"+ Order", addRevision:"+ Revision",
+  addFl:"+ Add", addTool:"+ Tool",
+  search:"🔍 Search...", all:"All",
+  assign:"Assign", unassign:"Unassign", assignTo:"Assign to", assignSub:"Choose a freelancer:",
+  newOrder:"New order", editOrder:"Edit order",
+  newRevision:"New revision", editRevision:"Edit revision",
+  newFl:"New freelancer", editFl:"Edit freelancer",
+  clientN:"Client name", clientE:"Client email", projType:"Project type",
+  budget:"Budget", deadline:"Deadline", desc:"Description",
+  projectName:"Project / site name",
+  revAspect:"Visual/aspect revision", revContent:"Content revision",
+  revText:"Text content revision", revOther:"Other",
+  deactivate:"Deactivate", reactivate:"Reactivate",
+  fullName:"Full name", email:"Email", spec:"Specialty",
+  phone:"WhatsApp", pwFl:"Password (login)",
+  toolsLib:"Resources shared with freelancers.",
+  icon:"Icon", name:"Name", url:"URL", cat:"Category", shortDesc:"Description",
+  myOnlyRev:"You only see revisions assigned to you.",
   loading:"Loading...",
-  sl:{new:"New",assigned:"Assigned",inprogress:"In progress",review:"In review",delivered:"Delivered",cancelled:"Cancelled"},
+  sl:{new:"New",assigned:"Assigned",inprogress:"In progress",review:"In review",done:"Done",cancelled:"Cancelled"},
+  rl:{new:"New",assigned:"Assigned",inprogress:"In progress",done:"Done",cancelled:"Cancelled"},
   ptypes:["Landing page","Showcase site","E-commerce","Pro site","Blog","Web app"],
   cats:["Fonts","Icons","Plugins","Copywriting","Checklist","How to Deliver","Other"],
   specs:["WordPress","Shopify","React/Next.js","Webflow","Wix","Full-stack"],
-  wa:(n,c,p)=>`Hello ${n} 👋\n\nNew mission on Openshore Workspace:\n\n🎯 *Client:* ${c}\n📦 *Project:* ${p}\n\nLog in to see the details.\n\n— Openshore`,
+  waOrder:(n,c,p)=>`Hello ${n} 👋\n\nNew mission on Openshore:\n\n🎯 *Client:* ${c}\n📦 *Project:* ${p}\n\nLog in to see the details.\n\n— Openshore`,
+  waRevision:(n,c,p)=>`Hello ${n} 👋\n\nNew revision on Openshore:\n\n🎯 *Client:* ${c}\n📝 *Project:* ${p}\n\n⏰ *Deadline: 24h*\n\nLog in to see the details.\n\n— Openshore`,
 }};
-const t=()=>T[S.lang];
+const t = () => T[S.lang];
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // HELPERS
-// ════════════════════════════════════════
-const el=id=>document.getElementById(id);
-function uid(){return Math.random().toString(36).slice(2,9)}
-function nowISO(){return new Date().toISOString()}
-function d7(){return new Date(Date.now()+7*864e5).toISOString().slice(0,10)}
-function fmt(iso){return iso?new Date(iso).toLocaleDateString("fr-FR",{day:"2-digit",month:"short"}):"—"}
-function showErr(id,msg){const e=el(id);e.textContent=msg;e.style.display="block";setTimeout(()=>e.style.display="none",3000)}
-function togglePw(id,btn){const i=el(id);i.type=i.type==="password"?"text":"password";btn.textContent=i.type==="password"?"👁":"🙈"}
-function mkAv(ini,sz=36){return`<div class="av" style="width:${sz}px;height:${sz}px;font-size:${sz*.33}px">${ini}</div>`}
-function mkBadge(sk){const c=STATUS_COLORS[sk]||"#58A6FF";return`<span class="badge" style="background:${c}20;color:${c};border:1px solid ${c}40">${t().sl[sk]||sk}</span>`}
-function mkPill(lbl,c="#F0A500"){return`<span class="pill" style="background:${c}18;color:${c};border:1px solid ${c}33">${lbl}</span>`}
-function daysLeft(iso){if(!iso)return null;return Math.ceil((new Date(iso)-Date.now())/864e5)}
-function deadlineHtml(iso){
-  if(!iso)return"";
-  const d=daysLeft(iso);
-  const c=d<=0?"var(--red)":d<=2?"var(--accent)":"var(--muted)";
-  return`<div style="font-size:11px;color:${c};font-weight:${d<=2?"700":"400"}">⏱ Deadline : ${fmt(iso)} (${d<=0?"Dépassé":"J-"+d})</div>`;
+// ══════════════════════════════════════════════════════════════════
+const el = id => document.getElementById(id);
+function uid(){ return Math.random().toString(36).slice(2,9) }
+function d7(){ return new Date(Date.now()+7*864e5).toISOString().slice(0,10) }
+function d24(){ return new Date(Date.now()+24*3600000).toISOString() }
+function fmt(iso){ return iso ? new Date(iso).toLocaleDateString("fr-FR",{day:"2-digit",month:"short"}) : "—" }
+function fmtTime(iso){ return iso ? new Date(iso).toLocaleString("fr-FR",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}) : "—" }
+function showErr(id,msg){ const e=el(id); if(!e)return; e.textContent=msg; e.style.display="block"; setTimeout(()=>e.style.display="none",3500) }
+function togglePw(id,btn){ const i=el(id); i.type=i.type==="password"?"text":"password"; btn.textContent=i.type==="password"?"👁":"🙈" }
+function mkAv(ini,sz=36){ return `<div class="av" style="width:${sz}px;height:${sz}px;font-size:${sz*.33}px">${ini}</div>` }
+function mkBadge(sk, map){
+  const c = STATUS_COLORS[sk]||"#58A6FF";
+  return `<span class="badge" style="background:${c}20;color:${c};border:1px solid ${c}40">${(map||t().sl)[sk]||sk}</span>`
 }
-function showLoading(){el("page").innerHTML=`<div class="spinner"><div class="spin"></div><div style="color:var(--muted);font-size:13px">${t().loading}</div></div>`}
+function mkPill(lbl,c="#F0A500"){ return `<span class="pill" style="background:${c}18;color:${c};border:1px solid ${c}33">${lbl}</span>` }
 
-// ════════════════════════════════════════
-// API CALLS
-// ════════════════════════════════════════
+function deadlineRv(iso){
+  if(!iso) return "";
+  const ms = new Date(iso) - Date.now();
+  const h  = Math.floor(ms / 3600000);
+  const m  = Math.floor((ms % 3600000) / 60000);
+  if(ms <= 0) return `<span class="dl-urgent">⚠️ Dépassée (${fmtTime(iso)})</span>`;
+  if(h < 2)   return `<span class="dl-urgent">🔴 ${h}h${m.toString().padStart(2,"0")} restantes</span>`;
+  if(h < 6)   return `<span class="dl-soon">🟠 ${h}h${m.toString().padStart(2,"0")} restantes</span>`;
+  return `<span class="dl-ok">⏱ ${fmtTime(iso)}</span>`;
+}
+function deadlineOrder(iso){
+  if(!iso) return "";
+  const d = Math.ceil((new Date(iso)-Date.now())/864e5);
+  const c = d<=0?"var(--red)":d<=2?"var(--accent)":"var(--muted)";
+  return `<span style="font-size:11px;color:${c};font-weight:${d<=2?"700":"400"}">⏱ ${fmt(iso)} (${d<=0?"Dépassé":"J-"+d})</span>`;
+}
+function rvTypeTags(rv){
+  let tags = "";
+  if(rv.revisionAspect)  tags += `<span class="rv-tag">🎨 Aspect</span>`;
+  if(rv.revisionContent) tags += `<span class="rv-tag">📄 Contenu</span>`;
+  if(rv.revisionText)    tags += `<span class="rv-tag">✍️ Texte</span>`;
+  if(rv.revisionOther)   tags += `<span class="rv-tag">💬 Autre</span>`;
+  return tags ? `<div style="margin-bottom:8px">${tags}</div>` : "";
+}
+function showLoading(){ el("page").innerHTML = `<div class="spinner"><div class="spin"></div><div style="color:var(--muted);font-size:13px">${t().loading}</div></div>` }
+
+// ══════════════════════════════════════════════════════════════════
+// API
+// ══════════════════════════════════════════════════════════════════
 async function api(method, path, body){
-  const opts={method,headers:{"Content-Type":"application/json"}};
-  if(body)opts.body=JSON.stringify(body);
-  const res=await fetch(API+path, opts);
-  if(!res.ok)throw new Error(`HTTP ${res.status}`);
+  const opts = {method, headers:{"Content-Type":"application/json"}};
+  if(body) opts.body = JSON.stringify(body);
+  const res = await fetch(API + path, opts);
+  if(!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
-
 async function loadAll(){
   showLoading();
-  try{
-    const [orders, freelancers, tools] = await Promise.all([
-      api("GET","/orders"),
-      api("GET","/freelancers"),
-      api("GET","/tools"),
+  try {
+    const [orders, freelancers, tools, revisions] = await Promise.all([
+      api("GET","/orders"), api("GET","/freelancers"),
+      api("GET","/tools"),  api("GET","/revisions"),
     ]);
-    S.orders=orders;
-    S.freelancers=freelancers;
-    S.tools=tools;
-  }catch(e){
-    console.error("loadAll error:",e);
-  }
+    S.orders=orders; S.freelancers=freelancers; S.tools=tools; S.revisions=revisions;
+  } catch(e){ console.error("loadAll:",e); }
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // AUTH
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 function setLang(l){
-  S.lang=l;
-  ["al","sl","tl"].forEach(p=>{
-    const fr=el(`${p}-fr`),en=el(`${p}-en`);
-    if(!fr||!en)return;
-    if(l==="fr"){fr.className="btn btn-sm btn-p";en.className="btn btn-sm btn-ghost";}
-    else{en.className="btn btn-sm btn-p";fr.className="btn btn-sm btn-ghost";}
+  S.lang = l;
+  ["al","sl","tl"].forEach(p => {
+    const fr=el(`${p}-fr`), en=el(`${p}-en`);
+    if(!fr||!en) return;
+    if(l==="fr"){ fr.className="btn btn-sm btn-p"; en.className="btn btn-sm btn-ghost"; }
+    else{ en.className="btn btn-sm btn-p"; fr.className="btn btn-sm btn-ghost"; }
   });
   updateAuthUI();
-  if(S.role)renderApp();
+  if(S.role) renderApp();
 }
 function updateAuthUI(){
-  const tr=t();
-  el("a-title").textContent=tr.login;
-  el("a-sub").textContent=tr.loginSub;
-  el("a-el").textContent=tr.emailL;
-  el("a-pl").textContent=tr.pwL;
-  el("a-btn").textContent=tr.loginBtn;
-  el("a-admin-lbl").textContent=tr.adminBtn;
-  el("am-title").textContent=tr.adminTitle;
-  el("am-sub").textContent=tr.adminSub;
-  el("am-btn").textContent=tr.loginBtn;
-  el("am-cancel").textContent=tr.cancel;
+  const tr = t();
+  el("a-title").textContent=tr.login; el("a-sub").textContent=tr.loginSub;
+  el("a-el").textContent=tr.emailL; el("a-pl").textContent=tr.pwL;
+  el("a-btn").textContent=tr.loginBtn; el("a-admin-lbl").textContent=tr.adminBtn;
+  el("am-title").textContent=tr.adminTitle; el("am-sub").textContent=tr.adminSub;
+  el("am-btn").textContent=tr.loginBtn; el("am-cancel").textContent=tr.cancel;
 }
-
 async function tryLogin(){
-  const email=el("a-email").value.trim().toLowerCase();
-  const pw=el("a-pw").value;
-  el("a-btn").textContent="⏳...";
-  el("a-btn").disabled=true;
-  try{
-    const fls=await api("GET","/freelancers");
-    S.freelancers=fls;
-    const fl=fls.find(f=>f.email.toLowerCase()===email&&f.password===pw&&f.active);
-    if(fl){doLogin("freelancer",fl);}
-    else{showErr("a-err",t().wrongPw);}
-  }catch(e){showErr("a-err","Erreur de connexion au serveur.");}
-  el("a-btn").textContent=t().loginBtn;
-  el("a-btn").disabled=false;
+  const email = el("a-email").value.trim().toLowerCase();
+  const pw    = el("a-pw").value;
+  el("a-btn").textContent="⏳..."; el("a-btn").disabled=true;
+  try {
+    const fls = await api("GET","/freelancers");
+    S.freelancers = fls;
+    const fl = fls.find(f=>f.email.toLowerCase()===email && f.password===pw && f.active);
+    if(fl) doLogin("freelancer", fl);
+    else showErr("a-err", t().wrongPw);
+  } catch(e){ showErr("a-err","Erreur de connexion au serveur."); }
+  el("a-btn").textContent=t().loginBtn; el("a-btn").disabled=false;
 }
-function openAdminModal(){el("admin-modal").style.display="flex";el("am-pw").value="";}
+function openAdminModal(){ el("admin-modal").style.display="flex"; el("am-pw").value=""; }
 function tryAdmin(){
-  if(el("am-pw").value===ADMIN_PW){el("admin-modal").style.display="none";doLogin("admin",null);}
-  else{showErr("am-err",t().wrongAdmin);}
+  if(el("am-pw").value===ADMIN_PW){ el("admin-modal").style.display="none"; doLogin("admin",null); }
+  else showErr("am-err", t().wrongAdmin);
 }
-async function doLogin(role,me){
-  S.role=role;S.me=me;S.tab="dashboard";
+async function doLogin(role, me){
+  S.role=role; S.me=me; S.tab="dashboard";
   el("auth").classList.add("hidden");
   el("app").classList.add("visible");
   await loadAll();
-  buildNav();renderPage();
-  if(role==="admin"){
-    S.syncTimer=setInterval(async()=>{
-      try{
-        const orders=await api("GET","/orders");
-        S.orders=orders;
-        if(S.tab==="orders")renderOrders();
-        if(S.tab==="dashboard")renderDash();
-        buildNav();
-      }catch(e){}
-    },60000);
-  }
+  buildNav(); renderPage();
+  // Auto-refresh toutes les 30s — cross-device sync
+  S.syncTimer = setInterval(async()=>{
+    try {
+      const [orders, revisions] = await Promise.all([
+        api("GET","/orders"), api("GET","/revisions")
+      ]);
+      S.orders=orders; S.revisions=revisions;
+      if(S.tab==="orders")    renderOrders();
+      if(S.tab==="revisions") renderRevisions();
+      if(S.tab==="dashboard") renderDash();
+      buildNav();
+    } catch(e){}
+  }, 30000);
 }
 function logout(){
-  S.role=null;S.me=null;
-  if(S.syncTimer)clearInterval(S.syncTimer);
+  S.role=null; S.me=null;
+  if(S.syncTimer) clearInterval(S.syncTimer);
   el("app").classList.remove("visible");
   el("auth").classList.remove("hidden");
-  el("a-email").value="";el("a-pw").value="";
+  el("a-email").value=""; el("a-pw").value="";
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // NAV
-// ════════════════════════════════════════
-const ADM_TABS=[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"freelancers",i:"👥"},{k:"tools",i:"🧰"},{k:"typeform",i:"🔗"}];
-const FL_TABS=[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"tools",i:"🧰"}];
+// ══════════════════════════════════════════════════════════════════
+const ADM_TABS = [{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"freelancers",i:"👥"},{k:"tools",i:"🧰"},{k:"typeform",i:"🔗"}];
+const FL_TABS  = [{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"tools",i:"🧰"}];
 
 function buildNav(){
-  const tabs=S.role==="admin"?ADM_TABS:FL_TABS;
-  const newCnt=S.orders.filter(o=>o.status==="new").length;
-  const tr=t();
-  el("sb-nav").innerHTML=tabs.map(tb=>`
+  const tabs = S.role==="admin" ? ADM_TABS : FL_TABS;
+  const newO  = S.orders.filter(o=>o.status==="new").length;
+  const newRV = S.revisions.filter(r=>r.status==="new").length;
+  const tr = t();
+  el("sb-nav").innerHTML = tabs.map(tb=>`
     <button class="sb-btn${S.tab===tb.k?" active":""}" onclick="goTab('${tb.k}')">
       <span class="si">${tb.i}</span>${tr[tb.k]}
-      ${tb.k==="orders"&&S.role==="admin"&&newCnt>0?`<span class="sb-badge">${newCnt}</span>`:""}
+      ${tb.k==="orders"   && newO >0?`<span class="sb-badge">${newO}</span>`:""}
+      ${tb.k==="revisions"&& newRV>0?`<span class="sb-badge">${newRV}</span>`:""}
     </button>`).join("");
-  el("sb-logout").textContent=tr.logout;
-  const me=S.me;
-  el("sb-user").innerHTML=me
-    ?`${mkAv(me.avatar,32)}<div><div style="font-size:12px;font-weight:700">${me.name}</div><div style="font-size:10px;color:var(--muted)">${me.specialty}</div></div>`
-    :`<div style="font-weight:800;color:var(--accent)">⚡ Admin</div>`;
-  el("tb-role").innerHTML=mkPill(S.role==="admin"?tr.admin:(me?me.name.split(" ")[0]:tr.freelancer),S.role==="admin"?"#F0A500":"#BC8CFF");
-  el("bottomnav").innerHTML=tabs.map(tb=>`
+  el("sb-logout").textContent = tr.logout;
+  const me = S.me;
+  el("sb-user").innerHTML = me
+    ? `${mkAv(me.avatar,32)}<div><div style="font-size:12px;font-weight:700">${me.name}</div><div style="font-size:10px;color:var(--muted)">${me.specialty}</div></div>`
+    : `<div style="font-weight:800;color:var(--accent)">⚡ Admin</div>`;
+  el("tb-role").innerHTML = mkPill(S.role==="admin"?tr.admin:(me?me.name.split(" ")[0]:tr.freelancer), S.role==="admin"?"#F0A500":"#BC8CFF");
+  el("bottomnav").innerHTML = tabs.map(tb=>`
     <button class="bn-btn${S.tab===tb.k?" active":""}" onclick="goTab('${tb.k}')">
-      <div class="bn-icon">${tb.i}${tb.k==="orders"&&S.role==="admin"&&newCnt>0?`<div class="bn-badge">${newCnt}</div>`:""}</div>
+      <div class="bn-icon">${tb.i}
+        ${tb.k==="orders"   &&newO >0?`<div class="bn-badge">${newO}</div>`:""}
+        ${tb.k==="revisions"&&newRV>0?`<div class="bn-badge">${newRV}</div>`:""}
+      </div>
       <span class="bn-label">${tr[tb.k]}</span>
     </button>`).join("");
 }
-
-function goTab(k){S.tab=k;buildNav();renderPage();el("content").scrollTo(0,0);}
-function renderApp(){buildNav();renderPage();}
+function goTab(k){ S.tab=k; buildNav(); renderPage(); el("content").scrollTo(0,0); }
+function renderApp(){ buildNav(); renderPage(); }
 function renderPage(){
-  const k=S.tab;
-  if(k==="dashboard")renderDash();
-  else if(k==="orders")renderOrders();
-  else if(k==="freelancers"&&S.role==="admin")renderFL();
-  else if(k==="tools")renderTools();
-  else if(k==="typeform"&&S.role==="admin")renderTF();
+  const k = S.tab;
+  if(k==="dashboard")   renderDash();
+  else if(k==="orders") renderOrders();
+  else if(k==="revisions") renderRevisions();
+  else if(k==="freelancers"&&S.role==="admin") renderFL();
+  else if(k==="tools")  renderTools();
+  else if(k==="typeform"&&S.role==="admin") renderTF();
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // DASHBOARD
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 function renderDash(){
-  const tr=t();
-  const my=S.role==="freelancer"?S.orders.filter(o=>o.freelanceId===S.me?.id):S.orders;
-  const stats=S.role==="admin"?[
-    {l:tr.totalOrders,v:S.orders.length,c:"var(--blue)",i:"📋"},
-    {l:tr.inProgress,v:S.orders.filter(o=>o.status==="inprogress").length,c:"var(--accent)",i:"⚡"},
-    {l:tr.delivered,v:S.orders.filter(o=>o.status==="delivered").length,c:"var(--green)",i:"✅"},
-    {l:tr.activeFl,v:S.freelancers.filter(f=>f.active).length,c:"var(--purple)",i:"👥"},
-  ]:[
-    {l:tr.totalOrders,v:my.length,c:"var(--blue)",i:"📋"},
-    {l:tr.inProgress,v:my.filter(o=>o.status==="inprogress").length,c:"var(--accent)",i:"⚡"},
-    {l:tr.delivered,v:my.filter(o=>o.status==="delivered").length,c:"var(--green)",i:"✅"},
+  const tr = t();
+  const myO  = S.role==="freelancer" ? S.orders.filter(o=>o.freelanceId===S.me?.id) : S.orders;
+  const myRV = S.role==="freelancer" ? S.revisions.filter(r=>r.freelanceId===S.me?.id) : S.revisions;
+  const rvOpen = myRV.filter(r=>!["done","cancelled"].includes(r.status));
+
+  const stats = S.role==="admin" ? [
+    {l:tr.totalOrders,   v:S.orders.length,    c:"var(--blue)",   i:"📋"},
+    {l:tr.totalRevisions,v:S.revisions.length, c:"var(--teal)",   i:"🔁"},
+    {l:tr.rvOpen,        v:S.revisions.filter(r=>!["done","cancelled"].includes(r.status)).length, c:"var(--accent)",i:"⏳"},
+    {l:tr.activeFl,      v:S.freelancers.filter(f=>f.active).length, c:"var(--purple)",i:"👥"},
+  ] : [
+    {l:tr.totalOrders,   v:myO.length,    c:"var(--blue)",  i:"📋"},
+    {l:tr.totalRevisions,v:myRV.length,   c:"var(--teal)",  i:"🔁"},
+    {l:tr.rvOpen,        v:rvOpen.length, c:"var(--accent)", i:"⏳"},
   ];
-  const recent=[...my].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5);
-  let h=`<div class="screen">`;
-  if(S.me)h+=`<div style="background:linear-gradient(135deg,rgba(240,165,0,.08),rgba(188,140,255,.08));border:1px solid rgba(240,165,0,.18);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">${mkAv(S.me.avatar,42)}<div><div style="font-weight:800;font-size:14px">👋 ${S.me.name}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${S.me.specialty}</div></div></div>`;
-  h+=`<div class="stats-grid">${stats.map(s=>`<div class="stat"><div class="stat-ico">${s.i}</div><div class="stat-val" style="color:${s.c}">${s.v}</div><div class="stat-lbl">${s.l}</div></div>`).join("")}</div>`;
-  h+=`<div class="card" style="margin-bottom:14px"><div class="card-h"><span style="font-size:13px;font-weight:800">${tr.recentOrders}</span></div>`;
-  if(!recent.length)h+=`<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px">${tr.noOrders}</div>`;
-  recent.forEach(o=>{h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border);gap:8px"><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${o.projectType||""} · ${fmt(o.createdAt)}</div></div>${mkBadge(o.status)}</div>`;});
+
+  // Révisions urgentes (deadline proche) triées par deadline
+  const urgentRV = [...myRV]
+    .filter(r=>!["done","cancelled"].includes(r.status) && r.deadline)
+    .sort((a,b)=>new Date(a.deadline)-new Date(b.deadline))
+    .slice(0,4);
+
+  const recentO = [...myO].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,3);
+
+  let h = `<div class="screen">`;
+  if(S.me) h+=`<div style="background:linear-gradient(135deg,rgba(240,165,0,.08),rgba(188,140,255,.08));border:1px solid rgba(240,165,0,.18);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">${mkAv(S.me.avatar,42)}<div><div style="font-weight:800;font-size:14px">👋 ${S.me.name}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${S.me.specialty}</div></div></div>`;
+
+  h += `<div class="stats-grid">${stats.map(s=>`<div class="stat"><div class="stat-ico">${s.i}</div><div class="stat-val" style="color:${s.c}">${s.v}</div><div class="stat-lbl">${s.l}</div></div>`).join("")}</div>`;
+
+  // Révisions urgentes
+  h += `<div class="card" style="margin-bottom:12px;border-color:rgba(38,198,218,.25)"><div class="card-h"><span style="font-size:13px;font-weight:800">🔁 ${tr.recentRevisions}</span><span style="font-size:10px;color:var(--teal)">${urgentRV.length} active${urgentRV.length!==1?"s":""}</span></div>`;
+  if(!urgentRV.length) h+=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">✅ Aucune révision en attente</div>`;
+  urgentRV.forEach(r=>{
+    const ms = r.deadline ? new Date(r.deadline)-Date.now() : null;
+    const borderC = ms!==null&&ms<7200000 ? "rgba(248,81,73,.5)" : ms!==null&&ms<21600000 ? "rgba(240,165,0,.4)" : "var(--border)";
+    h+=`<div style="padding:11px 16px;border-bottom:1px solid var(--border);border-left:3px solid ${borderC}">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div style="font-weight:700;font-size:13px">${r.clientName}</div>
+        ${mkBadge(r.status, tr.rl)}
+      </div>
+      <div style="font-size:11px;color:var(--teal);margin-bottom:3px">${r.projectName||""}</div>
+      <div style="font-size:11px">${deadlineRv(r.deadline)}</div>
+    </div>`;
+  });
   h+=`</div>`;
+
+  // Commandes récentes
+  h+=`<div class="card" style="margin-bottom:12px"><div class="card-h"><span style="font-size:13px;font-weight:800">📋 ${tr.recentOrders}</span></div>`;
+  if(!recentO.length) h+=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">${tr.noOrders}</div>`;
+  recentO.forEach(o=>{h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);gap:8px"><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${o.projectType||""} · ${fmt(o.createdAt)}</div></div>${mkBadge(o.status,tr.sl)}</div>`;});
+  h+=`</div>`;
+
+  // Charge freelances (admin uniquement)
   if(S.role==="admin"){
     h+=`<div class="card"><div class="card-h"><span style="font-size:13px;font-weight:800">${tr.flLoad}</span></div>`;
     S.freelancers.filter(f=>f.active).forEach(f=>{
-      const cnt=S.orders.filter(o=>o.freelanceId===f.id&&!["delivered","cancelled"].includes(o.status)).length;
-      h+=`<div style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border)">${mkAv(f.avatar,30)}<div style="flex:1"><div style="font-size:12px;font-weight:700">${f.name}</div><div style="font-size:10px;color:var(--muted)">${f.specialty}</div></div><div style="background:${cnt>2?"rgba(248,81,73,.12)":cnt>0?"rgba(240,165,0,.12)":"var(--dim)"};color:${cnt>2?"var(--red)":cnt>0?"var(--accent)":"var(--muted)"};border-radius:20px;padding:2px 10px;font-size:11px;font-weight:800">${cnt} proj.</div></div>`;
+      const cO  = S.orders.filter(o=>o.freelanceId===f.id&&!["done","delivered","cancelled"].includes(o.status)).length;
+      const cRV = S.revisions.filter(r=>r.freelanceId===f.id&&!["done","cancelled"].includes(r.status)).length;
+      h+=`<div style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border)">${mkAv(f.avatar,30)}<div style="flex:1"><div style="font-size:12px;font-weight:700">${f.name}</div><div style="font-size:10px;color:var(--muted)">${f.specialty}</div></div>
+        <div style="display:flex;gap:5px">
+          <span style="font-size:10px;background:rgba(88,166,255,.1);color:var(--blue);border-radius:5px;padding:2px 7px">${cO} cmd</span>
+          <span style="font-size:10px;background:rgba(38,198,218,.1);color:var(--teal);border-radius:5px;padding:2px 7px">${cRV} rév</span>
+        </div>
+      </div>`;
     });
     h+=`</div>`;
   }
   h+=`</div>`;
-  el("page").innerHTML=h;
+  el("page").innerHTML = h;
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // ORDERS
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 function renderOrders(){
-  const tr=t();
-  const pool=S.role==="freelancer"?S.orders.filter(o=>o.freelanceId===S.me?.id):S.orders;
-  const list=pool.filter(o=>{
-    if(S.oFilter!=="all"&&o.status!==S.oFilter)return false;
-    if(S.oSearch&&!o.clientName.toLowerCase().includes(S.oSearch.toLowerCase()))return false;
+  const tr = t();
+  const pool = S.role==="freelancer" ? S.orders.filter(o=>o.freelanceId===S.me?.id) : S.orders;
+  const list = pool.filter(o=>{
+    if(S.oFilter!=="all"&&o.status!==S.oFilter) return false;
+    if(S.oSearch&&!o.clientName.toLowerCase().includes(S.oSearch.toLowerCase())) return false;
     return true;
   });
-  let h=`<div class="screen">`;
-  if(S.role==="freelancer")h+=`<div class="alert alert-i" style="margin-bottom:12px">ℹ️ ${tr.myOnly}</div>`;
-  h+=`<div style="display:flex;gap:8px;margin-bottom:10px"><input class="inp" style="flex:1" placeholder="${tr.search}" value="${S.oSearch}" oninput="S.oSearch=this.value;renderOrders()"/>
-    ${S.role==="admin"?`<button class="btn btn-p" onclick="openOrderSheet(null)">${tr.addOrder}</button>`:""}
+  let h=`<div class="screen"><div style="display:flex;gap:8px;margin-bottom:10px">
+    <input class="inp" style="flex:1" placeholder="${tr.search}" value="${S.oSearch}" oninput="S.oSearch=this.value;renderOrders()"/>
+    ${S.role==="admin"?`<button class="btn btn-p btn-sm" onclick="openOrderSheet(null)">${tr.addOrder}</button>`:""}
   </div>
   <div class="filters">${["all",...Object.keys(tr.sl)].map(s=>`<button class="fbtn${S.oFilter===s?" active":""}" onclick="S.oFilter='${s}';renderOrders()">${s==="all"?tr.all:tr.sl[s]}</button>`).join("")}</div>`;
-  if(!list.length)h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted);font-size:13px">${S.role==="freelancer"?tr.noMissions:tr.noOrders}</div></div>`;
+  if(!list.length) h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted);font-size:13px">${S.role==="freelancer"?tr.noMissions:tr.noOrders}</div></div>`;
   list.forEach(o=>{
-    const fl=S.freelancers.find(f=>f.id===o.freelanceId);
+    const fl = S.freelancers.find(f=>f.id===o.freelanceId);
     h+=`<div class="card" style="margin-bottom:10px">
       <div class="card-h"><div style="flex:1;min-width:0">
         <div style="font-weight:800;font-size:14px">${o.clientName}</div>
@@ -589,70 +664,44 @@ function renderOrders(){
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
           <span style="font-size:11px;color:var(--muted);background:var(--dim);border-radius:5px;padding:2px 8px">${o.projectType||""}</span>
           ${S.role==="admin"
-            ?`<select class="inp" style="width:auto;font-size:10px;padding:4px 8px;color:${STATUS_COLORS[o.status]}" onchange="chgStatus('${o.id}',this.value)">${Object.entries(tr.sl).map(([k,v])=>`<option value="${k}"${k===o.status?" selected":""}>${v}</option>`).join("")}</select>`
-            :mkBadge(o.status)}
+            ?`<select class="inp" style="width:auto;font-size:10px;padding:4px 8px" onchange="chgOrderStatus('${o.id}',this.value)">${Object.entries(tr.sl).map(([k,v])=>`<option value="${k}"${k===o.status?" selected":""}>${v}</option>`).join("")}</select>`
+            :mkBadge(o.status,tr.sl)}
         </div>
         ${o.description?`<p style="font-size:11px;color:var(--muted);margin-bottom:7px;line-height:1.5">${o.description.slice(0,120)}${o.description.length>120?"…":""}</p>`:""}
-        ${o.landingObjective?`<div style="font-size:11px;margin-bottom:4px">🎯 <span style="color:var(--text);font-weight:600">${o.landingObjective}</span></div>`:""}
-        ${o.colors?`<div style="font-size:10px;color:var(--muted);margin-bottom:4px">🎨 ${o.colors}</div>`:""}
-        ${o.inspiration?`<div style="font-size:10px;margin-bottom:4px">🔗 <a href="${o.inspiration}" target="_blank" style="color:var(--blue)">${o.inspiration.slice(0,45)}${o.inspiration.length>45?"…":""}</a></div>`:""}
-        ${o.assets?`<div style="font-size:10px;margin-bottom:7px">📁 <a href="${o.assets}" target="_blank" style="color:var(--purple)">${o.assets.slice(0,45)}${o.assets.length>45?"…":""}</a></div>`:""}
-        ${deadlineHtml(o.deadline)}
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:7px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:5px">
           ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl.avatar,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
-          <span style="font-size:10px;color:var(--muted)">${fmt(o.createdAt)}</span>
+          ${deadlineOrder(o.deadline)}
         </div>
       </div>
       ${S.role==="admin"?`<div class="card-f">
-        <button class="btn btn-sm btn-blue" onclick="openAssign('${o.id}')">👤 ${tr.assign}</button>
-        ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="sendWA('${o.id}')">📲 WA</button>`:""}
+        <button class="btn btn-sm btn-blue" onclick="openAssign('${o.id}','order')">👤 ${tr.assign}</button>
+        ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="sendWA('order','${o.id}')">📲 WA</button>`:""}
         <button class="btn btn-sm btn-ghost" onclick="openOrderSheet('${o.id}')">✏️</button>
         <button class="btn btn-sm btn-red" onclick="delOrder('${o.id}')">🗑️</button>
       </div>`:""}
     </div>`;
   });
   h+=`</div>`;
-  el("page").innerHTML=h;
+  el("page").innerHTML = h;
 }
-
-async function chgStatus(id,status){
-  try{
-    const updated=await api("PUT",`/orders/${id}`,{...S.orders.find(o=>o.id===id),status});
-    S.orders=S.orders.map(o=>o.id===id?updated:o);
-    renderOrders();buildNav();
-  }catch(e){alert("Erreur lors de la mise à jour");}
+async function chgOrderStatus(id,status){
+  try{ const u=await api("PUT",`/orders/${id}`,{...S.orders.find(o=>o.id===id),status}); S.orders=S.orders.map(o=>o.id===id?u:o); renderOrders(); buildNav(); }
+  catch(e){ alert("Erreur"); }
 }
 async function delOrder(id){
-  if(!confirm("Supprimer cette commande ?"))return;
-  try{
-    await api("DELETE",`/orders/${id}`);
-    S.orders=S.orders.filter(o=>o.id!==id);
-    renderOrders();buildNav();
-  }catch(e){alert("Erreur lors de la suppression");}
+  if(!confirm("Supprimer ?")) return;
+  try{ await api("DELETE",`/orders/${id}`); S.orders=S.orders.filter(o=>o.id!==id); renderOrders(); buildNav(); }
+  catch(e){ alert("Erreur"); }
 }
-function sendWA(oid){
-  const o=S.orders.find(x=>x.id===oid);
-  const fl=S.freelancers.find(f=>f.id===o?.freelanceId);
-  if(!fl?.phone)return;
-  const msg=t().wa(fl.name,o.clientName,o.projectType);
-  window.open(`https://wa.me/${fl.phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`,"_blank");
-}
-
-// ════════════════════════════════════════
-// ORDER SHEET
-// ════════════════════════════════════════
 function openOrderSheet(id){
-  const tr=t();
-  const o=id?S.orders.find(x=>x.id===id):null;
-  const f={clientName:o?.clientName||"",clientEmail:o?.clientEmail||"",
-    projectType:o?.projectType||tr.ptypes[0],budget:o?.budget||"",
-    deadline:o?.deadline||d7(),description:o?.description||""};
+  const tr=t(); const o=id?S.orders.find(x=>x.id===id):null;
+  const f={clientName:o?.clientName||"",clientEmail:o?.clientEmail||"",projectType:o?.projectType||tr.ptypes[0],budget:o?.budget||"",deadline:o?.deadline||d7(),description:o?.description||""};
   openSheet(o?tr.editOrder:tr.newOrder,`
     <div class="field"><label class="lbl">${tr.clientN}</label><input class="inp" id="of-n" value="${f.clientName}"/></div>
     <div class="field"><label class="lbl">${tr.clientE}</label><input class="inp" type="email" id="of-e" value="${f.clientEmail}"/></div>
     <select class="inp" id="of-t">${tr.ptypes.map(x=>`<option${x===f.projectType?" selected":""}>${x}</option>`).join("")}</select>
     <div class="two-col">
-      <div class="field"><label class="lbl">${tr.budget}</label><input class="inp" id="of-b" value="${f.budget}" placeholder="ex: 1200€"/></div>
+      <div class="field"><label class="lbl">${tr.budget}</label><input class="inp" id="of-b" value="${f.budget}"/></div>
       <div class="field"><label class="lbl">${tr.deadline}</label><input class="inp" type="date" id="of-d" value="${f.deadline}"/></div>
     </div>
     <div class="field"><label class="lbl">${tr.desc}</label><textarea class="inp" id="of-ds">${f.description}</textarea></div>
@@ -663,70 +712,214 @@ function openOrderSheet(id){
     </div>`);
 }
 async function saveOrder(id){
-  const n=el("of-n").value.trim();if(!n)return;
-  const btn=el("of-save");btn.textContent="⏳...";btn.disabled=true;
-  const form={clientName:n,clientEmail:el("of-e").value,projectType:el("of-t").value,
-    budget:el("of-b").value,deadline:el("of-d").value||d7(),description:el("of-ds").value};
+  const n=el("of-n").value.trim(); if(!n)return;
+  const btn=el("of-save"); btn.textContent="⏳..."; btn.disabled=true;
+  const form={clientName:n,clientEmail:el("of-e").value,projectType:el("of-t").value,budget:el("of-b").value,deadline:el("of-d").value||d7(),description:el("of-ds").value};
   try{
-    if(id){
-      const updated=await api("PUT",`/orders/${id}`,{...S.orders.find(o=>o.id===id),...form});
-      S.orders=S.orders.map(o=>o.id===id?updated:o);
-    }else{
-      const created=await api("POST","/orders",{...form,id:uid(),status:"new",freelanceId:null,source:"manual"});
-      S.orders=[created,...S.orders];
-    }
-    closeSheet();renderOrders();buildNav();
-  }catch(e){
-    if(el("of-err")){el("of-err").textContent="Erreur de sauvegarde.";el("of-err").style.display="block";}
-    btn.textContent=t().save;btn.disabled=false;
-  }
+    if(id){const u=await api("PUT",`/orders/${id}`,{...S.orders.find(o=>o.id===id),...form});S.orders=S.orders.map(o=>o.id===id?u:o);}
+    else{const c=await api("POST","/orders",{...form,id:uid(),status:"new",freelanceId:null,source:"manual"});S.orders=[c,...S.orders];}
+    closeSheet(); renderOrders(); buildNav();
+  }catch(e){showErr("of-err","Erreur.");btn.textContent=t().save;btn.disabled=false;}
 }
 
-// ════════════════════════════════════════
-// ASSIGN SHEET
-// ════════════════════════════════════════
-function openAssign(oid){
+// ══════════════════════════════════════════════════════════════════
+// REVISIONS — triées par deadline ASC (plus ancienne en haut)
+// ══════════════════════════════════════════════════════════════════
+function renderRevisions(){
+  const tr = t();
+  // Freelance ne voit que SES révisions assignées
+  const pool = S.role==="freelancer"
+    ? S.revisions.filter(r=>r.freelanceId===S.me?.id)
+    : S.revisions;
+
+  // Filtre statut
+  let list = pool.filter(r=>{
+    if(S.rvFilter!=="all"&&r.status!==S.rvFilter) return false;
+    if(S.rvSearch){
+      const q=S.rvSearch.toLowerCase();
+      if(!r.clientName?.toLowerCase().includes(q)&&!r.projectName?.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+
+  // Tri : deadline la plus proche en premier (urgence)
+  list = [...list].sort((a,b)=>{
+    if(!a.deadline && !b.deadline) return 0;
+    if(!a.deadline) return 1;
+    if(!b.deadline) return -1;
+    return new Date(a.deadline)-new Date(b.deadline);
+  });
+
+  let h=`<div class="screen">`;
+  if(S.role==="freelancer") h+=`<div class="alert alert-i" style="margin-bottom:12px">🔁 ${tr.myOnlyRev}</div>`;
+  h+=`<div style="display:flex;gap:8px;margin-bottom:10px">
+    <input class="inp" style="flex:1" placeholder="${tr.search}" value="${S.rvSearch}" oninput="S.rvSearch=this.value;renderRevisions()"/>
+    ${S.role==="admin"?`<button class="btn btn-teal btn-sm" onclick="openRevisionSheet(null)">${tr.addRevision}</button>`:""}
+  </div>
+  <div class="filters">${["all",...Object.keys(tr.rl)].map(s=>`<button class="fbtn${S.rvFilter===s?" active":""}" onclick="S.rvFilter='${s}';renderRevisions()">${s==="all"?tr.all:tr.rl[s]}</button>`).join("")}</div>`;
+
+  if(!list.length) h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted);font-size:13px">${S.role==="freelancer"?tr.noMissions:tr.noRevisions}</div></div>`;
+
+  list.forEach(r=>{
+    const fl = S.freelancers.find(f=>f.id===r.freelanceId);
+    const ms = r.deadline ? new Date(r.deadline)-Date.now() : null;
+    const isUrgent = ms!==null && ms < 7200000; // < 2h
+    const borderC  = isUrgent ? "rgba(248,81,73,.6)" : ms!==null&&ms<21600000 ? "rgba(240,165,0,.4)" : "rgba(38,198,218,.25)";
+
+    h+=`<div class="card" style="margin-bottom:10px;border-color:${borderC}">
+      <div class="card-h">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:800;font-size:14px">${r.clientName}</div>
+          ${r.projectName?`<div style="font-size:11px;color:var(--teal);font-weight:700;margin-top:1px">📁 ${r.projectName}</div>`:""}
+          <div style="font-size:10px;color:var(--muted);margin-top:1px">${[r.clientEmail,r.clientPhone].filter(Boolean).join(" · ")}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
+          ${r.source==="typeform"?mkPill("TF","#58A6FF"):""}
+          ${isUrgent?`<span class="badge" style="background:rgba(248,81,73,.15);color:var(--red);border:1px solid rgba(248,81,73,.4)">🔴 Urgent</span>`:""}
+        </div>
+      </div>
+      <div class="card-b">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          ${S.role==="admin"
+            ?`<select class="inp" style="width:auto;font-size:10px;padding:4px 8px" onchange="chgRevisionStatus('${r.id}',this.value)">${Object.entries(tr.rl).map(([k,v])=>`<option value="${k}"${k===r.status?" selected":""}>${v}</option>`).join("")}</select>`
+            :mkBadge(r.status,tr.rl)}
+          <div style="font-size:11px">${deadlineRv(r.deadline)}</div>
+        </div>
+        ${rvTypeTags(r)}
+        ${r.revisionAspect  ?`<div style="font-size:11px;color:var(--muted);margin-bottom:4px;line-height:1.4"><span style="color:var(--teal);font-weight:700">🎨 Aspect :</span> ${r.revisionAspect.slice(0,100)}${r.revisionAspect.length>100?"…":""}</div>`:""}
+        ${r.revisionContent ?`<div style="font-size:11px;color:var(--muted);margin-bottom:4px;line-height:1.4"><span style="color:var(--teal);font-weight:700">📄 Contenu :</span> ${r.revisionContent.slice(0,100)}${r.revisionContent.length>100?"…":""}</div>`:""}
+        ${r.revisionText    ?`<div style="font-size:11px;color:var(--muted);margin-bottom:4px;line-height:1.4"><span style="color:var(--teal);font-weight:700">✍️ Texte :</span> ${r.revisionText.slice(0,100)}${r.revisionText.length>100?"…":""}</div>`:""}
+        ${r.revisionOther   ?`<div style="font-size:11px;color:var(--muted);margin-bottom:4px;line-height:1.4"><span style="color:var(--teal);font-weight:700">💬 Autre :</span> ${r.revisionOther.slice(0,100)}${r.revisionOther.length>100?"…":""}</div>`:""}
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+          ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl.avatar,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
+          <span style="font-size:10px;color:var(--muted)">${fmt(r.createdAt)}</span>
+        </div>
+      </div>
+      ${S.role==="admin"?`<div class="card-f">
+        <button class="btn btn-sm btn-blue" onclick="openAssign('${r.id}','revision')">👤 ${tr.assign}</button>
+        ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="sendWA('revision','${r.id}')">📲 WA</button>`:""}
+        <button class="btn btn-sm btn-ghost" onclick="openRevisionSheet('${r.id}')">✏️</button>
+        <button class="btn btn-sm btn-red" onclick="delRevision('${r.id}')">🗑️</button>
+      </div>`:""}
+    </div>`;
+  });
+  h+=`</div>`;
+  el("page").innerHTML = h;
+}
+async function chgRevisionStatus(id,status){
+  try{ const u=await api("PUT",`/revisions/${id}`,{...S.revisions.find(r=>r.id===id),status}); S.revisions=S.revisions.map(r=>r.id===id?u:r); renderRevisions(); buildNav(); }
+  catch(e){ alert("Erreur"); }
+}
+async function delRevision(id){
+  if(!confirm("Supprimer ?")) return;
+  try{ await api("DELETE",`/revisions/${id}`); S.revisions=S.revisions.filter(r=>r.id!==id); renderRevisions(); buildNav(); }
+  catch(e){ alert("Erreur"); }
+}
+function openRevisionSheet(id){
+  const tr=t(); const r=id?S.revisions.find(x=>x.id===id):null;
+  openSheet(r?tr.editRevision:tr.newRevision,`
+    <div class="two-col">
+      <div class="field"><label class="lbl">${tr.clientN}</label><input class="inp" id="rv-n" value="${r?.clientName||""}"/></div>
+      <div class="field"><label class="lbl">${tr.projectName}</label><input class="inp" id="rv-pn" value="${r?.projectName||""}"/></div>
+    </div>
+    <div class="two-col">
+      <div class="field"><label class="lbl">${tr.clientE}</label><input class="inp" type="email" id="rv-e" value="${r?.clientEmail||""}"/></div>
+      <div class="field"><label class="lbl">${tr.phone}</label><input class="inp" id="rv-ph" value="${r?.clientPhone||""}" placeholder="+33 6 ..."/></div>
+    </div>
+    <div class="field"><label class="lbl">🎨 ${tr.revAspect}</label><textarea class="inp" id="rv-asp" style="min-height:56px">${r?.revisionAspect||""}</textarea></div>
+    <div class="field"><label class="lbl">📄 ${tr.revContent}</label><textarea class="inp" id="rv-cnt" style="min-height:56px">${r?.revisionContent||""}</textarea></div>
+    <div class="field"><label class="lbl">✍️ ${tr.revText}</label><textarea class="inp" id="rv-txt" style="min-height:56px">${r?.revisionText||""}</textarea></div>
+    <div class="field"><label class="lbl">💬 ${tr.revOther}</label><textarea class="inp" id="rv-oth" style="min-height:56px">${r?.revisionOther||""}</textarea></div>
+    <div id="rv-err" class="alert alert-e" style="display:none"></div>
+    <div class="two-col">
+      <button class="btn btn-ghost btn-full" onclick="closeSheet()">${tr.cancel}</button>
+      <button class="btn btn-teal btn-full" id="rv-save" onclick="saveRevision('${id||""}')">${r?tr.save:tr.create}</button>
+    </div>`);
+}
+async function saveRevision(id){
+  const n=el("rv-n").value.trim(); if(!n)return;
+  const btn=el("rv-save"); btn.textContent="⏳..."; btn.disabled=true;
+  const form={
+    clientName:n, clientEmail:el("rv-e").value, clientPhone:el("rv-ph").value,
+    projectName:el("rv-pn").value,
+    revisionAspect:el("rv-asp").value, revisionContent:el("rv-cnt").value,
+    revisionText:el("rv-txt").value,   revisionOther:el("rv-oth").value,
+  };
+  try{
+    if(id){const u=await api("PUT",`/revisions/${id}`,{...S.revisions.find(r=>r.id===id),...form});S.revisions=S.revisions.map(r=>r.id===id?u:r);}
+    else{const c=await api("POST","/revisions",{...form,id:uid(),status:"new",freelanceId:null,source:"manual"});S.revisions=[c,...S.revisions];}
+    closeSheet(); renderRevisions(); buildNav();
+  }catch(e){showErr("rv-err","Erreur.");btn.textContent=t().save;btn.disabled=false;}
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ASSIGN (commandes + révisions)
+// ══════════════════════════════════════════════════════════════════
+function openAssign(itemId, type){
   const tr=t();
-  const o=S.orders.find(x=>x.id===oid);
+  const item = type==="revision" ? S.revisions.find(x=>x.id===itemId) : S.orders.find(x=>x.id===itemId);
   let h=`<p style="color:var(--muted);font-size:12px;margin-bottom:12px">${tr.assignSub}</p>`;
   S.freelancers.filter(f=>f.active).forEach(f=>{
-    const load=S.orders.filter(o=>o.freelanceId===f.id&&!["delivered","cancelled"].includes(o.status)).length;
-    const sel=o?.freelanceId===f.id;
-    h+=`<div onclick="doAssign('${oid}','${f.id}')" style="display:flex;align-items:center;gap:12px;padding:13px;background:${sel?"var(--adim)":"var(--bg)"};border:1px solid ${sel?"var(--accent)":"var(--border)"};border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .15s">
+    const cO  = S.orders.filter(o=>o.freelanceId===f.id&&!["done","delivered","cancelled"].includes(o.status)).length;
+    const cRV = S.revisions.filter(r=>r.freelanceId===f.id&&!["done","cancelled"].includes(r.status)).length;
+    const sel = item?.freelanceId===f.id;
+    h+=`<div onclick="doAssign('${itemId}','${type}','${f.id}')" style="display:flex;align-items:center;gap:12px;padding:13px;background:${sel?"var(--adim)":"var(--bg)"};border:1px solid ${sel?"var(--accent)":"var(--border)"};border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .15s">
       ${mkAv(f.avatar)}<div style="flex:1">
         <div style="font-weight:700;font-size:13px">${f.name}</div>
         <div style="font-size:11px;color:var(--muted)">${f.specialty}</div>
         ${f.phone?`<div style="font-size:10px;color:var(--wa)">📲 ${f.phone}</div>`:""}
       </div>
-      <div style="color:${load>2?"var(--red)":load>0?"var(--accent)":"var(--green)"};font-size:11px;font-weight:800">${load} proj.</div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
+        <span style="font-size:9px;background:rgba(88,166,255,.1);color:var(--blue);border-radius:4px;padding:2px 6px">${cO} cmd</span>
+        <span style="font-size:9px;background:rgba(38,198,218,.1);color:var(--teal);border-radius:4px;padding:2px 6px">${cRV} rév</span>
+      </div>
     </div>`;
   });
-  if(o?.freelanceId)h+=`<button class="btn btn-red btn-full" onclick="doAssign('${oid}','')">${tr.unassign}</button>`;
-  openSheet(`${tr.assignTo} — ${o?.clientName||""}`,h);
+  if(item?.freelanceId) h+=`<button class="btn btn-red btn-full" onclick="doAssign('${itemId}','${type}','')">${tr.unassign}</button>`;
+  openSheet(`${tr.assignTo} — ${item?.clientName||""}`, h);
 }
-async function doAssign(oid,fid){
-  const o=S.orders.find(x=>x.id===oid);
+async function doAssign(itemId, type, fid){
+  const isRev = type==="revision";
+  const item = isRev ? S.revisions.find(x=>x.id===itemId) : S.orders.find(x=>x.id===itemId);
   try{
-    const updated=await api("PUT",`/orders/${oid}`,{...o,freelanceId:fid||null,status:fid?"assigned":"new"});
-    S.orders=S.orders.map(x=>x.id===oid?updated:x);
+    const updated = await api("PUT",`/${isRev?"revisions":"orders"}/${itemId}`,{...item,freelanceId:fid||null,status:fid?"assigned":"new"});
+    if(isRev) S.revisions=S.revisions.map(x=>x.id===itemId?updated:x);
+    else      S.orders=S.orders.map(x=>x.id===itemId?updated:x);
     closeSheet();
     if(fid){
-      const fl=S.freelancers.find(f=>f.id===fid);
-      if(fl?.phone){const msg=t().wa(fl.name,o.clientName,o.projectType);window.open(`https://wa.me/${fl.phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`,"_blank");}
+      const fl = S.freelancers.find(f=>f.id===fid);
+      if(fl?.phone){
+        const msg = isRev
+          ? t().waRevision(fl.name, item.clientName, item.projectName||"")
+          : t().waOrder(fl.name, item.clientName, item.projectType||"");
+        window.open(`https://wa.me/${fl.phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`,"_blank");
+      }
     }
-    renderOrders();buildNav();
-  }catch(e){alert("Erreur lors de l'assignation");}
+    if(isRev) renderRevisions(); else renderOrders();
+    buildNav();
+  }catch(e){ alert("Erreur lors de l'assignation"); }
+}
+function sendWA(type, id){
+  const isRev = type==="revision";
+  const item = isRev ? S.revisions.find(x=>x.id===id) : S.orders.find(x=>x.id===id);
+  const fl   = S.freelancers.find(f=>f.id===item?.freelanceId);
+  if(!fl?.phone) return;
+  const msg = isRev
+    ? t().waRevision(fl.name, item.clientName, item.projectName||"")
+    : t().waOrder(fl.name, item.clientName, item.projectType||"");
+  window.open(`https://wa.me/${fl.phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`,"_blank");
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // FREELANCERS
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 function renderFL(){
   const tr=t();
   let h=`<div class="screen"><div style="display:flex;justify-content:flex-end;margin-bottom:14px"><button class="btn btn-p" onclick="openFlSheet(null)">${tr.addFl}</button></div>`;
   S.freelancers.forEach(f=>{
-    const act=S.orders.filter(o=>o.freelanceId===f.id&&!["delivered","cancelled"].includes(o.status)).length;
-    const done=S.orders.filter(o=>o.freelanceId===f.id&&o.status==="delivered").length;
+    const cO  = S.orders.filter(o=>o.freelanceId===f.id&&!["done","delivered","cancelled"].includes(o.status)).length;
+    const cRV = S.revisions.filter(r=>r.freelanceId===f.id&&!["done","cancelled"].includes(r.status)).length;
+    const dO  = S.orders.filter(o=>o.freelanceId===f.id&&["done","delivered"].includes(o.status)).length;
     h+=`<div class="card" style="margin-bottom:12px;opacity:${f.active?1:.5}">
       <div class="card-b">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
@@ -734,12 +927,12 @@ function renderFL(){
             <div style="font-weight:800;font-size:14px">${f.name}</div>
             <div style="font-size:11px;color:var(--muted)">${f.email}</div>
             ${f.phone?`<div style="font-size:10px;color:var(--wa);margin-top:2px">📲 ${f.phone}</div>`:""}
-          </div>
-          ${mkPill(f.specialty,"#BC8CFF")}
+          </div>${mkPill(f.specialty,"#BC8CFF")}
         </div>
-        <div class="two-col" style="margin-bottom:12px">
-          <div style="background:var(--bg);border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:900;color:var(--accent)">${act}</div><div style="font-size:10px;color:var(--muted)">${tr.inProgress}</div></div>
-          <div style="background:var(--bg);border-radius:8px;padding:10px;text-align:center"><div style="font-size:22px;font-weight:900;color:var(--green)">${done}</div><div style="font-size:10px;color:var(--muted)">${tr.delivered}</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+          <div style="background:var(--bg);border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:900;color:var(--blue)">${cO}</div><div style="font-size:9px;color:var(--muted)">Commandes</div></div>
+          <div style="background:var(--bg);border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:900;color:var(--teal)">${cRV}</div><div style="font-size:9px;color:var(--muted)">Révisions</div></div>
+          <div style="background:var(--bg);border-radius:8px;padding:10px;text-align:center"><div style="font-size:20px;font-weight:900;color:var(--green)">${dO}</div><div style="font-size:9px;color:var(--muted)">Livrées</div></div>
         </div>
         <div style="display:flex;gap:7px;flex-wrap:wrap">
           <button class="btn btn-sm btn-ghost" onclick="openFlSheet('${f.id}')">✏️ ${tr.edit}</button>
@@ -754,22 +947,16 @@ function renderFL(){
 }
 async function toggleFl(id,active){
   const f=S.freelancers.find(x=>x.id===id);
-  try{
-    const updated=await api("PUT",`/freelancers/${id}`,{...f,active:active==="true"?false:true});
-    S.freelancers=S.freelancers.map(x=>x.id===id?updated:x);
-    renderFL();
-  }catch(e){alert("Erreur");}
+  try{const u=await api("PUT",`/freelancers/${id}`,{...f,active:active==="true"?false:true});S.freelancers=S.freelancers.map(x=>x.id===id?u:x);renderFL();}
+  catch(e){alert("Erreur");}
 }
 async function delFl(id){
-  if(!confirm("Supprimer ce freelance ?"))return;
-  try{
-    await api("DELETE",`/freelancers/${id}`);
-    S.freelancers=S.freelancers.filter(f=>f.id!==id);
-    renderFL();
-  }catch(e){alert("Erreur");}
+  if(!confirm("Supprimer ?"))return;
+  try{await api("DELETE",`/freelancers/${id}`);S.freelancers=S.freelancers.filter(f=>f.id!==id);renderFL();}
+  catch(e){alert("Erreur");}
 }
 function openFlSheet(id){
-  const tr=t();const f=id?S.freelancers.find(x=>x.id===id):null;
+  const tr=t(); const f=id?S.freelancers.find(x=>x.id===id):null;
   openSheet(f?tr.editFl:tr.newFl,`
     <div class="field"><label class="lbl">${tr.fullName}</label><input class="inp" id="ff-n" value="${f?.name||""}"/></div>
     <div class="field"><label class="lbl">${tr.email}</label><input class="inp" type="email" id="ff-e" value="${f?.email||""}"/></div>
@@ -783,28 +970,20 @@ function openFlSheet(id){
     </div>`);
 }
 async function saveFl(id){
-  const n=el("ff-n").value.trim();if(!n)return;
-  const btn=el("ff-save");btn.textContent="⏳...";btn.disabled=true;
+  const n=el("ff-n").value.trim(); if(!n)return;
+  const btn=el("ff-save"); btn.textContent="⏳..."; btn.disabled=true;
   const ini=n.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
   const form={name:n,email:el("ff-e").value,password:el("ff-p").value,phone:el("ff-ph").value,specialty:el("ff-s").value,avatar:ini,active:true};
   try{
-    if(id){
-      const updated=await api("PUT",`/freelancers/${id}`,{...S.freelancers.find(f=>f.id===id),...form});
-      S.freelancers=S.freelancers.map(f=>f.id===id?updated:f);
-    }else{
-      const created=await api("POST","/freelancers",{...form,id:uid()});
-      S.freelancers=[...S.freelancers,created];
-    }
-    closeSheet();renderFL();
-  }catch(e){
-    if(el("ff-err")){el("ff-err").textContent="Erreur de sauvegarde.";el("ff-err").style.display="block";}
-    btn.textContent=t().save;btn.disabled=false;
-  }
+    if(id){const u=await api("PUT",`/freelancers/${id}`,{...S.freelancers.find(f=>f.id===id),...form});S.freelancers=S.freelancers.map(f=>f.id===id?u:f);}
+    else{const c=await api("POST","/freelancers",{...form,id:uid()});S.freelancers=[...S.freelancers,c];}
+    closeSheet(); renderFL();
+  }catch(e){showErr("ff-err","Erreur.");btn.textContent=t().save;btn.disabled=false;}
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // TOOLS
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 function renderTools(){
   const tr=t();
   const cats=[...new Set(S.tools.map(x=>x.category))];
@@ -815,8 +994,7 @@ function renderTools(){
   cats.forEach(cat=>{
     h+=`<div class="section-title">${cat}</div><div class="tools-grid" style="margin-bottom:20px">`;
     S.tools.filter(x=>x.category===cat).forEach(tl=>{
-      h+=`<a href="${tl.url}" target="_blank"><div class="tool-card">
-        <div class="tool-ico">${tl.icon}</div>
+      h+=`<a href="${tl.url}" target="_blank"><div class="tool-card"><div class="tool-ico">${tl.icon}</div>
         <div style="min-width:0"><div style="font-weight:700;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${tl.name}</div>
         <div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.3">${tl.description}</div></div>
       </div></a>`;
@@ -842,92 +1020,82 @@ function openToolSheet(){
     </div>`);
 }
 async function saveTool(){
-  const n=el("tl-n").value.trim();if(!n)return;
-  try{
-    const created=await api("POST","/tools",{id:uid(),icon:el("tl-i").value,name:n,url:el("tl-u").value,category:el("tl-c").value,description:el("tl-d").value});
-    S.tools=[...S.tools,created];
-    closeSheet();renderTools();
-  }catch(e){alert("Erreur de sauvegarde");}
+  const n=el("tl-n").value.trim(); if(!n)return;
+  try{const c=await api("POST","/tools",{id:uid(),icon:el("tl-i").value,name:n,url:el("tl-u").value,category:el("tl-c").value,description:el("tl-d").value});S.tools=[...S.tools,c];closeSheet();renderTools();}
+  catch(e){alert("Erreur");}
 }
 
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 // TYPEFORM
-// ════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════
 function renderTF(){
-  const newTF=S.orders.filter(o=>o.source==="typeform"&&o.status==="new").length;
+  const newO  = S.orders.filter(o=>o.source==="typeform"&&o.status==="new").length;
+  const newRV = S.revisions.filter(r=>r.source==="typeform"&&r.status==="new").length;
   el("page").innerHTML=`<div class="screen">
-    <div style="background:linear-gradient(135deg,rgba(88,166,255,.08),rgba(188,140,255,.06));border:1px solid rgba(88,166,255,.25);border-radius:14px;padding:16px;margin-bottom:14px">
-      <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">
-        <span style="font-size:24px">🔗</span>
-        <div><h3 style="font-size:14px;font-weight:800">Connexion Typeform → Openshore CRM</h3>
-        <p style="font-size:10px;color:var(--muted);margin-top:3px">Sync automatique toutes les 60s</p></div>
+
+    <div class="section-title">Commandes</div>
+    <div class="card" style="margin-bottom:14px"><div class="card-b">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div><h3 style="font-size:13px;font-weight:800">📋 Formulaire Commandes</h3>
+        <p style="font-size:10px;color:var(--muted);margin-top:2px">Webhook : <code style="color:var(--accent);font-size:9px">${API}/webhook/typeform</code></p></div>
+        <div style="background:rgba(88,166,255,.1);color:var(--blue);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:800">${newO} new</div>
       </div>
-      <a href="${FORM_URL}" target="_blank"><button class="btn btn-blue btn-sm">🔗 Ouvrir le formulaire</button></a>
-    </div>
-    <div class="card" style="border:2px solid rgba(240,165,0,.3);margin-bottom:14px">
-      <div class="card-b">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <div><h3 style="font-size:14px;font-weight:800">🔄 Synchronisation</h3>
-          <p style="color:var(--green);font-size:11px;margin-top:3px">✅ Toutes les données sont synchronisées avec Railway</p></div>
-          <button class="btn btn-p btn-sm" onclick="refreshAll()">🔄 Actualiser</button>
-        </div>
-        <div class="two-col">
-          <div style="background:var(--bg);border-radius:10px;padding:12px">
-            <div style="font-size:10px;color:var(--muted)">Commandes totales</div>
-            <div style="font-size:26px;font-weight:900;color:var(--blue)">${S.orders.length}</div>
-          </div>
-          <div style="background:var(--bg);border-radius:10px;padding:12px">
-            <div style="font-size:10px;color:var(--muted)">Nouvelles commandes TF</div>
-            <div style="font-size:26px;font-weight:900;color:${newTF>0?"var(--accent)":"var(--muted)"}">${newTF}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style="background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.2);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px">
-      <span>⏱</span><div>
-        <div style="font-weight:800;font-size:12px;color:var(--green)">Deadline automatique J+7</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">Chaque commande Typeform reçoit une deadline à 7 jours.</div>
-      </div>
-    </div>
-    <div class="card"><div class="card-b">
-      <h3 style="font-size:12px;font-weight:800;margin-bottom:13px">🗂 Champs Typeform → CRM</h3>
-      ${[["Décrivez votre landing page de rêve","description"],["Prénom + Nom","clientName"],["Téléphone","clientPhone"],["Email","clientEmail"],["Entreprise","company"],["Objectif de la landing page","landingObjective"],["Décrivez vos offres","offers"],["Documents (lien)","assets"],["3 couleurs de marque","colors"],["Inspiration web","inspiration"]]
-        .map(([f,c])=>`<div style="display:grid;grid-template-columns:1fr 18px 1fr;align-items:center;gap:6px;margin-bottom:7px">
-          <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:9px;color:var(--muted)">📝 ${f}</div>
-          <span style="color:var(--muted);text-align:center">→</span>
-          <div style="background:var(--adim);border:1px solid rgba(240,165,0,.27);border-radius:6px;padding:6px 8px;font-size:9px;color:var(--accent);font-weight:700">${c}</div>
-        </div>`).join("")}
+      <a href="${FORM_ORDERS}" target="_blank"><button class="btn btn-blue btn-sm">🔗 Ouvrir le formulaire</button></a>
     </div></div>
+
+    <div class="section-title">Révisions</div>
+    <div class="card" style="margin-bottom:14px;border-color:rgba(38,198,218,.3)"><div class="card-b">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div><h3 style="font-size:13px;font-weight:800">🔁 Formulaire Révisions</h3>
+        <p style="font-size:10px;color:var(--muted);margin-top:2px">Webhook : <code style="color:var(--teal);font-size:9px">${API}/webhook/typeform-revision</code></p></div>
+        <div style="background:rgba(38,198,218,.1);color:var(--teal);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:800">${newRV} new</div>
+      </div>
+      ${FORM_REVISIONS
+        ?`<a href="${FORM_REVISIONS}" target="_blank"><button class="btn btn-teal btn-sm">🔗 Ouvrir le formulaire</button></a>`
+        :`<div class="alert alert-w" style="margin-bottom:8px">⚠️ Colle l'URL de ton formulaire dans la variable FORM_REVISIONS du code</div>`}
+      <div style="margin-top:12px;background:var(--bg);border-radius:8px;padding:12px">
+        <div style="font-size:11px;font-weight:800;margin-bottom:8px;color:var(--teal)">Champs du formulaire Typeform à créer :</div>
+        ${[
+          ["0","Prénom + Nom","Short text"],
+          ["1","Email","Email"],
+          ["2","Téléphone","Phone number"],
+          ["3","Nom du projet / site","Short text"],
+          ["4","Avez-vous une révision sur l'aspect du site à faire ?","Long text"],
+          ["5","Avez-vous une révision sur le contenu du site à faire ?","Long text"],
+          ["6","Avez-vous une révision sur le contenu textuel du site à faire ?","Long text"],
+          ["7","Autre chose ?","Long text"],
+        ].map(([i,label,type])=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <div style="width:20px;height:20px;background:rgba(38,198,218,.15);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:var(--teal);flex-shrink:0">${i}</div>
+          <div style="flex:1;font-size:11px">${label}</div>
+          <div style="font-size:9px;color:var(--muted);background:var(--dim);border-radius:4px;padding:2px 6px;white-space:nowrap">${type}</div>
+        </div>`).join("")}
+      </div>
+    </div></div>
+
+    <div style="background:rgba(248,81,73,.08);border:1px solid rgba(248,81,73,.2);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:20px">⏰</span>
+      <div><div style="font-weight:800;font-size:12px;color:var(--red)">Deadline automatique 24h pour les révisions</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">Chaque révision reçue est triée par deadline — la plus urgente en haut.</div></div>
+    </div>
   </div>`;
 }
 
-async function refreshAll(){
-  showLoading();
-  await loadAll();
-  renderPage();buildNav();
-}
-
-// ════════════════════════════════════════
-// SHEET
-// ════════════════════════════════════════
-function openSheet(title,body){
+// ══════════════════════════════════════════════════════════════════
+// SHEET / MODAL
+// ══════════════════════════════════════════════════════════════════
+function openSheet(title, body){
   el("sheet-wrap").innerHTML=`
     <div class="overlay" onclick="if(event.target.classList.contains('overlay'))closeSheet()">
       <div class="sheet">
         <div class="sheet-handle"><div class="sheet-handle-bar"></div></div>
-        <div class="sheet-head">
-          <h3 style="font-size:15px;font-weight:800">${title}</h3>
-          <button class="sheet-x" onclick="closeSheet()">×</button>
-        </div>
+        <div class="sheet-head"><h3 style="font-size:15px;font-weight:800">${title}</h3><button class="sheet-x" onclick="closeSheet()">×</button></div>
         <div class="sheet-body">${body}</div>
       </div>
     </div>`;
 }
-function closeSheet(){el("sheet-wrap").innerHTML="";}
+function closeSheet(){ el("sheet-wrap").innerHTML=""; }
 
-// ════════════════════════════════════════
 // INIT
-// ════════════════════════════════════════
 setLang("fr");
 </script>
 </body>

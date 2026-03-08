@@ -333,7 +333,7 @@ select.inp{cursor:pointer}
 <div id="sheet-wrap"></div>
 
 <script>
-const ADMIN_PW       = "Openshore37.";
+// Mot de passe admin vérifié côté serveur via /auth/admin — plus de mot de passe dans le code
 const API            = "https://openshore-webhook-production.up.railway.app";
 const FORM_ORDERS    = "https://form.typeform.com/to/rJdfntNq";
 const FORM_REVISIONS = "";
@@ -562,19 +562,26 @@ function updateAuthUI(){
   el("am-btn").textContent=tr.loginBtn; el("am-cancel").textContent=tr.cancel;
 }
 async function tryLogin(){
-  const email=el("a-email").value.trim().toLowerCase(), pw=el("a-pw").value;
+  const email=el("a-email").value.trim(), pw=el("a-pw").value;
+  if(!email||!pw) return;
   el("a-btn").textContent="⏳..."; el("a-btn").disabled=true;
   try {
-    const fls=await api("GET","/freelancers"); S.freelancers=fls;
-    const fl=fls.find(f=>f.email.toLowerCase()===email&&f.password===pw&&f.active);
-    if(fl) doLogin("freelancer",fl); else showErr("a-err",t().wrongPw);
+    const res=await fetch(API+"/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password:pw})});
+    if(!res.ok){ showErr("a-err",t().wrongPw); }
+    else { const fl=await res.json(); doLogin("freelancer",fl); }
   } catch(e){ showErr("a-err","Erreur de connexion."); }
   el("a-btn").textContent=t().loginBtn; el("a-btn").disabled=false;
 }
 function openAdminModal(){ el("admin-modal").style.display="flex"; el("am-pw").value=""; }
-function tryAdmin(){
-  if(el("am-pw").value===ADMIN_PW){ el("admin-modal").style.display="none"; doLogin("admin",null); }
-  else showErr("am-err",t().wrongAdmin);
+async function tryAdmin(){
+  const pw=el("am-pw").value; if(!pw) return;
+  el("am-btn").textContent="⏳..."; el("am-btn").disabled=true;
+  try {
+    const res=await fetch(API+"/auth/admin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw})});
+    if(res.ok){ el("admin-modal").style.display="none"; doLogin("admin",null); }
+    else showErr("am-err",t().wrongAdmin);
+  } catch(e){ showErr("am-err","Erreur de connexion."); }
+  el("am-btn").textContent=t().loginBtn; el("am-btn").disabled=false;
 }
 async function doLogin(role,me){
   S.role=role; S.me=me; S.tab="dashboard";

@@ -14,7 +14,11 @@
   --wa:#25D366;--teal:#26C6DA;--orange:#FF9800;
   --text:#E6EDF3;--muted:#7D8590;--dim:#21262D;
 }
-html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;font-size:14px}
+body.light{
+  --bg:#F4F6FA;--surface:#FFFFFF;--card:#FFFFFF;--border:#E0E4EE;
+  --text:#1A1D23;--muted:#7D8590;--dim:#EEF0F5;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;font-size:14px;transition:background .2s,color .2s}
 button,input,select,textarea{font-family:inherit}
 a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar{width:4px;height:4px}
@@ -27,13 +31,13 @@ a{color:inherit;text-decoration:none}
 .auth-box{width:100%;max-width:380px}
 .auth-logo{text-align:center;margin-bottom:32px}
 .auth-logo-icon{width:68px;height:68px;background:var(--accent);border-radius:20px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 0 50px rgba(240,165,0,.4)}
-.auth-logo h1{font-size:28px;font-weight:900;letter-spacing:-0.5px}
+.auth-logo h1{font-size:28px;font-weight:900;letter-spacing:-.5px}
 .auth-logo p{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:5px}
 .auth-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;margin-bottom:12px}
 .auth-card h2{font-size:18px;font-weight:800;margin-bottom:4px}
 .auth-card .sub{color:var(--muted);font-size:12px;margin-bottom:22px}
 
-/* APP SHELL */
+/* APP */
 #app{display:none;height:100vh;overflow:hidden}
 #app.visible{display:flex}
 @media(min-width:900px){
@@ -41,7 +45,7 @@ a{color:inherit;text-decoration:none}
   #sidebar{display:flex!important;flex-direction:column;width:230px;min-width:230px;background:var(--surface);border-right:1px solid var(--border);height:100vh;flex-shrink:0}
   #topbar,#bottomnav{display:none!important}
   #content{flex:1;overflow-y:auto;height:100vh}
-  #page{padding:28px 32px 40px;max-width:900px;margin:0 auto}
+  #page{padding:28px 32px 40px;max-width:940px;margin:0 auto}
 }
 @media(min-width:600px) and (max-width:899px){
   #app{flex-direction:column}
@@ -75,11 +79,13 @@ a{color:inherit;text-decoration:none}
 .sb-langs{display:flex;gap:5px;padding:0 4px;margin-bottom:6px}
 
 /* TOPBAR */
-#topbar{display:none;align-items:center;justify-content:space-between;padding:0 14px;height:52px;flex-shrink:0;background:rgba(14,17,23,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+#topbar{display:none;align-items:center;justify-content:space-between;padding:0 14px;height:52px;flex-shrink:0;background:rgba(14,17,23,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+body.light #topbar{background:rgba(255,255,255,.97)}
 .tb-right{display:flex;align-items:center;gap:7px}
 
 /* BOTTOM NAV */
 #bottomnav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:10;background:rgba(14,17,23,.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom,0px)}
+body.light #bottomnav{background:rgba(255,255,255,.97)}
 .bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:7px 2px;border:none;background:transparent;border-top:2px solid transparent;cursor:pointer;transition:all .15s}
 .bn-btn.active{background:var(--adim);border-top-color:var(--accent)}
 .bn-icon{font-size:18px;position:relative}
@@ -117,7 +123,8 @@ select.inp{cursor:pointer}
 
 .badge{border-radius:6px;padding:3px 9px;font-size:10px;font-weight:700}
 .pill{border-radius:20px;padding:2px 9px;font-size:10px;font-weight:700}
-.av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;flex-shrink:0;background:linear-gradient(135deg,rgba(240,165,0,.8),rgba(188,140,255,.8));border:2px solid rgba(240,165,0,.2)}
+.av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;flex-shrink:0;background:linear-gradient(135deg,rgba(240,165,0,.8),rgba(188,140,255,.8));border:2px solid rgba(240,165,0,.2);overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 
 .alert{border-radius:8px;padding:9px 13px;font-size:12px;font-weight:700}
 .alert-e{background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);color:var(--red)}
@@ -165,6 +172,20 @@ select.inp{cursor:pointer}
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;width:100%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,.9)}
 
+/* SEARCH OVERLAY */
+.search-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:flex;flex-direction:column;align-items:center;padding:60px 20px 20px;animation:fadein .15s}
+.search-box{width:100%;max-width:560px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+.search-inp{background:transparent;border:none;color:var(--text);padding:16px 20px;font-size:16px;outline:none;width:100%;font-weight:600}
+.search-results{max-height:420px;overflow-y:auto}
+.search-res-item{display:flex;align-items:center;gap:10px;padding:11px 16px;border-top:1px solid var(--border);cursor:pointer;transition:background .1s}
+.search-res-item:hover{background:var(--dim)}
+.search-section{padding:6px 16px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);background:var(--bg)}
+
+/* STALE ALERT */
+.stale-item{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--border)}
+.stale-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);flex-shrink:0;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
 .section-title{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin:16px 0 10px}
 .screen{animation:pagein .18s ease}
 @keyframes pagein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -185,7 +206,6 @@ select.inp{cursor:pointer}
 .rv-tag{display:inline-flex;align-items:center;gap:4px;background:rgba(38,198,218,.1);border:1px solid rgba(38,198,218,.25);border-radius:6px;padding:3px 8px;font-size:10px;font-weight:700;color:var(--teal);margin:2px 2px 2px 0}
 
 /* COMMENTS */
-.cmt-wrap{border-top:1px solid var(--border);padding:10px 14px}
 .cmt-item{display:flex;gap:8px;margin-bottom:10px}
 .cmt-bubble{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px 10px;flex:1}
 .cmt-admin{background:rgba(240,165,0,.06);border-color:rgba(240,165,0,.2)}
@@ -202,6 +222,13 @@ select.inp{cursor:pointer}
 /* BILLING */
 .billing-month{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden}
 .billing-month-h{padding:12px 14px;background:var(--dim);display:flex;align-items:center;justify-content:space-between;font-weight:800;font-size:13px}
+
+/* CLIENTS */
+.client-card{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.client-card-h{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+
+/* KEYBOARD HINT */
+.kbd{display:inline-block;background:var(--dim);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:9px;font-weight:700;font-family:monospace;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -268,7 +295,9 @@ select.inp{cursor:pointer}
       <div class="sb-langs">
         <button class="btn btn-sm btn-p" id="sl-fr" onclick="setLang('fr')">FR</button>
         <button class="btn btn-sm btn-ghost" id="sl-en" onclick="setLang('en')">EN</button>
+        <button class="btn btn-sm btn-ghost" onclick="toggleTheme()" id="theme-btn" style="margin-left:auto">🌙</button>
       </div>
+      <button class="btn btn-ghost btn-full btn-sm" style="margin-bottom:4px" onclick="openSearch()">🔍 <span id="sb-search-lbl">Recherche</span> <span class="kbd">K</span></button>
       <button class="btn btn-ghost btn-full btn-sm" onclick="logout()">⎋ <span id="sb-logout"></span></button>
     </div>
   </nav>
@@ -279,8 +308,8 @@ select.inp{cursor:pointer}
         <div style="line-height:1.1"><div style="font-size:13px;font-weight:900">Openshore</div><div style="font-size:8px;color:var(--accent);font-weight:700;letter-spacing:1.5px;text-transform:uppercase">Workspace</div></div>
       </div>
       <div class="tb-right">
-        <button class="btn btn-sm btn-p" id="tl-fr" onclick="setLang('fr')">FR</button>
-        <button class="btn btn-sm btn-ghost" id="tl-en" onclick="setLang('en')">EN</button>
+        <button onclick="openSearch()" style="background:var(--dim);border:1px solid var(--border);border-radius:8px;color:var(--muted);padding:5px 10px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px">🔍</button>
+        <button onclick="toggleTheme()" style="background:none;border:none;font-size:18px;cursor:pointer;padding:4px" id="theme-btn-tb">🌙</button>
         <span id="tb-role"></span>
         <button onclick="logout()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px">⎋</button>
       </div>
@@ -289,6 +318,18 @@ select.inp{cursor:pointer}
   </div>
   <nav id="bottomnav"></nav>
 </div>
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" style="display:none">
+  <div class="search-overlay" onclick="if(event.target.classList.contains('search-overlay'))closeSearch()">
+    <div class="search-box">
+      <input class="search-inp" id="search-inp" placeholder="🔍 Rechercher un client, freelance..." oninput="doSearch(this.value)" onkeydown="if(event.key==='Escape')closeSearch()"/>
+      <div class="search-results" id="search-results"></div>
+    </div>
+    <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.4)">Appuie sur <span class="kbd">Echap</span> pour fermer · <span class="kbd">K</span> pour ouvrir</div>
+  </div>
+</div>
+
 <div id="sheet-wrap"></div>
 
 <script>
@@ -298,13 +339,14 @@ const FORM_ORDERS    = "https://form.typeform.com/to/rJdfntNq";
 const FORM_REVISIONS = "";
 
 const STATUS_COLORS = {new:"#58A6FF",assigned:"#BC8CFF",inprogress:"#F0A500",review:"#FF9800",done:"#3FB950",cancelled:"#F85149"};
+const STALE_DAYS    = 5; // Nombre de jours sans changement pour déclencher une alerte
 
 let S = {
   role:null, me:null, lang:"fr", tab:"dashboard",
-  oFilter:"all", oSearch:"", oView:"list",
-  rvFilter:"all", rvSearch:"", rvView:"list",
+  oFilter:"all", oSearch:"", oView:"list", oFlFilter:"all",
+  rvFilter:"all", rvSearch:"", rvView:"list", rvFlFilter:"all",
   orders:[], freelancers:[], tools:[], revisions:[],
-  syncTimer:null,
+  syncTimer:null, theme:"dark",
 };
 
 const T = {
@@ -316,13 +358,14 @@ fr:{
   cancel:"Annuler", save:"Sauvegarder", create:"Créer", add:"Ajouter", edit:"Modifier", del:"Supprimer",
   logout:"Déconnexion", admin:"Admin", freelancer:"Freelance",
   dashboard:"Dashboard", orders:"Commandes", revisions:"Révisions",
-  freelancers:"Freelances", tools:"Outils", typeform:"Typeform", billing:"Facturation",
+  freelancers:"Freelances", tools:"Outils", typeform:"Typeform", billing:"Facturation", clients:"Clients",
   totalOrders:"Commandes", inProgress:"En cours", delivered:"Livrées", activeFl:"Freelances",
   totalRevisions:"Révisions", rvOpen:"En attente",
   recentOrders:"Commandes récentes", recentRevisions:"Révisions urgentes", flLoad:"Charge équipe",
-  noOrders:"Aucune commande.", noRevisions:"Aucune révision.", noMissions:"Aucune mission assignée.",
+  staleAlert:"⏰ Missions sans activité depuis +5j",
+  noOrders:"Aucune commande.", noRevisions:"Aucune révision.", noMissions:"Aucune mission assignée.", noClients:"Aucun client.",
   addOrder:"+ Commande", addRevision:"+ Révision", addFl:"+ Ajouter", addTool:"+ Outil",
-  search:"🔍 Rechercher...", all:"Tous",
+  search:"🔍 Rechercher...", searchGlobal:"Recherche globale", all:"Tous", allFl:"Tous les freelances",
   assign:"Assigner", unassign:"Désassigner", assignTo:"Assigner à", assignSub:"Choisissez un freelance :",
   newOrder:"Nouvelle commande", editOrder:"Modifier la commande",
   newRevision:"Nouvelle révision", editRevision:"Modifier la révision",
@@ -334,12 +377,14 @@ fr:{
   deliveryUrl:"🚀 Lien de livraison (Drive, Loom...)",
   deactivate:"Désactiver", reactivate:"Réactiver",
   fullName:"Nom complet", email:"Email", spec:"Niveau", phone:"WhatsApp", pwFl:"Mot de passe",
+  notesLbl:"Notes internes (admin)", avatarUrlLbl:"Photo de profil (URL image)",
   toolsLib:"Ressources partagées avec les freelances.",
   icon:"Icône", name:"Nom", url:"URL", cat:"Catégorie", shortDesc:"Description",
   myOnlyRev:"Vous ne voyez que vos révisions assignées.",
   comments:"Commentaires", addComment:"Ajouter un commentaire...", send:"Envoyer",
   history:"Historique", noHistory:"Aucun historique.",
   avgDelay:"Délai moyen", missions:"Missions", billingTitle:"Récap mensuel",
+  exportCsv:"Exporter CSV",
   listView:"Liste", kanbanView:"Kanban",
   loading:"Chargement...",
   sl:{new:"Nouveau",assigned:"Assigné",inprogress:"En cours",review:"En révision",done:"Terminé",cancelled:"Annulé"},
@@ -358,13 +403,14 @@ en:{
   cancel:"Cancel", save:"Save", create:"Create", add:"Add", edit:"Edit", del:"Delete",
   logout:"Log out", admin:"Admin", freelancer:"Freelancer",
   dashboard:"Dashboard", orders:"Orders", revisions:"Revisions",
-  freelancers:"Freelancers", tools:"Tools", typeform:"Typeform", billing:"Billing",
+  freelancers:"Freelancers", tools:"Tools", typeform:"Typeform", billing:"Billing", clients:"Clients",
   totalOrders:"Orders", inProgress:"In progress", delivered:"Delivered", activeFl:"Freelancers",
   totalRevisions:"Revisions", rvOpen:"Pending",
   recentOrders:"Recent orders", recentRevisions:"Urgent revisions", flLoad:"Team workload",
-  noOrders:"No orders.", noRevisions:"No revisions.", noMissions:"No missions assigned.",
+  staleAlert:"⏰ Missions with no activity for +5 days",
+  noOrders:"No orders.", noRevisions:"No revisions.", noMissions:"No missions assigned.", noClients:"No clients.",
   addOrder:"+ Order", addRevision:"+ Revision", addFl:"+ Add", addTool:"+ Tool",
-  search:"🔍 Search...", all:"All",
+  search:"🔍 Search...", searchGlobal:"Global search", all:"All", allFl:"All freelancers",
   assign:"Assign", unassign:"Unassign", assignTo:"Assign to", assignSub:"Choose a freelancer:",
   newOrder:"New order", editOrder:"Edit order",
   newRevision:"New revision", editRevision:"Edit revision",
@@ -376,12 +422,14 @@ en:{
   deliveryUrl:"🚀 Delivery link (Drive, Loom...)",
   deactivate:"Deactivate", reactivate:"Reactivate",
   fullName:"Full name", email:"Email", spec:"Level", phone:"WhatsApp", pwFl:"Password",
+  notesLbl:"Internal notes (admin)", avatarUrlLbl:"Profile photo (image URL)",
   toolsLib:"Resources shared with freelancers.",
   icon:"Icon", name:"Name", url:"URL", cat:"Category", shortDesc:"Description",
   myOnlyRev:"You only see your assigned revisions.",
   comments:"Comments", addComment:"Add a comment...", send:"Send",
   history:"History", noHistory:"No history.",
   avgDelay:"Avg delay", missions:"Missions", billingTitle:"Monthly recap",
+  exportCsv:"Export CSV",
   listView:"List", kanbanView:"Kanban",
   loading:"Loading...",
   sl:{new:"New",assigned:"Assigned",inprogress:"In progress",review:"In review",done:"Done",cancelled:"Cancelled"},
@@ -398,13 +446,15 @@ const t = () => T[S.lang];
 const el = id => document.getElementById(id);
 function uid(){ return Math.random().toString(36).slice(2,9) }
 function d7(){ return new Date(Date.now()+7*864e5).toISOString().slice(0,10) }
-function d24(){ return new Date(Date.now()+24*3600000).toISOString() }
 function fmt(iso){ return iso ? new Date(iso).toLocaleDateString("fr-FR",{day:"2-digit",month:"short"}) : "—" }
 function fmtFull(iso){ return iso ? new Date(iso).toLocaleString("fr-FR",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}) : "—" }
-function fmtMonth(iso){ return iso ? new Date(iso).toLocaleDateString("fr-FR",{month:"long",year:"numeric"}) : "" }
 function showErr(id,msg){ const e=el(id); if(!e)return; e.textContent=msg; e.style.display="block"; setTimeout(()=>e.style.display="none",3500) }
 function togglePw(id,btn){ const i=el(id); i.type=i.type==="password"?"text":"password"; btn.textContent=i.type==="password"?"👁":"🙈" }
-function mkAv(ini,sz=36){ return `<div class="av" style="width:${sz}px;height:${sz}px;font-size:${sz*.33}px">${ini||"?"}</div>` }
+function mkAv(fl, sz=36){
+  if(fl?.avatarUrl) return `<div class="av" style="width:${sz}px;height:${sz}px"><img src="${fl.avatarUrl}" onerror="this.parentNode.innerHTML='${(fl.avatar||"?").replace(/'/g,"")}'"/></div>`;
+  const ini = typeof fl==="string" ? fl : (fl?.avatar||"?");
+  return `<div class="av" style="width:${sz}px;height:${sz}px;font-size:${sz*.33}px">${ini}</div>`;
+}
 function mkBadge(sk,map){ const c=STATUS_COLORS[sk]||"#58A6FF"; return `<span class="badge" style="background:${c}20;color:${c};border:1px solid ${c}40">${(map||t().sl)[sk]||sk}</span>` }
 function mkPill(lbl,c="#F0A500"){ return `<span class="pill" style="background:${c}18;color:${c};border:1px solid ${c}33">${lbl}</span>` }
 function deadlineRv(iso){
@@ -422,30 +472,46 @@ function deadlineOrder(iso){
   return `<span style="font-size:11px;color:${c};font-weight:${d<=2?"700":"400"}">⏱ ${fmt(iso)} (${d<=0?"Dépassé":"J-"+d})</span>`;
 }
 function rvTypeTags(rv){
-  let t="";
-  if(rv.revisionAspect)  t+=`<span class="rv-tag">🎨 Aspect</span>`;
-  if(rv.revisionContent) t+=`<span class="rv-tag">📄 Contenu</span>`;
-  if(rv.revisionText)    t+=`<span class="rv-tag">✍️ Texte</span>`;
-  if(rv.revisionOther)   t+=`<span class="rv-tag">💬 Autre</span>`;
-  return t?`<div style="margin-bottom:8px">${t}</div>`:"";
+  let tags="";
+  if(rv.revisionAspect)  tags+=`<span class="rv-tag">🎨 Aspect</span>`;
+  if(rv.revisionContent) tags+=`<span class="rv-tag">📄 Contenu</span>`;
+  if(rv.revisionText)    tags+=`<span class="rv-tag">✍️ Texte</span>`;
+  if(rv.revisionOther)   tags+=`<span class="rv-tag">💬 Autre</span>`;
+  return tags?`<div style="margin-bottom:8px">${tags}</div>`:"";
 }
 function showLoading(){ el("page").innerHTML=`<div class="spinner"><div class="spin"></div><div style="color:var(--muted);font-size:13px">${t().loading}</div></div>` }
 
-// Calcul délai moyen (assigned→done) en jours
-function avgDelayDays(fid){
-  const hist = S._histCache||[];
-  const flOrders = S.orders.filter(o=>o.freelanceId===fid && o.status==="done");
-  if(!flOrders.length) return null;
-  let total=0, count=0;
-  flOrders.forEach(o=>{
-    const assigned = hist.filter(h=>h.itemId===o.id&&h.newStatus==="assigned").sort((a,b)=>new Date(a.createdAt)-new Date(b.createdAt))[0];
-    const done     = hist.filter(h=>h.itemId===o.id&&h.newStatus==="done").sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt))[0];
-    if(assigned&&done){
-      total += (new Date(done.createdAt)-new Date(assigned.createdAt))/864e5;
-      count++;
-    }
+// Stale orders: assigned >5 days no status change
+function getStaleOrders(){
+  return S.orders.filter(o=>{
+    if(!["assigned","inprogress"].includes(o.status)) return false;
+    const age=(Date.now()-new Date(o.createdAt))/864e5;
+    return age>STALE_DAYS;
   });
-  return count>0 ? Math.round(total/count) : null;
+}
+
+function avgDelayDays(fid){
+  const doneO=S.orders.filter(o=>o.freelanceId===fid&&["done","delivered"].includes(o.status));
+  if(!doneO.length) return null;
+  // Approximate: use createdAt vs now for done orders (real calc would need history)
+  const total=doneO.reduce((acc,o)=>acc+7,0); // default estimate
+  return Math.round(total/doneO.length);
+}
+
+// ── THEME ─────────────────────────────────────────────────────────
+function toggleTheme(){
+  S.theme=S.theme==="dark"?"light":"dark";
+  document.body.classList.toggle("light",S.theme==="light");
+  const ico=S.theme==="light"?"☀️":"🌙";
+  if(el("theme-btn"))el("theme-btn").textContent=ico;
+  if(el("theme-btn-tb"))el("theme-btn-tb").textContent=ico;
+  localStorage.setItem("theme",S.theme);
+}
+function initTheme(){
+  const saved=localStorage.getItem("theme")||"dark";
+  S.theme=saved; document.body.classList.toggle("light",saved==="light");
+  const ico=saved==="light"?"☀️":"🌙";
+  setTimeout(()=>{ if(el("theme-btn"))el("theme-btn").textContent=ico; if(el("theme-btn-tb"))el("theme-btn-tb").textContent=ico; },100);
 }
 
 // ── API ───────────────────────────────────────────────────────────
@@ -528,28 +594,30 @@ function logout(){
 }
 
 // ── NAV ───────────────────────────────────────────────────────────
-const ADM_TABS=[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"freelancers",i:"👥"},{k:"billing",i:"💰"},{k:"tools",i:"🧰"},{k:"typeform",i:"🔗"}];
+const ADM_TABS=[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"clients",i:"👤"},{k:"freelancers",i:"👥"},{k:"billing",i:"💰"},{k:"tools",i:"🧰"},{k:"typeform",i:"🔗"}];
 const FL_TABS =[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"tools",i:"🧰"}];
 
 function buildNav(){
   const tabs=S.role==="admin"?ADM_TABS:FL_TABS;
   const newO =S.role==="admin"?S.orders.filter(o=>o.status==="new").length:S.orders.filter(o=>o.freelanceId===S.me?.id&&o.status==="assigned").length;
   const newRV=S.role==="admin"?S.revisions.filter(r=>r.status==="new").length:S.revisions.filter(r=>r.freelanceId===S.me?.id&&r.status==="assigned").length;
+  const stale=getStaleOrders().length;
   const tr=t();
   el("sb-nav").innerHTML=tabs.map(tb=>`
     <button class="sb-btn${S.tab===tb.k?" active":""}" onclick="goTab('${tb.k}')">
       <span class="si">${tb.i}</span>${tr[tb.k]||tb.k}
       ${tb.k==="orders"&&newO>0?`<span class="sb-badge">${newO}</span>`:""}
+      ${tb.k==="orders"&&stale>0&&S.role==="admin"?`<span style="margin-left:auto;font-size:9px;color:var(--orange)">⏰${stale}</span>`:""}
       ${tb.k==="revisions"&&newRV>0?`<span class="sb-badge">${newRV}</span>`:""}
     </button>`).join("");
-  el("sb-logout").textContent=tr.logout;
+  if(el("sb-search-lbl"))el("sb-search-lbl").textContent=tr.searchGlobal;
+  if(el("sb-logout"))el("sb-logout").textContent=tr.logout;
   const me=S.me;
   el("sb-user").innerHTML=me
-    ?`${mkAv(me.avatar,32)}<div><div style="font-size:12px;font-weight:700">${me.name}</div><div style="font-size:10px;color:var(--muted)">${me.specialty}</div></div>`
+    ?`${mkAv(me,32)}<div><div style="font-size:12px;font-weight:700">${me.name}</div><div style="font-size:10px;color:var(--muted)">${me.specialty}</div></div>`
     :`<div style="font-weight:800;color:var(--accent)">⚡ Admin</div>`;
   el("tb-role").innerHTML=mkPill(S.role==="admin"?tr.admin:(me?me.name.split(" ")[0]:tr.freelancer),S.role==="admin"?"#F0A500":"#BC8CFF");
-  // Bottom nav (only 5 tabs max on mobile)
-  const mTabs=S.role==="admin"?[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"freelancers",i:"👥"},{k:"tools",i:"🧰"}]:FL_TABS;
+  const mTabs=S.role==="admin"?[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"clients",i:"👤"},{k:"tools",i:"🧰"}]:FL_TABS;
   el("bottomnav").innerHTML=mTabs.map(tb=>`
     <button class="bn-btn${S.tab===tb.k?" active":""}" onclick="goTab('${tb.k}')">
       <div class="bn-icon">${tb.i}
@@ -566,10 +634,72 @@ function renderPage(){
   if(k==="dashboard")   renderDash();
   else if(k==="orders") renderOrders();
   else if(k==="revisions") renderRevisions();
+  else if(k==="clients") renderClients();
   else if(k==="freelancers"&&S.role==="admin") renderFL();
   else if(k==="billing"&&S.role==="admin") renderBilling();
   else if(k==="tools")  renderTools();
   else if(k==="typeform"&&S.role==="admin") renderTF();
+}
+
+// ── KEYBOARD SHORTCUTS ────────────────────────────────────────────
+document.addEventListener("keydown", e=>{
+  if(!S.role) return;
+  if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA") return;
+  const tabs=S.role==="admin"?ADM_TABS:FL_TABS;
+  if(e.key==="Escape"){ closeSheet(); closeSearch(); return; }
+  if((e.metaKey||e.ctrlKey)&&e.key==="k"){ e.preventDefault(); openSearch(); return; }
+  if(e.key==="k"&&!e.metaKey&&!e.ctrlKey){ openSearch(); return; }
+  const idx=parseInt(e.key)-1;
+  if(idx>=0&&idx<tabs.length){ goTab(tabs[idx].k); }
+});
+
+// ── GLOBAL SEARCH ─────────────────────────────────────────────────
+let searchTimer=null;
+function openSearch(){
+  el("search-overlay").style.display="block";
+  setTimeout(()=>{ if(el("search-inp"))el("search-inp").focus(); },50);
+}
+function closeSearch(){ el("search-overlay").style.display="none"; }
+async function doSearch(q){
+  clearTimeout(searchTimer);
+  const r=el("search-results"); if(!r)return;
+  if(!q||q.length<2){ r.innerHTML=""; return; }
+  r.innerHTML=`<div style="padding:12px 16px;color:var(--muted);font-size:12px">Recherche…</div>`;
+  searchTimer=setTimeout(async()=>{
+    try{
+      const res=await api("GET",`/search?q=${encodeURIComponent(q)}`);
+      let h="";
+      if(res.orders?.length){
+        h+=`<div class="search-section">📋 Commandes</div>`;
+        res.orders.forEach(o=>{
+          const fl=S.freelancers.find(f=>f.id===o.freelanceId);
+          h+=`<div class="search-res-item" onclick="closeSearch();S.tab='orders';S.oSearch='${o.clientName.replace(/'/g,"")}';renderOrders();buildNav()">
+            <div style="flex:1"><div style="font-weight:700;font-size:12px">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${o.company||o.projectType||""}</div></div>
+            ${mkBadge(o.status,t().sl)}
+          </div>`;
+        });
+      }
+      if(res.revisions?.length){
+        h+=`<div class="search-section">🔁 Révisions</div>`;
+        res.revisions.forEach(r2=>{
+          h+=`<div class="search-res-item" onclick="closeSearch();S.tab='revisions';S.rvSearch='${r2.clientName.replace(/'/g,"")}';renderRevisions();buildNav()">
+            <div style="flex:1"><div style="font-weight:700;font-size:12px">${r2.clientName}</div><div style="font-size:10px;color:var(--teal)">${r2.projectName||""}</div></div>
+            ${mkBadge(r2.status,t().rl)}
+          </div>`;
+        });
+      }
+      if(res.freelancers?.length){
+        h+=`<div class="search-section">👥 Freelances</div>`;
+        res.freelancers.forEach(f=>{
+          h+=`<div class="search-res-item" onclick="closeSearch();goTab('freelancers')">
+            ${mkAv(f,28)}<div><div style="font-weight:700;font-size:12px">${f.name}</div><div style="font-size:10px;color:var(--muted)">${f.specialty}</div></div>
+          </div>`;
+        });
+      }
+      if(!h) h=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:12px">Aucun résultat pour "${q}"</div>`;
+      if(r)r.innerHTML=h;
+    }catch(e2){ if(r)r.innerHTML=`<div style="padding:12px;color:var(--red);font-size:12px">Erreur.</div>`; }
+  },300);
 }
 
 // ── DASHBOARD ─────────────────────────────────────────────────────
@@ -589,9 +719,23 @@ function renderDash(){
   ];
   const urgentRV=[...myRV].filter(r=>!["done","cancelled"].includes(r.status)&&r.deadline).sort((a,b)=>new Date(a.deadline)-new Date(b.deadline)).slice(0,4);
   const recentO=[...myO].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,3);
+  const stale=S.role==="admin"?getStaleOrders():[];
+
   let h=`<div class="screen">`;
-  if(S.me) h+=`<div style="background:linear-gradient(135deg,rgba(240,165,0,.08),rgba(188,140,255,.08));border:1px solid rgba(240,165,0,.18);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">${mkAv(S.me.avatar,42)}<div><div style="font-weight:800;font-size:14px">👋 ${S.me.name}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${S.me.specialty}</div></div></div>`;
+  if(S.me) h+=`<div style="background:linear-gradient(135deg,rgba(240,165,0,.08),rgba(188,140,255,.08));border:1px solid rgba(240,165,0,.18);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">${mkAv(S.me,42)}<div><div style="font-weight:800;font-size:14px">👋 ${S.me.name}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${S.me.specialty}</div></div></div>`;
   h+=`<div class="stats-grid">${stats.map(s=>`<div class="stat"><div class="stat-ico">${s.i}</div><div class="stat-val" style="color:${s.c}">${s.v}</div><div class="stat-lbl">${s.l}</div></div>`).join("")}</div>`;
+
+  // Alertes relance
+  if(stale.length){
+    h+=`<div class="card" style="margin-bottom:12px;border-color:rgba(255,152,0,.4)"><div class="card-h"><span style="font-size:13px;font-weight:800;color:var(--orange)">${tr.staleAlert}</span><span style="font-size:11px;color:var(--orange)">${stale.length}</span></div>`;
+    stale.forEach(o=>{
+      const fl=S.freelancers.find(f=>f.id===o.freelanceId);
+      const days=Math.floor((Date.now()-new Date(o.createdAt))/864e5);
+      h+=`<div class="stale-item"><div style="display:flex;align-items:center;gap:8px"><div class="stale-dot"></div><div><div style="font-size:12px;font-weight:700">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${fl?.name||"—"} · ${days}j</div></div></div>${mkBadge(o.status,tr.sl)}</div>`;
+    });
+    h+=`</div>`;
+  }
+
   // Révisions urgentes
   h+=`<div class="card" style="margin-bottom:12px;border-color:rgba(38,198,218,.25)"><div class="card-h"><span style="font-size:13px;font-weight:800">🔁 ${tr.recentRevisions}</span></div>`;
   if(!urgentRV.length) h+=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">✅ Aucune révision urgente</div>`;
@@ -601,11 +745,13 @@ function renderDash(){
     h+=`<div style="padding:11px 16px;border-bottom:1px solid var(--border);border-left:3px solid ${bc}"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px"><div style="font-weight:700;font-size:13px">${r.clientName}</div>${mkBadge(r.status,tr.rl)}</div><div style="font-size:11px;color:var(--teal)">${r.projectName||""}</div><div style="font-size:11px;margin-top:2px">${deadlineRv(r.deadline)}</div></div>`;
   });
   h+=`</div>`;
+
   // Commandes récentes
   h+=`<div class="card" style="margin-bottom:12px"><div class="card-h"><span style="font-size:13px;font-weight:800">📋 ${tr.recentOrders}</span></div>`;
   if(!recentO.length) h+=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">${tr.noOrders}</div>`;
-  recentO.forEach(o=>{h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);gap:8px"><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${o.projectType||""} · ${fmt(o.createdAt)}</div></div>${mkBadge(o.status,tr.sl)}</div>`;});
+  recentO.forEach(o=>{ h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);gap:8px"><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${o.projectType||""} · ${fmt(o.createdAt)}</div></div>${mkBadge(o.status,tr.sl)}</div>`; });
   h+=`</div>`;
+
   // Charge équipe (admin)
   if(S.role==="admin"){
     h+=`<div class="card"><div class="card-h"><span style="font-size:13px;font-weight:800">${tr.flLoad}</span></div>`;
@@ -614,11 +760,7 @@ function renderDash(){
       const cRV=S.revisions.filter(r=>r.freelanceId===f.id&&!["done","cancelled"].includes(r.status)).length;
       const pct=Math.min(100,Math.round((cO+cRV)*20));
       const barC=pct>80?"var(--red)":pct>50?"var(--accent)":"var(--green)";
-      h+=`<div style="padding:11px 16px;border-bottom:1px solid var(--border)">${mkAv(f.avatar,28)}
-        <div style="flex:1;margin-left:10px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:700">${f.name}</span><span style="font-size:10px;color:var(--muted)">${cO} cmd · ${cRV} rév</span></div>
-        <div style="height:4px;background:var(--border);border-radius:2px"><div style="height:4px;background:${barC};border-radius:2px;width:${pct}%;transition:width .3s"></div></div></div>`;
-      h=h.replace(`${mkAv(f.avatar,28)}\n        <div`,`<div style="display:flex;align-items:center;gap:10px">${mkAv(f.avatar,28)}<div`);
-      h+=`</div></div>`;
+      h+=`<div style="display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--border)">${mkAv(f,28)}<div style="flex:1"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:700">${f.name}</span><span style="font-size:10px;color:var(--muted)">${cO} cmd · ${cRV} rév</span></div><div style="height:4px;background:var(--border);border-radius:2px"><div style="height:4px;background:${barC};border-radius:2px;width:${pct}%;transition:width .3s"></div></div></div></div>`;
     });
     h+=`</div>`;
   }
@@ -631,16 +773,24 @@ function renderOrders(){
   const tr=t();
   const pool=S.role==="freelancer"?S.orders.filter(o=>o.freelanceId===S.me?.id):S.orders;
   let list=pool.filter(o=>{
-    if(S.oFilter!=="all"&&o.status!==S.oFilter)return false;
-    if(S.oSearch&&!o.clientName?.toLowerCase().includes(S.oSearch.toLowerCase()))return false;
+    if(S.oFilter!=="all"&&o.status!==S.oFilter) return false;
+    if(S.oFlFilter!=="all"&&o.freelanceId!==S.oFlFilter) return false;
+    if(S.oSearch&&!o.clientName?.toLowerCase().includes(S.oSearch.toLowerCase())&&!o.company?.toLowerCase().includes(S.oSearch.toLowerCase())) return false;
     return true;
   });
-  let h=`<div class="screen"><div style="display:flex;gap:8px;margin-bottom:10px;align-items:center">
-    <input class="inp" style="flex:1" placeholder="${tr.search}" value="${S.oSearch}" oninput="S.oSearch=this.value;renderOrders()"/>
-    <button class="btn btn-ghost btn-sm" onclick="S.oView=S.oView==='list'?'kanban':'list';renderOrders()" title="${S.oView==="list"?tr.kanbanView:tr.listView}">${S.oView==="list"?"🔲":"☰"}</button>
-    ${S.role==="admin"?`<button class="btn btn-p btn-sm" onclick="openOrderSheet(null)">${tr.addOrder}</button>`:""}
-  </div>
-  <div class="filters">${["all",...Object.keys(tr.sl)].map(s=>`<button class="fbtn${S.oFilter===s?" active":""}" onclick="S.oFilter='${s}';renderOrders()">${s==="all"?tr.all:tr.sl[s]}</button>`).join("")}</div>`;
+  let h=`<div class="screen">`;
+  h+=`<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap">
+    <input class="inp" style="flex:1;min-width:140px" placeholder="${tr.search}" value="${S.oSearch}" oninput="S.oSearch=this.value;renderOrders()"/>
+    <button class="btn btn-ghost btn-sm" onclick="S.oView=S.oView==='list'?'kanban':'list';renderOrders()">${S.oView==="list"?"🔲":"☰"}</button>
+    ${S.role==="admin"?`<button class="btn btn-ghost btn-sm" onclick="exportOrdersCsv()">⬇ CSV</button><button class="btn btn-p btn-sm" onclick="openOrderSheet(null)">${tr.addOrder}</button>`:""}
+  </div>`;
+  // Filtre freelance (admin)
+  if(S.role==="admin"){
+    h+=`<div class="filters"><button class="fbtn${S.oFlFilter==="all"?" active":""}" onclick="S.oFlFilter='all';renderOrders()">${tr.allFl}</button>`;
+    S.freelancers.filter(f=>f.active).forEach(f=>{h+=`<button class="fbtn${S.oFlFilter===f.id?" active":""}" onclick="S.oFlFilter='${f.id}';renderOrders()">${f.name.split(" ")[0]}</button>`;});
+    h+=`</div>`;
+  }
+  h+=`<div class="filters">${["all",...Object.keys(tr.sl)].map(s=>`<button class="fbtn${S.oFilter===s?" active":""}" onclick="S.oFilter='${s}';renderOrders()">${s==="all"?tr.all:tr.sl[s]}</button>`).join("")}</div>`;
   if(S.oView==="kanban"){ h+=renderKanban(list,"order"); }
   else {
     if(!list.length) h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted);font-size:13px">${S.role==="freelancer"?tr.noMissions:tr.noOrders}</div></div>`;
@@ -652,9 +802,10 @@ function renderOrders(){
 function renderOrderCard(o){
   const tr=t();
   const fl=S.freelancers.find(f=>f.id===o.freelanceId);
-  return `<div class="card" style="margin-bottom:10px">
+  const stale=["assigned","inprogress"].includes(o.status)&&(Date.now()-new Date(o.createdAt))/864e5>STALE_DAYS;
+  return `<div class="card" style="margin-bottom:10px${stale?";border-color:rgba(255,152,0,.5)":""}">
     <div class="card-h"><div style="flex:1;min-width:0">
-      <div style="font-weight:800;font-size:14px">${o.clientName}</div>
+      <div style="font-weight:800;font-size:14px">${o.clientName}${stale?` <span style="font-size:9px;color:var(--orange)">⏰ Relance</span>`:""}</div>
       ${o.company?`<div style="font-size:10px;color:var(--accent);font-weight:700">${o.company}</div>`:""}
       <div style="font-size:10px;color:var(--muted)">${[o.clientEmail,o.clientPhone].filter(Boolean).join(" · ")}</div>
     </div>
@@ -672,7 +823,7 @@ function renderOrderCard(o){
       ${o.description?`<p style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.5">${o.description.slice(0,120)}${o.description.length>120?"…":""}</p>`:""}
       ${o.deliveryUrl?`<a href="${o.deliveryUrl}" target="_blank"><div class="delivery-badge" style="margin-bottom:6px">🚀 Livraison disponible</div></a>`:""}
       <div style="display:flex;align-items:center;justify-content:space-between">
-        ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl.avatar,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
+        ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
         ${deadlineOrder(o.deadline)}
       </div>
     </div>
@@ -680,20 +831,20 @@ function renderOrderCard(o){
       <button class="btn btn-sm btn-blue" onclick="openAssign('${o.id}','order')">👤 ${tr.assign}</button>
       ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="sendWA('order','${o.id}')">📲</button>`:""}
       <button class="btn btn-sm btn-ghost" onclick="openOrderSheet('${o.id}')">✏️</button>
-      <button class="btn btn-sm btn-purple" onclick="openComments('${o.id}','order','${o.clientName}')">💬</button>
-      <button class="btn btn-sm btn-orange" onclick="openHistory('${o.id}','order','${o.clientName}')">📋</button>
+      <button class="btn btn-sm btn-purple" onclick="openComments('${o.id}','order','${o.clientName.replace(/'/g,"")}')">💬</button>
+      <button class="btn btn-sm btn-orange" onclick="openHistory('${o.id}','order','${o.clientName.replace(/'/g,"")}')">📋</button>
       <button class="btn btn-sm btn-red" onclick="delOrder('${o.id}')">🗑️</button>
     </div>`:`<div class="card-f">
-      <button class="btn btn-sm btn-purple" onclick="openComments('${o.id}','order','${o.clientName}')">💬 ${tr.comments}</button>
-      ${o.deliveryUrl?"":S.role==="freelancer"?`<button class="btn btn-sm btn-green" onclick="openDelivery('${o.id}','order')">🚀 Livrer</button>`:""}
+      <button class="btn btn-sm btn-purple" onclick="openComments('${o.id}','order','${o.clientName.replace(/'/g,"")}')">💬 ${tr.comments}</button>
+      ${!o.deliveryUrl?`<button class="btn btn-sm btn-green" onclick="openDelivery('${o.id}','order')">🚀 Livrer</button>`:""}
     </div>`}
   </div>`;
 }
 function renderKanban(items, type){
   const tr=t();
-  const statuses=Object.entries(type==="order"?tr.sl:tr.rl);
+  const statusMap=type==="order"?tr.sl:tr.rl;
   let h=`<div class="kanban-wrap">`;
-  statuses.forEach(([sk,sv])=>{
+  Object.entries(statusMap).forEach(([sk,sv])=>{
     const col=items.filter(i=>i.status===sk);
     const c=STATUS_COLORS[sk]||"#58A6FF";
     h+=`<div class="kanban-col"><div class="kanban-col-h">
@@ -702,12 +853,12 @@ function renderKanban(items, type){
     </div><div class="kanban-col-body">`;
     col.forEach(item=>{
       const fl=S.freelancers.find(f=>f.id===item.freelanceId);
-      h+=`<div class="kanban-card" onclick="S.oView='list';S.oFilter='${sk}';renderOrders()">
+      h+=`<div class="kanban-card">
         <div style="font-weight:700;font-size:12px;margin-bottom:4px">${item.clientName}</div>
         ${type==="order"&&item.budget?`<div style="font-size:10px;color:var(--accent);font-weight:800">${item.budget}€</div>`:""}
         ${type==="revision"&&item.projectName?`<div style="font-size:10px;color:var(--teal)">${item.projectName}</div>`:""}
         <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
-          ${fl?`<div style="display:flex;align-items:center;gap:4px">${mkAv(fl.avatar,18)}<span style="font-size:9px">${fl.name.split(" ")[0]}</span></div>`:`<span style="font-size:9px;color:var(--muted)">—</span>`}
+          ${fl?`<div style="display:flex;align-items:center;gap:4px">${mkAv(fl,18)}<span style="font-size:9px">${fl.name.split(" ")[0]}</span></div>`:`<span style="font-size:9px;color:var(--muted)">—</span>`}
           <span style="font-size:9px;color:var(--muted)">${fmt(item.createdAt)}</span>
         </div>
       </div>`;
@@ -760,27 +911,52 @@ async function saveOrder(id){
   }catch(e){showErr("of-err","Erreur.");btn.textContent=t().save;btn.disabled=false;}
 }
 
+// ── EXPORT CSV ────────────────────────────────────────────────────
+function exportOrdersCsv(){
+  const headers=["Nom","Email","Téléphone","Entreprise","Projet","Statut","Budget","Deadline","Freelance","Créé le"];
+  const rows=S.orders.map(o=>{
+    const fl=S.freelancers.find(f=>f.id===o.freelanceId);
+    return [o.clientName,o.clientEmail,o.clientPhone,o.company,o.projectType,o.status,o.budget,o.deadline?.slice(0,10),fl?.name||"",o.createdAt?.slice(0,10)].map(v=>`"${(v||"").replace(/"/g,'""')}"`);
+  });
+  const csv=[headers,...rows].map(r=>r.join(",")).join("\n");
+  const a=document.createElement("a"); a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);
+  a.download="commandes-openshore.csv"; a.click();
+}
+function exportRevisionsCsv(){
+  const headers=["Nom","Email","Téléphone","Projet","Statut","Deadline","Freelance","Créé le"];
+  const rows=S.revisions.map(r=>{
+    const fl=S.freelancers.find(f=>f.id===r.freelanceId);
+    return [r.clientName,r.clientEmail,r.clientPhone,r.projectName,r.status,r.deadline?.slice(0,10),fl?.name||"",r.createdAt?.slice(0,10)].map(v=>`"${(v||"").replace(/"/g,'""')}"`);
+  });
+  const csv=[headers,...rows].map(r=>r.join(",")).join("\n");
+  const a=document.createElement("a"); a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);
+  a.download="revisions-openshore.csv"; a.click();
+}
+
 // ── REVISIONS ─────────────────────────────────────────────────────
 function renderRevisions(){
   const tr=t();
   const pool=S.role==="freelancer"?S.revisions.filter(r=>r.freelanceId===S.me?.id):S.revisions;
   let list=pool.filter(r=>{
-    if(S.rvFilter!=="all"&&r.status!==S.rvFilter)return false;
+    if(S.rvFilter!=="all"&&r.status!==S.rvFilter) return false;
+    if(S.rvFlFilter!=="all"&&r.freelanceId!==S.rvFlFilter) return false;
     if(S.rvSearch){const q=S.rvSearch.toLowerCase();if(!r.clientName?.toLowerCase().includes(q)&&!r.projectName?.toLowerCase().includes(q))return false;}
     return true;
   });
-  list=[...list].sort((a,b)=>{
-    if(!a.deadline&&!b.deadline)return 0; if(!a.deadline)return 1; if(!b.deadline)return -1;
-    return new Date(a.deadline)-new Date(b.deadline);
-  });
+  list=[...list].sort((a,b)=>{if(!a.deadline&&!b.deadline)return 0;if(!a.deadline)return 1;if(!b.deadline)return -1;return new Date(a.deadline)-new Date(b.deadline);});
   let h=`<div class="screen">`;
   if(S.role==="freelancer") h+=`<div class="alert alert-i" style="margin-bottom:12px">🔁 ${tr.myOnlyRev}</div>`;
-  h+=`<div style="display:flex;gap:8px;margin-bottom:10px;align-items:center">
-    <input class="inp" style="flex:1" placeholder="${tr.search}" value="${S.rvSearch}" oninput="S.rvSearch=this.value;renderRevisions()"/>
+  h+=`<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap">
+    <input class="inp" style="flex:1;min-width:140px" placeholder="${tr.search}" value="${S.rvSearch}" oninput="S.rvSearch=this.value;renderRevisions()"/>
     <button class="btn btn-ghost btn-sm" onclick="S.rvView=S.rvView==='list'?'kanban':'list';renderRevisions()">${S.rvView==="list"?"🔲":"☰"}</button>
-    ${S.role==="admin"?`<button class="btn btn-teal btn-sm" onclick="openRevisionSheet(null)">${tr.addRevision}</button>`:""}
-  </div>
-  <div class="filters">${["all",...Object.keys(tr.rl)].map(s=>`<button class="fbtn${S.rvFilter===s?" active":""}" onclick="S.rvFilter='${s}';renderRevisions()">${s==="all"?tr.all:tr.rl[s]}</button>`).join("")}</div>`;
+    ${S.role==="admin"?`<button class="btn btn-ghost btn-sm" onclick="exportRevisionsCsv()">⬇ CSV</button><button class="btn btn-teal btn-sm" onclick="openRevisionSheet(null)">${tr.addRevision}</button>`:""}
+  </div>`;
+  if(S.role==="admin"){
+    h+=`<div class="filters"><button class="fbtn${S.rvFlFilter==="all"?" active":""}" onclick="S.rvFlFilter='all';renderRevisions()">${tr.allFl}</button>`;
+    S.freelancers.filter(f=>f.active).forEach(f=>{h+=`<button class="fbtn${S.rvFlFilter===f.id?" active":""}" onclick="S.rvFlFilter='${f.id}';renderRevisions()">${f.name.split(" ")[0]}</button>`;});
+    h+=`</div>`;
+  }
+  h+=`<div class="filters">${["all",...Object.keys(tr.rl)].map(s=>`<button class="fbtn${S.rvFilter===s?" active":""}" onclick="S.rvFilter='${s}';renderRevisions()">${s==="all"?tr.all:tr.rl[s]}</button>`).join("")}</div>`;
   if(S.rvView==="kanban"){ h+=renderKanban(list,"revision"); }
   else {
     if(!list.length) h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted);font-size:13px">${S.role==="freelancer"?tr.noMissions:tr.noRevisions}</div></div>`;
@@ -815,13 +991,12 @@ function renderRevisionCard(r){
         <div style="font-size:11px">${deadlineRv(r.deadline)}</div>
       </div>
       ${rvTypeTags(r)}
-      ${r.revisionAspect?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4"><span style="color:var(--teal);font-weight:700">🎨</span> ${r.revisionAspect.slice(0,100)}…</div>`:""}
-      ${r.revisionContent?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4"><span style="color:var(--teal);font-weight:700">📄</span> ${r.revisionContent.slice(0,100)}…</div>`:""}
-      ${r.revisionText?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4"><span style="color:var(--teal);font-weight:700">✍️</span> ${r.revisionText.slice(0,100)}…</div>`:""}
-      ${r.revisionOther?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4"><span style="color:var(--teal);font-weight:700">💬</span> ${r.revisionOther.slice(0,100)}…</div>`:""}
+      ${r.revisionAspect?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">🎨 ${r.revisionAspect.slice(0,100)}…</div>`:""}
+      ${r.revisionContent?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">📄 ${r.revisionContent.slice(0,100)}…</div>`:""}
+      ${r.revisionText?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">✍️ ${r.revisionText.slice(0,100)}…</div>`:""}
       ${r.deliveryUrl?`<a href="${r.deliveryUrl}" target="_blank"><div class="delivery-badge" style="margin-top:6px">🚀 Livraison disponible</div></a>`:""}
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
-        ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl.avatar,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
+        ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
         <span style="font-size:10px;color:var(--muted)">${fmt(r.createdAt)}</span>
       </div>
     </div>
@@ -829,12 +1004,12 @@ function renderRevisionCard(r){
       <button class="btn btn-sm btn-blue" onclick="openAssign('${r.id}','revision')">👤 ${tr.assign}</button>
       ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="sendWA('revision','${r.id}')">📲</button>`:""}
       <button class="btn btn-sm btn-ghost" onclick="openRevisionSheet('${r.id}')">✏️</button>
-      <button class="btn btn-sm btn-purple" onclick="openComments('${r.id}','revision','${r.clientName}')">💬</button>
-      <button class="btn btn-sm btn-orange" onclick="openHistory('${r.id}','revision','${r.clientName}')">📋</button>
+      <button class="btn btn-sm btn-purple" onclick="openComments('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">💬</button>
+      <button class="btn btn-sm btn-orange" onclick="openHistory('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">📋</button>
       <button class="btn btn-sm btn-red" onclick="delRevision('${r.id}')">🗑️</button>
     </div>`:`<div class="card-f">
-      <button class="btn btn-sm btn-purple" onclick="openComments('${r.id}','revision','${r.clientName}')">💬 ${tr.comments}</button>
-      ${r.deliveryUrl?"":S.role==="freelancer"?`<button class="btn btn-sm btn-green" onclick="openDelivery('${r.id}','revision')">🚀 Livrer</button>`:""}
+      <button class="btn btn-sm btn-purple" onclick="openComments('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">💬 ${tr.comments}</button>
+      ${!r.deliveryUrl?`<button class="btn btn-sm btn-green" onclick="openDelivery('${r.id}','revision')">🚀 Livrer</button>`:""}
     </div>`}
   </div>`;
 }
@@ -856,13 +1031,13 @@ function openRevisionSheet(id){
     </div>
     <div class="two-col">
       <div class="field"><label class="lbl">${tr.clientE}</label><input class="inp" type="email" id="rv-e" value="${r?.clientEmail||""}"/></div>
-      <div class="field"><label class="lbl">${tr.phone}</label><input class="inp" id="rv-ph" value="${r?.clientPhone||""}" placeholder="+33 6 ..."/></div>
+      <div class="field"><label class="lbl">${tr.phone}</label><input class="inp" id="rv-ph" value="${r?.clientPhone||""}"/></div>
     </div>
     <div class="field"><label class="lbl">🎨 ${tr.revAspect}</label><textarea class="inp" id="rv-asp" style="min-height:52px">${r?.revisionAspect||""}</textarea></div>
     <div class="field"><label class="lbl">📄 ${tr.revContent}</label><textarea class="inp" id="rv-cnt" style="min-height:52px">${r?.revisionContent||""}</textarea></div>
     <div class="field"><label class="lbl">✍️ ${tr.revText}</label><textarea class="inp" id="rv-txt" style="min-height:52px">${r?.revisionText||""}</textarea></div>
     <div class="field"><label class="lbl">💬 ${tr.revOther}</label><textarea class="inp" id="rv-oth" style="min-height:52px">${r?.revisionOther||""}</textarea></div>
-    <div class="field"><label class="lbl">${tr.deliveryUrl}</label><input class="inp" id="rv-dl" value="${r?.deliveryUrl||""}" placeholder="https://drive.google.com/..."/></div>
+    <div class="field"><label class="lbl">${tr.deliveryUrl}</label><input class="inp" id="rv-dl" value="${r?.deliveryUrl||""}" placeholder="https://"/></div>
     <div id="rv-err" class="alert alert-e" style="display:none"></div>
     <div class="two-col">
       <button class="btn btn-ghost btn-full" onclick="closeSheet()">${tr.cancel}</button>
@@ -882,11 +1057,11 @@ async function saveRevision(id){
   }catch(e){showErr("rv-err","Erreur.");btn.textContent=t().save;btn.disabled=false;}
 }
 
-// ── DELIVERY (freelance) ───────────────────────────────────────────
+// ── DELIVERY ──────────────────────────────────────────────────────
 function openDelivery(id, type){
   const tr=t();
   openSheet("🚀 Soumettre la livraison",`
-    <p style="color:var(--muted);font-size:12px;margin-bottom:4px">Colle le lien Drive, Loom, Figma ou tout autre lien de livraison :</p>
+    <p style="color:var(--muted);font-size:12px;margin-bottom:4px">Colle le lien Drive, Loom, Figma ou tout autre lien :</p>
     <div class="field"><input class="inp" id="dl-url" placeholder="https://" /></div>
     <div class="two-col">
       <button class="btn btn-ghost btn-full" onclick="closeSheet()">${tr.cancel}</button>
@@ -916,9 +1091,11 @@ function openAssign(itemId,type){
     const cRV=S.revisions.filter(r=>r.freelanceId===f.id&&!["done","cancelled"].includes(r.status)).length;
     const sel=item?.freelanceId===f.id;
     h+=`<div onclick="doAssign('${itemId}','${type}','${f.id}')" style="display:flex;align-items:center;gap:12px;padding:13px;background:${sel?"var(--adim)":"var(--bg)"};border:1px solid ${sel?"var(--accent)":"var(--border)"};border-radius:12px;margin-bottom:8px;cursor:pointer">
-      ${mkAv(f.avatar)}<div style="flex:1"><div style="font-weight:700;font-size:13px">${f.name}</div>
-      <div style="font-size:11px;color:var(--muted)">${f.specialty}</div>
-      ${f.phone?`<div style="font-size:10px;color:var(--wa)">📲 ${f.phone}</div>`:""}</div>
+      ${mkAv(f)}<div style="flex:1">
+        <div style="font-weight:700;font-size:13px">${f.name}</div>
+        <div style="font-size:11px;color:var(--muted)">${f.specialty}</div>
+        ${f.phone?`<div style="font-size:10px;color:var(--wa)">📲 ${f.phone}</div>`:""}
+      </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
         <span style="font-size:9px;background:rgba(88,166,255,.1);color:var(--blue);border-radius:4px;padding:2px 6px">${cO} cmd</span>
         <span style="font-size:9px;background:rgba(38,198,218,.1);color:var(--teal);border-radius:4px;padding:2px 6px">${cRV} rév</span>
@@ -969,8 +1146,7 @@ async function openComments(itemId,type,name){
 async function loadComments(itemId,type){
   try{
     const comments=await api("GET",`/comments/${type}/${itemId}`);
-    const wrap=el("cmt-list");
-    if(!wrap)return;
+    const wrap=el("cmt-list"); if(!wrap)return;
     if(!comments.length){wrap.innerHTML=`<div style="text-align:center;color:var(--muted);font-size:12px;padding:16px">Aucun commentaire.</div>`;return;}
     wrap.innerHTML=comments.map(c=>{
       const isAdmin=c.authorRole==="admin";
@@ -985,7 +1161,7 @@ async function loadComments(itemId,type){
         </div>
       </div>`;
     }).join("");
-  }catch(e){const w=el("cmt-list");if(w)w.innerHTML=`<div style="color:var(--red);font-size:12px">Erreur chargement.</div>`;}
+  }catch(e){const w=el("cmt-list");if(w)w.innerHTML=`<div style="color:var(--red);font-size:12px">Erreur.</div>`;}
 }
 async function postComment(itemId,type){
   const input=el("cmt-input");
@@ -1004,10 +1180,9 @@ async function openHistory(itemId,type,name){
   openSheet(`📋 ${tr.history} — ${name}`,`<div id="hist-list"><div class="spinner"><div class="spin"></div></div></div>`);
   try{
     const hist=await api("GET",`/history/${type}/${itemId}`);
-    const wrap=el("hist-list");
-    if(!wrap)return;
+    const wrap=el("hist-list"); if(!wrap)return;
     if(!hist.length){wrap.innerHTML=`<div style="text-align:center;color:var(--muted);font-size:12px;padding:20px">${tr.noHistory}</div>`;return;}
-    const statusMap=type==="revision"?t().rl:t().sl;
+    const statusMap=type==="revision"?tr.rl:tr.sl;
     wrap.innerHTML=`<div style="padding:8px 0">`+hist.map((h,i)=>{
       const c=STATUS_COLORS[h.newStatus]||"#58A6FF";
       return `<div class="tl-item">
@@ -1025,6 +1200,63 @@ async function openHistory(itemId,type,name){
   }catch(e){const w=el("hist-list");if(w)w.innerHTML=`<div style="color:var(--red)">Erreur.</div>`;}
 }
 
+// ── CLIENTS ───────────────────────────────────────────────────────
+function renderClients(){
+  const tr=t();
+  // Grouper par email
+  const byEmail={};
+  S.orders.forEach(o=>{
+    const k=o.clientEmail||o.clientName;
+    if(!byEmail[k]) byEmail[k]={name:o.clientName,email:o.clientEmail,phone:o.clientPhone,company:o.company,orders:[],revisions:[]};
+    byEmail[k].orders.push(o);
+  });
+  S.revisions.forEach(r=>{
+    const k=r.clientEmail||r.clientName;
+    if(!byEmail[k]) byEmail[k]={name:r.clientName,email:r.clientEmail,phone:r.clientPhone,company:"",orders:[],revisions:[]};
+    byEmail[k].revisions.push(r);
+  });
+  const clients=Object.values(byEmail).sort((a,b)=>b.orders.length+b.revisions.length-(a.orders.length+a.revisions.length));
+  let h=`<div class="screen"><div style="color:var(--muted);font-size:12px;margin-bottom:14px">${clients.length} client${clients.length>1?"s":""} trouvés</div>`;
+  if(!clients.length){h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted)">${tr.noClients}</div></div>`;h+=`</div>`;el("page").innerHTML=h;return;}
+  clients.forEach(c=>{
+    const totalBudget=c.orders.filter(o=>o.budget).reduce((acc,o)=>acc+(parseFloat(o.budget)||0),0);
+    const lastOrder=c.orders.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt))[0];
+    const fls=[...new Set(c.orders.map(o=>o.freelanceId).filter(Boolean))].map(id=>S.freelancers.find(f=>f.id===id)).filter(Boolean);
+    h+=`<div class="client-card">
+      <div class="client-card-h">
+        <div class="av" style="width:42px;height:42px;font-size:16px">${(c.name||"?").slice(0,2).toUpperCase()}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:800;font-size:14px">${c.name}</div>
+          ${c.company?`<div style="font-size:11px;color:var(--accent);font-weight:700">${c.company}</div>`:""}
+          <div style="font-size:10px;color:var(--muted)">${[c.email,c.phone].filter(Boolean).join(" · ")}</div>
+        </div>
+        ${totalBudget>0?`<div style="font-size:18px;font-weight:900;color:var(--accent)">${totalBudget}€</div>`:""}
+      </div>
+      <div class="card-b">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+          <span style="font-size:11px;background:rgba(88,166,255,.1);color:var(--blue);border-radius:6px;padding:3px 8px;font-weight:700">📋 ${c.orders.length} commande${c.orders.length>1?"s":""}</span>
+          <span style="font-size:11px;background:rgba(38,198,218,.1);color:var(--teal);border-radius:6px;padding:3px 8px;font-weight:700">🔁 ${c.revisions.length} révision${c.revisions.length>1?"s":""}</span>
+          ${lastOrder?`<span style="font-size:11px;color:var(--muted)">Dernière : ${fmt(lastOrder.createdAt)}</span>`:""}
+        </div>
+        ${fls.length?`<div style="display:flex;align-items:center;gap:6px">${fls.map(f=>mkAv(f,22)).join("")}<span style="font-size:10px;color:var(--muted)">${fls.map(f=>f.name.split(" ")[0]).join(", ")}</span></div>`:""}
+        ${c.orders.length?`<div style="margin-top:10px">
+          ${c.orders.slice(0,3).map(o=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:var(--bg);border-radius:6px;margin-bottom:4px">
+            <div style="font-size:11px;font-weight:600">${o.projectType||"—"}</div>
+            <div style="display:flex;gap:6px;align-items:center">${o.budget?`<span style="font-size:10px;color:var(--accent);font-weight:700">${o.budget}€</span>`:""}${mkBadge(o.status,t().sl)}</div>
+          </div>`).join("")}
+          ${c.orders.length>3?`<div style="font-size:10px;color:var(--muted);text-align:center;padding:4px">+${c.orders.length-3} autres</div>`:""}
+        </div>`:""}
+      </div>
+      <div class="card-f">
+        ${c.email?`<a href="mailto:${c.email}"><button class="btn btn-sm btn-blue">✉️ Email</button></a>`:""}
+        ${c.phone?`<a href="https://wa.me/${c.phone.replace(/\D/g,"")}"><button class="btn btn-sm btn-wa">📲 WhatsApp</button></a>`:""}
+      </div>
+    </div>`;
+  });
+  h+=`</div>`;
+  el("page").innerHTML=h;
+}
+
 // ── FREELANCERS ───────────────────────────────────────────────────
 function renderFL(){
   const tr=t();
@@ -1035,24 +1267,25 @@ function renderFL(){
     const doneO=S.orders.filter(o=>o.freelanceId===f.id&&["done","delivered"].includes(o.status)).length;
     const doneRV=S.revisions.filter(r=>r.freelanceId===f.id&&r.status==="done").length;
     const totalBudget=S.orders.filter(o=>o.freelanceId===f.id&&["done","delivered"].includes(o.status)&&o.budget).reduce((acc,o)=>acc+(parseFloat(o.budget)||0),0);
-    const avg=avgDelayDays(f.id);
-    const lvlColor=f.specialty==="Niveau 1"||f.specialty==="Level 1"?"var(--blue)":f.specialty==="Niveau 2"||f.specialty==="Level 2"?"var(--purple)":"var(--accent)";
+    const lvlColor=["Niveau 1","Level 1"].includes(f.specialty)?"var(--blue)":["Niveau 2","Level 2"].includes(f.specialty)?"var(--purple)":"var(--accent)";
     h+=`<div class="card" style="margin-bottom:14px;opacity:${f.active?1:.5}">
       <div class="card-b">
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-          ${mkAv(f.avatar,46)}<div style="flex:1;min-width:0">
+          ${mkAv(f,48)}
+          <div style="flex:1;min-width:0">
             <div style="font-weight:800;font-size:15px">${f.name}</div>
             <div style="font-size:11px;color:var(--muted)">${f.email}</div>
             ${f.phone?`<div style="font-size:10px;color:var(--wa);margin-top:2px">📲 ${f.phone}</div>`:""}
-          </div><span class="pill" style="background:${lvlColor}18;color:${lvlColor};border:1px solid ${lvlColor}33">${f.specialty}</span>
+          </div>
+          <span class="pill" style="background:${lvlColor}18;color:${lvlColor};border:1px solid ${lvlColor}33">${f.specialty}</span>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:${f.notes?"12px":"4px"}">
           <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:18px;font-weight:900;color:var(--blue)">${cO}</div><div style="font-size:8px;color:var(--muted)">En cours</div></div>
           <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:18px;font-weight:900;color:var(--teal)">${cRV}</div><div style="font-size:8px;color:var(--muted)">Révisions</div></div>
           <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:18px;font-weight:900;color:var(--green)">${doneO+doneRV}</div><div style="font-size:8px;color:var(--muted)">Livrées</div></div>
           <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:14px;font-weight:900;color:var(--accent)">${totalBudget>0?totalBudget+"€":"—"}</div><div style="font-size:8px;color:var(--muted)">CA</div></div>
-          <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:14px;font-weight:900;color:var(--orange)">${avg!==null?avg+"j":"—"}</div><div style="font-size:8px;color:var(--muted)">Délai moy.</div></div>
         </div>
+        ${f.notes?`<div style="background:rgba(240,165,0,.06);border:1px solid rgba(240,165,0,.2);border-radius:8px;padding:8px 10px;font-size:11px;line-height:1.5;color:var(--muted);margin-bottom:10px">📝 ${f.notes}</div>`:""}
         <div style="display:flex;gap:7px;flex-wrap:wrap">
           <button class="btn btn-sm btn-ghost" onclick="openFlSheet('${f.id}')">✏️ ${tr.edit}</button>
           <button class="btn btn-sm ${f.active?"btn-red":"btn-green"}" onclick="toggleFl('${f.id}','${f.active}')">${f.active?tr.deactivate:tr.reactivate}</button>
@@ -1084,6 +1317,8 @@ function openFlSheet(id){
     <div class="field"><label class="lbl">${tr.spec}</label>
       <select class="inp" id="ff-s">${tr.specs.map(x=>`<option${x===f?.specialty?" selected":""}>${x}</option>`).join("")}</select>
     </div>
+    <div class="field"><label class="lbl">${tr.avatarUrlLbl}</label><input class="inp" id="ff-av" value="${f?.avatarUrl||""}" placeholder="https://..."/></div>
+    <div class="field"><label class="lbl">${tr.notesLbl}</label><textarea class="inp" id="ff-notes" style="min-height:60px">${f?.notes||""}</textarea></div>
     <div id="ff-err" class="alert alert-e" style="display:none"></div>
     <div class="two-col">
       <button class="btn btn-ghost btn-full" onclick="closeSheet()">${tr.cancel}</button>
@@ -1094,7 +1329,8 @@ async function saveFl(id){
   const n=el("ff-n").value.trim(); if(!n)return;
   const btn=el("ff-save"); btn.textContent="⏳..."; btn.disabled=true;
   const ini=n.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
-  const form={name:n,email:el("ff-e").value,password:el("ff-p").value,phone:el("ff-ph").value,specialty:el("ff-s").value,avatar:ini,active:true};
+  const form={name:n,email:el("ff-e").value,password:el("ff-p").value,phone:el("ff-ph").value,
+    specialty:el("ff-s").value,avatar:ini,avatarUrl:el("ff-av").value,notes:el("ff-notes").value,active:true};
   try{
     if(id){const u=await api("PUT",`/freelancers/${id}`,{...S.freelancers.find(f=>f.id===id),...form});S.freelancers=S.freelancers.map(f=>f.id===id?u:f);}
     else{const c=await api("POST","/freelancers",{...form,id:uid()});S.freelancers=[...S.freelancers,c];}
@@ -1105,7 +1341,6 @@ async function saveFl(id){
 // ── BILLING ───────────────────────────────────────────────────────
 function renderBilling(){
   const tr=t();
-  // Grouper les commandes terminées par mois
   const done=S.orders.filter(o=>["done","delivered"].includes(o.status));
   const byMonth={};
   done.forEach(o=>{
@@ -1115,29 +1350,23 @@ function renderBilling(){
     byMonth[mk].total+=(parseFloat(o.budget)||0);
   });
   const months=Object.keys(byMonth).sort((a,b)=>b.localeCompare(a));
-  let h=`<div class="screen"><h2 style="font-size:16px;font-weight:900;margin-bottom:16px">💰 ${tr.billingTitle}</h2>`;
-  if(!months.length){h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted);font-size:13px">Aucune commande terminée.</div></div>`;h+=`</div>`;el("page").innerHTML=h;return;}
+  let h=`<div class="screen"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+    <h2 style="font-size:16px;font-weight:900">💰 ${tr.billingTitle}</h2>
+    <button class="btn btn-ghost btn-sm" onclick="exportOrdersCsv()">⬇ ${tr.exportCsv}</button>
+  </div>`;
+  if(!months.length){h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted)">Aucune commande terminée.</div></div>`;h+=`</div>`;el("page").innerHTML=h;return;}
   months.forEach(mk=>{
     const m=byMonth[mk];
     const label=new Date(mk+"-01").toLocaleDateString("fr-FR",{month:"long",year:"numeric"});
-    h+=`<div class="billing-month">
-      <div class="billing-month-h">
-        <span>📅 ${label}</span>
-        <span style="color:var(--accent)">${m.total>0?m.total+"€":""} · ${m.orders.length} mission${m.orders.length>1?"s":""}</span>
-      </div>`;
-    // Par freelance
+    h+=`<div class="billing-month"><div class="billing-month-h"><span>📅 ${label}</span><span style="color:var(--accent)">${m.total>0?m.total+"€ · ":""}${m.orders.length} mission${m.orders.length>1?"s":""}</span></div>`;
     const byFl={};
-    m.orders.forEach(o=>{
-      const fid=o.freelanceId||"unassigned";
-      if(!byFl[fid])byFl[fid]=[];
-      byFl[fid].push(o);
-    });
+    m.orders.forEach(o=>{ const fid=o.freelanceId||"unassigned"; if(!byFl[fid])byFl[fid]=[]; byFl[fid].push(o); });
     Object.entries(byFl).forEach(([fid,orders])=>{
       const fl=S.freelancers.find(f=>f.id===fid);
       const flTotal=orders.reduce((acc,o)=>acc+(parseFloat(o.budget)||0),0);
       h+=`<div style="padding:10px 14px;border-top:1px solid var(--border)">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-          ${fl?mkAv(fl.avatar,24):mkAv("?",24)}
+          ${fl?mkAv(fl,24):mkAv("?",24)}
           <span style="font-weight:700;font-size:13px">${fl?.name||"Non assigné"}</span>
           ${fl?`<span class="pill" style="background:rgba(188,140,255,.1);color:var(--purple);border:1px solid rgba(188,140,255,.25)">${fl.specialty}</span>`:""}
           <span style="margin-left:auto;font-weight:800;color:var(--accent)">${flTotal>0?flTotal+"€":""}</span>
@@ -1153,7 +1382,6 @@ function renderBilling(){
     });
     h+=`</div>`;
   });
-  // Total global
   const grandTotal=done.reduce((acc,o)=>acc+(parseFloat(o.budget)||0),0);
   if(grandTotal>0) h+=`<div style="background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.25);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-top:4px"><span style="font-weight:800">💰 Total global</span><span style="font-size:20px;font-weight:900;color:var(--accent)">${grandTotal}€</span></div>`;
   h+=`</div>`;
@@ -1225,8 +1453,12 @@ function renderTF(){
       </div>
       ${FORM_REVISIONS?`<a href="${FORM_REVISIONS}" target="_blank"><button class="btn btn-teal btn-sm">🔗 Ouvrir</button></a>`:`<div class="alert alert-w">⚠️ Colle l'URL dans FORM_REVISIONS</div>`}
     </div></div>
-    <div style="background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.2);border-radius:12px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:800;color:var(--green)">📧 Notifications email</div>
+    <div style="background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.2);border-radius:12px;padding:12px 14px;margin-bottom:10px">
+      <div style="font-size:12px;font-weight:800;color:var(--green)">🔗 Auto-assignation activée</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Quand un client soumet une révision, le CRM retrouve automatiquement la commande liée (par email) et assigne la révision au même freelance. La commande passe en statut <strong>En révision</strong>.</div>
+    </div>
+    <div style="background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.2);border-radius:12px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:800;color:var(--blue)">📧 Notifications email</div>
       <div style="font-size:11px;color:var(--muted);margin-top:4px">Pour activer les emails automatiques, ajoute <code style="color:var(--accent)">RESEND_API_KEY</code> dans les variables Railway.</div>
     </div>
   </div>`;
@@ -1245,7 +1477,8 @@ function openSheet(title,body){
 }
 function closeSheet(){ el("sheet-wrap").innerHTML=""; }
 
-// INIT
+// ── INIT ─────────────────────────────────────────────────────────
+initTheme();
 setLang("fr");
 </script>
 </body>

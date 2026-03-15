@@ -172,6 +172,23 @@ select.inp{cursor:pointer}
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;width:100%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,.9)}
 
+/* ORDER DETAIL MODAL */
+.detail-modal{background:var(--card);border:1px solid var(--border);border-radius:20px;width:100%;max-width:620px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 80px rgba(0,0,0,.9);animation:detailIn .25s ease}
+@keyframes detailIn{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.detail-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.detail-header-info h2{font-size:18px;font-weight:900;line-height:1.2}
+.detail-close{background:none;border:none;color:var(--muted);font-size:28px;cursor:pointer;padding:0 4px;line-height:1;transition:color .15s;flex-shrink:0}
+.detail-close:hover{color:var(--text)}
+.detail-body{padding:20px 24px 24px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;margin-bottom:18px}
+@media(max-width:500px){.detail-grid{grid-template-columns:1fr}}
+.detail-field .detail-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:4px}
+.detail-field .detail-value{font-size:13px;font-weight:600;color:var(--text);line-height:1.5;word-break:break-word}
+.detail-field.full{grid-column:1/-1}
+.detail-divider{height:1px;background:var(--border);margin:4px 0 14px;grid-column:1/-1}
+.detail-desc{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:300px;overflow-y:auto}
+.detail-actions{display:flex;gap:8px;flex-wrap:wrap;padding:14px 24px 20px;border-top:1px solid var(--border)}
+
 /* SEARCH OVERLAY */
 .search-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:flex;flex-direction:column;align-items:center;padding:60px 20px 20px;animation:fadein .15s}
 .search-box{width:100%;max-width:560px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.8)}
@@ -331,6 +348,7 @@ select.inp{cursor:pointer}
 </div>
 
 <div id="sheet-wrap"></div>
+<div id="detail-wrap"></div>
 
 <script>
 // Mot de passe admin vérifié côté serveur via /auth/admin — plus de mot de passe dans le code
@@ -663,7 +681,7 @@ document.addEventListener("keydown", e=>{
   if(!S.role) return;
   if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA") return;
   const tabs=S.role==="admin"?ADM_TABS:FL_TABS;
-  if(e.key==="Escape"){ closeSheet(); closeSearch(); return; }
+  if(e.key==="Escape"){ closeDetail(); closeSheet(); closeSearch(); return; }
   if((e.metaKey||e.ctrlKey)&&e.key==="k"){ e.preventDefault(); openSearch(); return; }
   if(e.key==="k"&&!e.metaKey&&!e.ctrlKey){ openSearch(); return; }
   const idx=parseInt(e.key)-1;
@@ -821,7 +839,7 @@ function renderOrderCard(o){
   const fl=S.freelancers.find(f=>f.id===o.freelanceId);
   const stale=["assigned","inprogress"].includes(o.status)&&(Date.now()-new Date(o.createdAt))/864e5>STALE_DAYS;
   return `<div class="card" style="margin-bottom:10px${stale?";border-color:rgba(255,152,0,.5)":""}">
-    <div class="card-h"><div style="flex:1;min-width:0">
+    <div class="card-h" style="cursor:pointer" onclick="openOrderDetail('${o.id}')"><div style="flex:1;min-width:0">
       <div style="font-weight:800;font-size:14px">${o.clientName}${stale?` <span style="font-size:9px;color:var(--orange)">⏰ Relance</span>`:""}</div>
       ${o.company?`<div style="font-size:10px;color:var(--accent);font-weight:700">${o.company}</div>`:""}
       <div style="font-size:10px;color:var(--muted)">${[o.clientEmail,o.clientPhone].filter(Boolean).join(" · ")}</div>
@@ -830,15 +848,15 @@ function renderOrderCard(o){
       ${o.source==="typeform"?mkPill("TF","#58A6FF"):""}
       ${o.budget?`<span style="font-weight:900;color:var(--accent)">${o.budget}€</span>`:""}
     </div></div>
-    <div class="card-b">
+    <div class="card-b" style="cursor:pointer" onclick="if(event.target.tagName!=='SELECT'&&!event.target.closest('select')&&!event.target.closest('a'))openOrderDetail('${o.id}')">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         <span style="font-size:11px;color:var(--muted);background:var(--dim);border-radius:5px;padding:2px 8px">${o.projectType||""}</span>
         ${S.role==="admin"
-          ?`<select class="inp" style="width:auto;font-size:10px;padding:4px 8px" onchange="chgOrderStatus('${o.id}',this.value)">${Object.entries(tr.sl).map(([k,v])=>`<option value="${k}"${k===o.status?" selected":""}>${v}</option>`).join("")}</select>`
+          ?`<select class="inp" style="width:auto;font-size:10px;padding:4px 8px" onclick="event.stopPropagation()" onchange="chgOrderStatus('${o.id}',this.value)">${Object.entries(tr.sl).map(([k,v])=>`<option value="${k}"${k===o.status?" selected":""}>${v}</option>`).join("")}</select>`
           :mkBadge(o.status,tr.sl)}
       </div>
       ${o.description?`<p style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.5">${o.description.slice(0,120)}${o.description.length>120?"…":""}</p>`:""}
-      ${o.deliveryUrl?`<a href="${o.deliveryUrl}" target="_blank"><div class="delivery-badge" style="margin-bottom:6px">🚀 Livraison disponible</div></a>`:""}
+      ${o.deliveryUrl?`<a href="${o.deliveryUrl}" target="_blank" onclick="event.stopPropagation()"><div class="delivery-badge" style="margin-bottom:6px">🚀 Livraison disponible</div></a>`:""}
       <div style="display:flex;align-items:center;justify-content:space-between">
         ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
         ${deadlineOrder(o.deadline)}
@@ -870,7 +888,7 @@ function renderKanban(items, type){
     </div><div class="kanban-col-body">`;
     col.forEach(item=>{
       const fl=S.freelancers.find(f=>f.id===item.freelanceId);
-      h+=`<div class="kanban-card">
+      h+=`<div class="kanban-card" style="cursor:pointer" onclick="${type==='order'?`openOrderDetail('${item.id}')`:`openRevisionDetail('${item.id}')`}">
         <div style="font-weight:700;font-size:12px;margin-bottom:4px">${item.clientName}</div>
         ${type==="order"&&item.budget?`<div style="font-size:10px;color:var(--accent);font-weight:800">${item.budget}€</div>`:""}
         ${type==="revision"&&item.projectName?`<div style="font-size:10px;color:var(--teal)">${item.projectName}</div>`:""}
@@ -989,7 +1007,7 @@ function renderRevisionCard(r){
   const isUrgent=ms!==null&&ms<7200000;
   const bc=isUrgent?"rgba(248,81,73,.6)":ms!==null&&ms<21600000?"rgba(240,165,0,.4)":"rgba(38,198,218,.25)";
   return `<div class="card" style="margin-bottom:10px;border-color:${bc}">
-    <div class="card-h">
+    <div class="card-h" style="cursor:pointer" onclick="openRevisionDetail('${r.id}')">
       <div style="flex:1;min-width:0">
         <div style="font-weight:800;font-size:14px">${r.clientName}</div>
         ${r.projectName?`<div style="font-size:11px;color:var(--teal);font-weight:700">📁 ${r.projectName}</div>`:""}
@@ -1000,10 +1018,10 @@ function renderRevisionCard(r){
         ${isUrgent?`<span class="badge" style="background:rgba(248,81,73,.15);color:var(--red);border:1px solid rgba(248,81,73,.4)">🔴 Urgent</span>`:""}
       </div>
     </div>
-    <div class="card-b">
+    <div class="card-b" style="cursor:pointer" onclick="if(event.target.tagName!=='SELECT'&&!event.target.closest('select')&&!event.target.closest('a'))openRevisionDetail('${r.id}')">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         ${S.role==="admin"
-          ?`<select class="inp" style="width:auto;font-size:10px;padding:4px 8px" onchange="chgRevisionStatus('${r.id}',this.value)">${Object.entries(tr.rl).map(([k,v])=>`<option value="${k}"${k===r.status?" selected":""}>${v}</option>`).join("")}</select>`
+          ?`<select class="inp" style="width:auto;font-size:10px;padding:4px 8px" onclick="event.stopPropagation()" onchange="chgRevisionStatus('${r.id}',this.value)">${Object.entries(tr.rl).map(([k,v])=>`<option value="${k}"${k===r.status?" selected":""}>${v}</option>`).join("")}</select>`
           :mkBadge(r.status,tr.rl)}
         <div style="font-size:11px">${deadlineRv(r.deadline)}</div>
       </div>
@@ -1011,7 +1029,7 @@ function renderRevisionCard(r){
       ${r.revisionAspect?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">🎨 ${r.revisionAspect.slice(0,100)}…</div>`:""}
       ${r.revisionContent?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">📄 ${r.revisionContent.slice(0,100)}…</div>`:""}
       ${r.revisionText?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">✍️ ${r.revisionText.slice(0,100)}…</div>`:""}
-      ${r.deliveryUrl?`<a href="${r.deliveryUrl}" target="_blank"><div class="delivery-badge" style="margin-top:6px">🚀 Livraison disponible</div></a>`:""}
+      ${r.deliveryUrl?`<a href="${r.deliveryUrl}" target="_blank" onclick="event.stopPropagation()"><div class="delivery-badge" style="margin-top:6px">🚀 Livraison disponible</div></a>`:""}
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
         ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
         <span style="font-size:10px;color:var(--muted)">${fmt(r.createdAt)}</span>
@@ -1490,6 +1508,156 @@ function renderTF(){
       <div style="font-size:11px;color:var(--muted);margin-top:4px">Pour activer les emails automatiques, ajoute <code style="color:var(--accent)">RESEND_API_KEY</code> dans les variables Railway.</div>
     </div>
   </div>`;
+}
+
+// ── ORDER DETAIL POPUP ────────────────────────────────────────────
+function openOrderDetail(id){
+  const o=S.orders.find(x=>x.id===id); if(!o)return;
+  const tr=t();
+  const fl=S.freelancers.find(f=>f.id===o.freelanceId);
+  const stColor=STATUS_COLORS[o.status]||"#58A6FF";
+  const stLabel=(tr.sl||{})[o.status]||o.status;
+  const dDays=o.deadline?Math.ceil((new Date(o.deadline)-Date.now())/864e5):null;
+  const dColor=dDays===null?"var(--muted)":dDays<=0?"var(--red)":dDays<=2?"var(--accent)":"var(--muted)";
+
+  el("detail-wrap").innerHTML=`
+    <div class="modal-bg" onclick="if(event.target.classList.contains('modal-bg'))closeDetail()">
+      <div class="detail-modal">
+        <div class="detail-header">
+          <div class="detail-header-info" style="flex:1;min-width:0">
+            <h2>${o.clientName}</h2>
+            ${o.company?`<div style="font-size:12px;color:var(--accent);font-weight:700;margin-top:2px">${o.company}</div>`:""}
+            <div style="display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap">
+              <span class="badge" style="background:${stColor}20;color:${stColor};border:1px solid ${stColor}40;font-size:11px">${stLabel}</span>
+              ${o.budget?`<span style="font-weight:900;font-size:15px;color:var(--accent)">${o.budget}€</span>`:""}
+              ${o.source==="typeform"?mkPill("Typeform","#58A6FF"):""}
+            </div>
+          </div>
+          <button class="detail-close" onclick="closeDetail()">×</button>
+        </div>
+        <div class="detail-body">
+          <div class="detail-grid">
+            <div class="detail-field">
+              <div class="detail-label">📧 Email</div>
+              <div class="detail-value">${o.clientEmail||`<span style="color:var(--muted)">—</span>`}</div>
+            </div>
+            <div class="detail-field">
+              <div class="detail-label">📱 Téléphone</div>
+              <div class="detail-value">${o.clientPhone||`<span style="color:var(--muted)">—</span>`}</div>
+            </div>
+            <div class="detail-field">
+              <div class="detail-label">📦 Type de projet</div>
+              <div class="detail-value">${o.projectType||`<span style="color:var(--muted)">—</span>`}</div>
+            </div>
+            <div class="detail-field">
+              <div class="detail-label">📅 Deadline</div>
+              <div class="detail-value">${o.deadline?`${fmt(o.deadline)} <span style="font-size:11px;color:${dColor};font-weight:700">(J${dDays>0?"-"+dDays:dDays===0?"our J":"+"+Math.abs(dDays)})</span>`:`<span style="color:var(--muted)">—</span>`}</div>
+            </div>
+            <div class="detail-field">
+              <div class="detail-label">👤 Freelance assigné</div>
+              <div class="detail-value">${fl?`<div style="display:flex;align-items:center;gap:8px">${mkAv(fl,24)}<span>${fl.name}</span></div>`:`<span style="color:var(--muted);font-style:italic">Non assigné</span>`}</div>
+            </div>
+            <div class="detail-field">
+              <div class="detail-label">🕒 Créé le</div>
+              <div class="detail-value">${fmtFull(o.createdAt)}</div>
+            </div>
+            ${o.deliveryUrl?`<div class="detail-field full">
+              <div class="detail-label">🚀 Lien de livraison</div>
+              <div class="detail-value"><a href="${o.deliveryUrl}" target="_blank" style="color:var(--green);text-decoration:underline;word-break:break-all">${o.deliveryUrl}</a></div>
+            </div>`:""}
+            ${o.description?`<div class="detail-field full">
+              <div class="detail-label">📝 Description complète</div>
+              <div class="detail-desc">${o.description}</div>
+            </div>`:""}
+          </div>
+        </div>
+        ${S.role==="admin"?`<div class="detail-actions">
+          <button class="btn btn-sm btn-blue" onclick="closeDetail();openAssign('${o.id}','order')">👤 ${tr.assign}</button>
+          <button class="btn btn-sm btn-ghost" onclick="closeDetail();openOrderSheet('${o.id}')">✏️ ${tr.edit}</button>
+          <button class="btn btn-sm btn-purple" onclick="closeDetail();openComments('${o.id}','order','${o.clientName.replace(/'/g,"")}')">💬 ${tr.comments}</button>
+          <button class="btn btn-sm btn-orange" onclick="closeDetail();openHistory('${o.id}','order','${o.clientName.replace(/'/g,"")}')">📋 ${S.lang==="fr"?"Historique":"History"}</button>
+          ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="closeDetail();sendWA('order','${o.id}')">📲 WhatsApp</button>`:""}
+        </div>`:""}
+      </div>
+    </div>`;
+}
+function closeDetail(){ el("detail-wrap").innerHTML=""; }
+
+function openRevisionDetail(id){
+  const r=S.revisions.find(x=>x.id===id); if(!r)return;
+  const tr=t();
+  const fl=S.freelancers.find(f=>f.id===r.freelanceId);
+  const stColor=STATUS_COLORS[r.status]||"#58A6FF";
+  const stLabel=(tr.rl||{})[r.status]||r.status;
+
+  el("detail-wrap").innerHTML=`
+    <div class="modal-bg" onclick="if(event.target.classList.contains('modal-bg'))closeDetail()">
+      <div class="detail-modal">
+        <div class="detail-header">
+          <div class="detail-header-info" style="flex:1;min-width:0">
+            <h2>${r.clientName}</h2>
+            ${r.projectName?`<div style="font-size:12px;color:var(--teal);font-weight:700;margin-top:2px">📁 ${r.projectName}</div>`:""}
+            <div style="display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap">
+              <span class="badge" style="background:${stColor}20;color:${stColor};border:1px solid ${stColor}40;font-size:11px">${stLabel}</span>
+              ${r.source==="typeform"?mkPill("Typeform","#58A6FF"):""}
+            </div>
+          </div>
+          <button class="detail-close" onclick="closeDetail()">×</button>
+        </div>
+        <div class="detail-body">
+          <div class="detail-grid">
+            <div class="detail-field">
+              <div class="detail-label">📧 Email</div>
+              <div class="detail-value">${r.clientEmail||`<span style="color:var(--muted)">—</span>`}</div>
+            </div>
+            <div class="detail-field">
+              <div class="detail-label">📱 Téléphone</div>
+              <div class="detail-value">${r.clientPhone||`<span style="color:var(--muted)">—</span>`}</div>
+            </div>
+            <div class="detail-field">
+              <div class="detail-label">📅 Deadline</div>
+              <div class="detail-value">${r.deadline?deadlineRv(r.deadline):`<span style="color:var(--muted)">—</span>`}</div>
+            </div>
+            <div class="detail-field">
+              <div class="detail-label">👤 Freelance assigné</div>
+              <div class="detail-value">${fl?`<div style="display:flex;align-items:center;gap:8px">${mkAv(fl,24)}<span>${fl.name}</span></div>`:`<span style="color:var(--muted);font-style:italic">Non assigné</span>`}</div>
+            </div>
+            <div class="detail-field">
+              <div class="detail-label">🕒 Créé le</div>
+              <div class="detail-value">${fmtFull(r.createdAt)}</div>
+            </div>
+            ${r.deliveryUrl?`<div class="detail-field full">
+              <div class="detail-label">🚀 Lien de livraison</div>
+              <div class="detail-value"><a href="${r.deliveryUrl}" target="_blank" style="color:var(--green);text-decoration:underline;word-break:break-all">${r.deliveryUrl}</a></div>
+            </div>`:""}
+            <div class="detail-divider"></div>
+            ${r.revisionAspect?`<div class="detail-field full">
+              <div class="detail-label">🎨 Aspect du site</div>
+              <div class="detail-desc">${r.revisionAspect}</div>
+            </div>`:""}
+            ${r.revisionContent?`<div class="detail-field full">
+              <div class="detail-label">📄 Contenu du site</div>
+              <div class="detail-desc">${r.revisionContent}</div>
+            </div>`:""}
+            ${r.revisionText?`<div class="detail-field full">
+              <div class="detail-label">✍️ Contenu textuel</div>
+              <div class="detail-desc">${r.revisionText}</div>
+            </div>`:""}
+            ${r.revisionOther?`<div class="detail-field full">
+              <div class="detail-label">📝 Autre</div>
+              <div class="detail-desc">${r.revisionOther}</div>
+            </div>`:""}
+          </div>
+        </div>
+        ${S.role==="admin"?`<div class="detail-actions">
+          <button class="btn btn-sm btn-blue" onclick="closeDetail();openAssign('${r.id}','revision')">👤 ${tr.assign}</button>
+          <button class="btn btn-sm btn-ghost" onclick="closeDetail();openRevisionSheet('${r.id}')">✏️ ${tr.edit}</button>
+          <button class="btn btn-sm btn-purple" onclick="closeDetail();openComments('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">💬 ${tr.comments}</button>
+          <button class="btn btn-sm btn-orange" onclick="closeDetail();openHistory('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">📋 ${S.lang==="fr"?"Historique":"History"}</button>
+          ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="closeDetail();sendWA('revision','${r.id}')">📲 WhatsApp</button>`:""}
+        </div>`:""}
+      </div>
+    </div>`;
 }
 
 // ── SHEET ─────────────────────────────────────────────────────────

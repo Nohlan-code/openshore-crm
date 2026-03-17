@@ -888,7 +888,8 @@ function renderKanban(items, type){
     </div><div class="kanban-col-body">`;
     col.forEach(item=>{
       const fl=S.freelancers.find(f=>f.id===item.freelanceId);
-      h+=`<div class="kanban-card" style="cursor:pointer" onclick="${type==='order'?`openOrderDetail('${item.id}')`:`openRevisionDetail('${item.id}')`}">
+      const kOnclick=type==="order"?"openOrderDetail('"+item.id+"')":" openRevisionDetail('"+item.id+"')";
+      h+=`<div class="kanban-card" style="cursor:pointer" onclick="${kOnclick}">
         <div style="font-weight:700;font-size:12px;margin-bottom:4px">${item.clientName}</div>
         ${type==="order"&&item.budget?`<div style="font-size:10px;color:var(--accent);font-weight:800">${item.budget}€</div>`:""}
         ${type==="revision"&&item.projectName?`<div style="font-size:10px;color:var(--teal)">${item.projectName}</div>`:""}

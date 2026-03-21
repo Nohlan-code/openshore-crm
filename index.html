@@ -194,6 +194,18 @@ select.inp{cursor:pointer}
 .detail-divider{height:1px;background:var(--border);margin:4px 0 16px;grid-column:1/-1;}
 .detail-desc{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 16px;font-size:13px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:300px;overflow-y:auto;}
 .detail-actions{display:flex;gap:8px;flex-wrap:wrap;padding:14px 26px 22px;border-top:1px solid var(--border);background:var(--dim);}
+.detail-drawer-wrap{position:fixed;inset:0;z-index:1000}.detail-drawer-bg{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:fadein .2s;}.detail-drawer{position:absolute;top:0;right:0;bottom:0;width:100%;max-width:520px;background:var(--card);border-left:1px solid var(--border);box-shadow:var(--shadow-xl);overflow-y:auto;display:flex;flex-direction:column;animation:drawerIn .28s cubic-bezier(.16,1,.3,1);}
+@keyframes drawerIn{from{transform:translateX(110%)}to{transform:none}}
+@media(max-width:599px){.detail-drawer{max-width:100%}}
+.tl-group{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:12px;overflow:hidden;transition:border-color .18s;}
+.tl-group:hover{border-color:rgba(245,166,35,.3)}
+.tl-order-row{padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .15s;}
+.tl-order-row:hover{background:var(--card-hover)}.tl-chevron{font-size:11px;color:var(--text-3);transition:transform .2s;flex-shrink:0;width:16px;text-align:center;}
+.tl-chevron.open{transform:rotate(90deg)}.tl-revs{display:none;border-top:1px solid var(--border-subtle)}.tl-revs.open{display:block}
+.tl-rev-row{padding:10px 16px 10px 44px;border-bottom:1px solid var(--border-subtle);cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:10px;}
+.tl-rev-row:last-child{border-bottom:none}.tl-rev-row:hover{background:var(--card-hover)}
+.tl-add-rev{padding:10px 16px 10px 44px;font-size:11px;color:var(--text-3);border-top:1px solid var(--border-subtle);cursor:pointer;}.tl-add-rev:hover{color:var(--accent)}
+.badge-overdue{display:inline-flex;align-items:center;gap:3px;background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.35);border-radius:20px;padding:2px 8px;font-size:10px;font-weight:800;}
 .search-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:300;display:flex;flex-direction:column;align-items:center;padding:56px 20px 20px;animation:fadein .15s;}
 .search-box{width:100%;max-width:580px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-xl);animation:slidedown .2s cubic-bezier(.16,1,.3,1);}
 @keyframes slidedown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
@@ -353,6 +365,7 @@ let S = {
   role:null, me:null, lang:"fr", tab:"dashboard",
   oFilter:"all", oSearch:"", oView:"list", oFlFilter:"all",
   rvFilter:"all", rvSearch:"", rvView:"list", rvFlFilter:"all",
+  tlOpen:{},
   orders:[], freelancers:[], tools:[], revisions:[],
   syncTimer:null, theme:"dark",
 };
@@ -871,7 +884,9 @@ function renderOrders(){
   let h=`<div class="screen">`;
   h+=`<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap">
     <input class="inp" style="flex:1;min-width:140px" placeholder="${tr.search}" value="${S.oSearch}" oninput="S.oSearch=this.value;renderOrders()"/>
-    <button class="btn btn-ghost btn-sm" onclick="S.oView=S.oView==='list'?'kanban':'list';renderOrders()">${S.oView==="list"?"🔲":"☰"}</button>
+    <button class="btn btn-ghost btn-sm${S.oView==='list'?' active':''}" onclick="S.oView='list';renderOrders()" title="Liste">☰</button>
+    <button class="btn btn-ghost btn-sm${S.oView==='kanban'?' active':''}" onclick="S.oView='kanban';renderOrders()" title="Kanban">🔲</button>
+    <button class="btn btn-ghost btn-sm${S.oView==='timeline'?' active':''}" onclick="S.oView='timeline';renderOrders()" title="Timeline">🗂</button>
     ${S.role==="admin"?`<button class="btn btn-ghost btn-sm" onclick="exportOrdersCsv()">⬇ CSV</button><button class="btn btn-p btn-sm" onclick="openOrderSheet(null)">${tr.addOrder}</button>`:""}
   </div>`;
   // Filtre freelance (admin)
@@ -882,6 +897,7 @@ function renderOrders(){
   }
   h+=`<div class="filters">${["all",...Object.keys(tr.sl)].map(s=>`<button class="fbtn${S.oFilter===s?" active":""}" onclick="S.oFilter='${s}';renderOrders()">${s==="all"?tr.all:tr.sl[s]}</button>`).join("")}</div>`;
   if(S.oView==="kanban"){ h+=renderKanban(list,"order"); }
+  else if(S.oView==="timeline"){ h+=renderTimeline(list); }
   else {
     if(!list.length) h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted);font-size:13px">${S.role==="freelancer"?tr.noMissions:tr.noOrders}</div></div>`;
     list.forEach(o=>{ h+=renderOrderCard(o); });
@@ -893,9 +909,11 @@ function renderOrderCard(o){
   const tr=t();
   const fl=S.freelancers.find(f=>f.id===o.freelanceId);
   const stale=["assigned","inprogress"].includes(o.status)&&(Date.now()-new Date(o.createdAt))/864e5>STALE_DAYS;
-  return `<div class="card" style="margin-bottom:10px${stale?";border-color:rgba(255,152,0,.5)":""}">
+  const overdue=!["done","delivered","cancelled"].includes(o.status)&&o.deadline&&new Date(o.deadline)<new Date();
+  const borderColor=overdue?"rgba(239,68,68,.5)":stale?"rgba(255,152,0,.5)":"";
+  return `<div class="card" style="margin-bottom:10px${borderColor?";border-color:"+borderColor:""}">
     <div class="card-h" style="cursor:pointer" onclick="openOrderDetail('${o.id}')"><div style="flex:1;min-width:0">
-      <div style="font-weight:800;font-size:14px">${o.clientName}${stale?` <span style="font-size:9px;color:var(--orange)">⏰ Relance</span>`:""}</div>
+      <div style="font-weight:800;font-size:14px">${o.clientName}${overdue?` <span class="badge-overdue">⛔ Dépassé</span>`:stale?` <span style="font-size:9px;color:var(--orange)">⏰ Relance</span>`:""}</div>
       ${o.company?`<div style="font-size:10px;color:var(--accent);font-weight:700">${o.company}</div>`:""}
       <div style="font-size:10px;color:var(--muted)">${[o.clientEmail,o.clientPhone].filter(Boolean).join(" · ")}</div>
     </div>
@@ -958,6 +976,72 @@ function renderKanban(items, type){
   });
   h+=`</div>`;
   return h;
+}
+function renderTimeline(list){
+  const tr=t();
+  if(!list.length) return `<div class="card"><div style="padding:32px;text-align:center;color:var(--muted);font-size:13px">${tr.noOrders}</div></div>`;
+  let h="";
+  list.forEach(o=>{
+    const fl=S.freelancers.find(f=>f.id===o.freelanceId);
+    const stColor=STATUS_COLORS[o.status]||"#58A6FF";
+    const stLabel=(tr.sl||{})[o.status]||o.status;
+    const overdue=!["done","delivered","cancelled"].includes(o.status)&&o.deadline&&new Date(o.deadline)<new Date();
+    const linkedRevs=S.revisions.filter(r=>r.clientName===o.clientName);
+    const openState=S.tlOpen&&S.tlOpen[o.id];
+    const revCount=linkedRevs.length;
+    h+=`<div class="tl-group" style="${overdue?"border-color:rgba(239,68,68,.5)":""}">
+      <div class="tl-order-row" onclick="toggleTl('${o.id}')">
+        <span class="tl-chevron${openState?" open":""}">▶</span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span style="font-weight:800;font-size:14px">${o.clientName}</span>
+            ${overdue?`<span class="badge-overdue">⛔ Dépassé</span>`:""}
+            <span class="badge" style="background:${stColor}20;color:${stColor};border:1px solid ${stColor}40;font-size:10px">${stLabel}</span>
+            ${o.budget?`<span style="font-weight:900;font-size:12px;color:var(--accent)">${o.budget}€</span>`:""}
+          </div>
+          <div style="font-size:11px;color:var(--text-2);margin-top:2px">
+            ${o.projectType||""}${o.projectType&&(o.deadline||fl)?" · ":""}${o.deadline?`📅 ${fmt(o.deadline)}`:""}
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+          ${revCount?`<span style="font-size:10px;background:var(--teal)20;color:var(--teal);border:1px solid var(--teal)40;border-radius:20px;padding:2px 8px;font-weight:800">🔁 ${revCount}</span>`:`<span style="font-size:10px;color:var(--text-3)">0 rév.</span>`}
+          <button class="btn btn-sm btn-ghost" style="padding:4px 8px" onclick="event.stopPropagation();openOrderDetail('${o.id}')">👁</button>
+          ${S.role==="admin"?`<button class="btn btn-sm btn-blue" style="padding:4px 8px" onclick="event.stopPropagation();openAssign('${o.id}','order')">👤</button>`:""}
+          ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" style="padding:4px 8px" onclick="event.stopPropagation();sendWA('order','${o.id}')">📲</button>`:""}
+        </div>
+      </div>
+      <div class="tl-revs${openState?" open":""}">
+        ${linkedRevs.length?linkedRevs.map(rv=>{
+          const rvFl=S.freelancers.find(f=>f.id===rv.freelanceId);
+          const rvColor=STATUS_COLORS[rv.status]||"#58A6FF";
+          const rvLabel=(tr.rl||{})[rv.status]||rv.status;
+          const rvOverdue=!["done","cancelled"].includes(rv.status)&&rv.deadline&&new Date(rv.deadline)<new Date();
+          return `<div class="tl-rev-row" onclick="openRevisionDetail('${rv.id}')">
+            <span style="font-size:14px;color:var(--teal)">🔁</span>
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                <span style="font-size:12px;font-weight:700">${rv.projectName||"Révision"}</span>
+                ${rvOverdue?`<span class="badge-overdue" style="font-size:9px;padding:1px 6px">⛔ Dépassé</span>`:""}
+                <span class="badge" style="background:${rvColor}20;color:${rvColor};border:1px solid ${rvColor}40;font-size:9px">${rvLabel}</span>
+              </div>
+              <div style="font-size:10px;color:var(--text-2);margin-top:1px">
+                ${rv.deadline?`📅 ${deadlineRv(rv.deadline)}`:""}
+              </div>
+            </div>
+            ${S.role==="admin"?`<button class="btn btn-sm btn-blue" style="padding:4px 8px" onclick="event.stopPropagation();openAssign('${rv.id}','revision')">👤</button>`:""}
+            ${rvFl&&rvFl.phone?`<button class="btn btn-sm btn-wa" style="padding:4px 8px" onclick="event.stopPropagation();sendWA('revision','${rv.id}')">📲</button>`:""}
+          </div>`;
+        }).join(""):""}
+        ${S.role==="admin"?`<div class="tl-add-rev" onclick="openRevisionSheet(null)">＋ Ajouter une révision pour ${o.clientName}</div>`:""}
+      </div>
+    </div>`;
+  });
+  return h;
+}
+function toggleTl(id){
+  if(!S.tlOpen)S.tlOpen={};
+  S.tlOpen[id]=!S.tlOpen[id];
+  renderOrders();
 }
 async function chgOrderStatus(id,status){
   try{const u=await api("PUT",`/orders/${id}`,{status,changedBy:S.me?.name||"Admin"});S.orders=S.orders.map(o=>o.id===id?u:o);renderOrders();buildNav();}
@@ -1060,12 +1144,13 @@ function renderRevisionCard(r){
   const tr=t();
   const fl=S.freelancers.find(f=>f.id===r.freelanceId);
   const ms=r.deadline?new Date(r.deadline)-Date.now():null;
-  const isUrgent=ms!==null&&ms<7200000;
-  const bc=isUrgent?"rgba(248,81,73,.6)":ms!==null&&ms<21600000?"rgba(240,165,0,.4)":"rgba(38,198,218,.25)";
+  const isOverdue=!["done","cancelled"].includes(r.status)&&ms!==null&&ms<0;
+  const isUrgent=!isOverdue&&ms!==null&&ms<7200000;
+  const bc=isOverdue?"rgba(239,68,68,.7)":isUrgent?"rgba(248,81,73,.6)":ms!==null&&ms<21600000?"rgba(240,165,0,.4)":"rgba(38,198,218,.25)";
   return `<div class="card" style="margin-bottom:10px;border-color:${bc}">
     <div class="card-h" style="cursor:pointer" onclick="openRevisionDetail('${r.id}')">
       <div style="flex:1;min-width:0">
-        <div style="font-weight:800;font-size:14px">${r.clientName}</div>
+        <div style="font-weight:800;font-size:14px">${r.clientName}${isOverdue?` <span class="badge-overdue">⛔ Dépassé</span>`:""}</div>
         ${r.projectName?`<div style="font-size:11px;color:var(--teal);font-weight:700">📁 ${r.projectName}</div>`:""}
         <div style="font-size:10px;color:var(--muted)">${[r.clientEmail,r.clientPhone].filter(Boolean).join(" · ")}</div>
       </div>
@@ -1578,8 +1663,9 @@ function openOrderDetail(id){
   const dColor=dDays===null?"var(--muted)":dDays<=0?"var(--red)":dDays<=2?"var(--accent)":"var(--muted)";
 
   el("detail-wrap").innerHTML=`
-    <div class="modal-bg" onclick="if(event.target.classList.contains('modal-bg'))closeDetail()">
-      <div class="detail-modal">
+    <div class="detail-drawer-wrap">
+      <div class="detail-drawer-bg" onclick="closeDetail()"></div>
+      <div class="detail-drawer">
         <div class="detail-header">
           <div class="detail-header-info" style="flex:1;min-width:0">
             <h2>${o.clientName}</h2>
@@ -1648,8 +1734,9 @@ function openRevisionDetail(id){
   const stLabel=(tr.rl||{})[r.status]||r.status;
 
   el("detail-wrap").innerHTML=`
-    <div class="modal-bg" onclick="if(event.target.classList.contains('modal-bg'))closeDetail()">
-      <div class="detail-modal">
+    <div class="detail-drawer-wrap">
+      <div class="detail-drawer-bg" onclick="closeDetail()"></div>
+      <div class="detail-drawer">
         <div class="detail-header">
           <div class="detail-header-info" style="flex:1;min-width:0">
             <h2>${r.clientName}</h2>

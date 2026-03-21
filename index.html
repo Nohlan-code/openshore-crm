@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>Openshore — Workspace</title>
+<title>Openshore â Workspace</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -257,15 +257,15 @@ select.inp{cursor:pointer}
         <div class="field"><label class="lbl" id="a-el"></label><input id="a-email" class="inp" type="email" placeholder="votre@email.com" onkeydown="if(event.key==='Enter')tryLogin()"/></div>
         <div class="field"><label class="lbl" id="a-pl"></label>
           <div style="position:relative">
-            <input id="a-pw" class="inp" type="password" placeholder="••••••••" style="padding-right:44px" onkeydown="if(event.key==='Enter')tryLogin()"/>
-            <button onclick="togglePw('a-pw',this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:15px;color:var(--muted);cursor:pointer">👁</button>
+            <input id="a-pw" class="inp" type="password" placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" style="padding-right:44px" onkeydown="if(event.key==='Enter')tryLogin()"/>
+            <button onclick="togglePw('a-pw',this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:15px;color:var(--muted);cursor:pointer">ð</button>
           </div>
         </div>
         <div id="a-err" class="alert alert-e" style="display:none"></div>
         <button class="btn btn-p btn-full" id="a-btn" onclick="tryLogin()"></button>
       </div>
     </div>
-    <button onclick="openAdminModal()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:12px;color:var(--muted);padding:12px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">🔐 <span id="a-admin-lbl"></span></button>
+    <button onclick="openAdminModal()" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:12px;color:var(--muted);padding:12px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">ð <span id="a-admin-lbl"></span></button>
   </div>
 </div>
 
@@ -273,14 +273,14 @@ select.inp{cursor:pointer}
 <div id="admin-modal" class="modal-bg" style="display:none">
   <div class="modal">
     <div style="text-align:center;margin-bottom:20px">
-      <div style="font-size:36px;margin-bottom:8px">🔐</div>
+      <div style="font-size:36px;margin-bottom:8px">ð</div>
       <h3 id="am-title" style="font-size:17px;font-weight:800"></h3>
       <p id="am-sub" style="color:var(--muted);font-size:12px;margin-top:5px"></p>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px">
       <div style="position:relative">
-        <input id="am-pw" class="inp" type="password" placeholder="••••••••" style="padding-right:44px" onkeydown="if(event.key==='Enter')tryAdmin()"/>
-        <button onclick="togglePw('am-pw',this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:15px;color:var(--muted);cursor:pointer">👁</button>
+        <input id="am-pw" class="inp" type="password" placeholder="â¢â¢â¢â¢â¢â¢â¢â¢" style="padding-right:44px" onkeydown="if(event.key==='Enter')tryAdmin()"/>
+        <button onclick="togglePw('am-pw',this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:15px;color:var(--muted);cursor:pointer">ð</button>
       </div>
       <div id="am-err" class="alert alert-e" style="display:none"></div>
       <button class="btn btn-p btn-full" onclick="tryAdmin()" id="am-btn"></button>
@@ -302,10 +302,10 @@ select.inp{cursor:pointer}
       <div class="sb-langs">
         <button class="btn btn-sm btn-p" id="sl-fr" onclick="setLang('fr')">FR</button>
         <button class="btn btn-sm btn-ghost" id="sl-en" onclick="setLang('en')">EN</button>
-        <button class="btn btn-sm btn-ghost" onclick="toggleTheme()" id="theme-btn" style="margin-left:auto">🌙</button>
+        <button class="btn btn-sm btn-ghost" onclick="toggleTheme()" id="theme-btn" style="margin-left:auto">ð</button>
       </div>
-      <button class="btn btn-ghost btn-full btn-sm" style="margin-bottom:4px" onclick="openSearch()">🔍 <span id="sb-search-lbl">Recherche</span> <span class="kbd">K</span></button>
-      <button class="btn btn-ghost btn-full btn-sm" onclick="logout()">⎋ <span id="sb-logout"></span></button>
+      <button class="btn btn-ghost btn-full btn-sm" style="margin-bottom:4px" onclick="openSearch()">ð <span id="sb-search-lbl">Recherche</span> <span class="kbd">K</span></button>
+      <button class="btn btn-ghost btn-full btn-sm" onclick="logout()">â <span id="sb-logout"></span></button>
     </div>
   </nav>
   <div id="content">
@@ -315,10 +315,10 @@ select.inp{cursor:pointer}
         <div style="line-height:1.1"><div style="font-size:13px;font-weight:900">Openshore</div><div style="font-size:8px;color:var(--accent);font-weight:700;letter-spacing:1.5px;text-transform:uppercase">Workspace</div></div>
       </div>
       <div class="tb-right">
-        <button onclick="openSearch()" style="background:var(--dim);border:1px solid var(--border);border-radius:8px;color:var(--muted);padding:5px 10px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px">🔍</button>
-        <button onclick="toggleTheme()" style="background:none;border:none;font-size:18px;cursor:pointer;padding:4px" id="theme-btn-tb">🌙</button>
+        <button onclick="openSearch()" style="background:var(--dim);border:1px solid var(--border);border-radius:8px;color:var(--muted);padding:5px 10px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px">ð</button>
+        <button onclick="toggleTheme()" style="background:none;border:none;font-size:18px;cursor:pointer;padding:4px" id="theme-btn-tb">ð</button>
         <span id="tb-role"></span>
-        <button onclick="logout()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px">⎋</button>
+        <button onclick="logout()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px">â</button>
       </div>
     </div>
     <div id="page"></div>
@@ -330,10 +330,10 @@ select.inp{cursor:pointer}
 <div id="search-overlay" style="display:none">
   <div class="search-overlay" onclick="if(event.target.classList.contains('search-overlay'))closeSearch()">
     <div class="search-box">
-      <input class="search-inp" id="search-inp" placeholder="🔍 Rechercher un client, freelance..." oninput="doSearch(this.value)" onkeydown="if(event.key==='Escape')closeSearch()"/>
+      <input class="search-inp" id="search-inp" placeholder="ð Rechercher un client, freelance..." oninput="doSearch(this.value)" onkeydown="if(event.key==='Escape')closeSearch()"/>
       <div class="search-results" id="search-results"></div>
     </div>
-    <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.4)">Appuie sur <span class="kbd">Echap</span> pour fermer · <span class="kbd">K</span> pour ouvrir</div>
+    <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.4)">Appuie sur <span class="kbd">Echap</span> pour fermer Â· <span class="kbd">K</span> pour ouvrir</div>
   </div>
 </div>
 
@@ -341,13 +341,13 @@ select.inp{cursor:pointer}
 <div id="detail-wrap"></div>
 
 <script>
-// Mot de passe admin vérifié côté serveur via /auth/admin — plus de mot de passe dans le code
+// Mot de passe admin vÃ©rifiÃ© cÃ´tÃ© serveur via /auth/admin â plus de mot de passe dans le code
 const API            = "https://openshore-webhook-production.up.railway.app";
 const FORM_ORDERS    = "https://form.typeform.com/to/rJdfntNq";
 const FORM_REVISIONS = "";
 
 const STATUS_COLORS = {new:"#58A6FF",assigned:"#BC8CFF",inprogress:"#F0A500",review:"#FF9800",done:"#3FB950",cancelled:"#F85149"};
-const STALE_DAYS    = 5; // Nombre de jours sans changement pour déclencher une alerte
+const STALE_DAYS    = 5; // Nombre de jours sans changement pour dÃ©clencher une alerte
 
 let S = {
   role:null, me:null, lang:"fr", tab:"dashboard",
@@ -359,49 +359,49 @@ let S = {
 
 const T = {
 fr:{
-  login:"Bienvenue", loginSub:"Connectez-vous à votre espace",
+  login:"Bienvenue", loginSub:"Connectez-vous Ã  votre espace",
   emailL:"Email", pwL:"Mot de passe", loginBtn:"Se connecter",
-  adminBtn:"Accès Administrateur", adminTitle:"Espace Admin", adminSub:"Entrez le mot de passe",
+  adminBtn:"AccÃ¨s Administrateur", adminTitle:"Espace Admin", adminSub:"Entrez le mot de passe",
   wrongPw:"Identifiants incorrects.", wrongAdmin:"Mot de passe incorrect.",
-  cancel:"Annuler", save:"Sauvegarder", create:"Créer", add:"Ajouter", edit:"Modifier", del:"Supprimer",
-  logout:"Déconnexion", admin:"Admin", freelancer:"Freelance",
-  dashboard:"Dashboard", orders:"Commandes", revisions:"Révisions",
+  cancel:"Annuler", save:"Sauvegarder", create:"CrÃ©er", add:"Ajouter", edit:"Modifier", del:"Supprimer",
+  logout:"DÃ©connexion", admin:"Admin", freelancer:"Freelance",
+  dashboard:"Dashboard", orders:"Commandes", revisions:"RÃ©visions",
   freelancers:"Freelances", tools:"Outils", typeform:"Typeform", billing:"Facturation", clients:"Clients",
-  totalOrders:"Commandes", inProgress:"En cours", delivered:"Livrées", activeFl:"Freelances",
-  totalRevisions:"Révisions", rvOpen:"En attente",
-  recentOrders:"Commandes récentes", recentRevisions:"Révisions urgentes", flLoad:"Charge équipe",
-  staleAlert:"⏰ Missions sans activité depuis +5j",
-  noOrders:"Aucune commande.", noRevisions:"Aucune révision.", noMissions:"Aucune mission assignée.", noClients:"Aucun client.",
-  addOrder:"+ Commande", addRevision:"+ Révision", addFl:"+ Ajouter", addTool:"+ Outil",
-  search:"🔍 Rechercher...", searchGlobal:"Recherche globale", all:"Tous", allFl:"Tous les freelances",
-  assign:"Assigner", unassign:"Désassigner", assignTo:"Assigner à", assignSub:"Choisissez un freelance :",
+  totalOrders:"Commandes", inProgress:"En cours", delivered:"LivrÃ©es", activeFl:"Freelances",
+  totalRevisions:"RÃ©visions", rvOpen:"En attente",
+  recentOrders:"Commandes rÃ©centes", recentRevisions:"RÃ©visions urgentes", flLoad:"Charge Ã©quipe",
+  staleAlert:"â° Missions sans activitÃ© depuis +5j",
+  noOrders:"Aucune commande.", noRevisions:"Aucune rÃ©vision.", noMissions:"Aucune mission assignÃ©e.", noClients:"Aucun client.",
+  addOrder:"+ Commande", addRevision:"+ RÃ©vision", addFl:"+ Ajouter", addTool:"+ Outil",
+  search:"ð Rechercher...", searchGlobal:"Recherche globale", all:"Tous", allFl:"Tous les freelances",
+  assign:"Assigner", unassign:"DÃ©sassigner", assignTo:"Assigner Ã ", assignSub:"Choisissez un freelance :",
   newOrder:"Nouvelle commande", editOrder:"Modifier la commande",
-  newRevision:"Nouvelle révision", editRevision:"Modifier la révision",
+  newRevision:"Nouvelle rÃ©vision", editRevision:"Modifier la rÃ©vision",
   newFl:"Nouveau freelance", editFl:"Modifier le freelance",
   clientN:"Nom client", clientE:"Email client", projType:"Type de projet",
-  budget:"Budget (€)", deadline:"Deadline", desc:"Description", company:"Entreprise",
+  budget:"Budget (â¬)", deadline:"Deadline", desc:"Description", company:"Entreprise",
   projectName:"Nom du projet / site",
   revAspect:"Aspect du site", revContent:"Contenu du site", revText:"Contenu textuel", revOther:"Autre chose",
-  deliveryUrl:"🚀 Lien de livraison (Drive, Loom...)",
-  deactivate:"Désactiver", reactivate:"Réactiver",
+  deliveryUrl:"ð Lien de livraison (Drive, Loom...)",
+  deactivate:"DÃ©sactiver", reactivate:"RÃ©activer",
   fullName:"Nom complet", email:"Email", spec:"Niveau", phone:"WhatsApp", pwFl:"Mot de passe",
-  notesLbl:"Notes internes (admin)", avatarUrlLbl:"Photo de profil (URL image)",
-  toolsLib:"Ressources partagées avec les freelances.",
-  icon:"Icône", name:"Nom", url:"URL", cat:"Catégorie", shortDesc:"Description",
-  myOnlyRev:"Vous ne voyez que vos révisions assignées.",
+  notesLbl:"Notes internes (admin)", waKeyLbl:"🤖 Clé CallMeBot (notifs WA auto)", avatarUrlLbl:"Photo de profil (URL image)",
+  toolsLib:"Ressources partagÃ©es avec les freelances.",
+  icon:"IcÃ´ne", name:"Nom", url:"URL", cat:"CatÃ©gorie", shortDesc:"Description",
+  myOnlyRev:"Vous ne voyez que vos rÃ©visions assignÃ©es.",
   comments:"Commentaires", addComment:"Ajouter un commentaire...", send:"Envoyer",
   history:"Historique", noHistory:"Aucun historique.",
-  avgDelay:"Délai moyen", missions:"Missions", billingTitle:"Récap mensuel",
+  avgDelay:"DÃ©lai moyen", missions:"Missions", billingTitle:"RÃ©cap mensuel",
   exportCsv:"Exporter CSV",
   listView:"Liste", kanbanView:"Kanban",
   loading:"Chargement...",
-  sl:{new:"Nouveau",assigned:"Assigné",inprogress:"En cours",review:"En révision",done:"Terminé",cancelled:"Annulé"},
-  rl:{new:"Nouveau",assigned:"Assigné",inprogress:"En cours",done:"Terminé",cancelled:"Annulé"},
+  sl:{new:"Nouveau",assigned:"AssignÃ©",inprogress:"En cours",review:"En rÃ©vision",done:"TerminÃ©",cancelled:"AnnulÃ©"},
+  rl:{new:"Nouveau",assigned:"AssignÃ©",inprogress:"En cours",done:"TerminÃ©",cancelled:"AnnulÃ©"},
   ptypes:["Landing page","Site vitrine","E-commerce","Site professionnel","Blog","App web"],
   cats:["Fonts","Icons","Plugins","Copywriting","Checklist","How to Deliver","Autre"],
   specs:["Niveau 1","Niveau 2","Niveau 3"],
-  waOrder:(n,c,p)=>`Bonjour ${n} 👋\n\nNouvelle mission sur Openshore :\n🎯 *Client :* ${c}\n📦 *Projet :* ${p}\n\nConnectez-vous pour voir les détails.\n— Openshore`,
-  waRevision:(n,c,p)=>`Bonjour ${n} 👋\n\nNouvelle révision sur Openshore :\n🎯 *Client :* ${c}\n📝 *Projet :* ${p}\n⏰ *Deadline : 24h*\n\nConnectez-vous pour voir les détails.\n— Openshore`,
+  waOrder:(n,c,p)=>`Bonjour ${n} ð\n\nNouvelle mission sur Openshore :\nð¯ *Client :* ${c}\nð¦ *Projet :* ${p}\n\nConnectez-vous pour voir les dÃ©tails.\nâ Openshore`,
+  waRevision:(n,c,p)=>`Bonjour ${n} ð\n\nNouvelle rÃ©vision sur Openshore :\nð¯ *Client :* ${c}\nð *Projet :* ${p}\nâ° *Deadline : 24h*\n\nConnectez-vous pour voir les dÃ©tails.\nâ Openshore`,
 },
 en:{
   login:"Welcome", loginSub:"Log in to your workspace",
@@ -415,23 +415,23 @@ en:{
   totalOrders:"Orders", inProgress:"In progress", delivered:"Delivered", activeFl:"Freelancers",
   totalRevisions:"Revisions", rvOpen:"Pending",
   recentOrders:"Recent orders", recentRevisions:"Urgent revisions", flLoad:"Team workload",
-  staleAlert:"⏰ Missions with no activity for +5 days",
+  staleAlert:"â° Missions with no activity for +5 days",
   noOrders:"No orders.", noRevisions:"No revisions.", noMissions:"No missions assigned.", noClients:"No clients.",
   addOrder:"+ Order", addRevision:"+ Revision", addFl:"+ Add", addTool:"+ Tool",
-  search:"🔍 Search...", searchGlobal:"Global search", all:"All", allFl:"All freelancers",
+  search:"ð Search...", searchGlobal:"Global search", all:"All", allFl:"All freelancers",
   assign:"Assign", unassign:"Unassign", assignTo:"Assign to", assignSub:"Choose a freelancer:",
   newOrder:"New order", editOrder:"Edit order",
   newRevision:"New revision", editRevision:"Edit revision",
   newFl:"New freelancer", editFl:"Edit freelancer",
   clientN:"Client name", clientE:"Client email", projType:"Project type",
-  budget:"Budget (€)", deadline:"Deadline", desc:"Description", company:"Company",
+  budget:"Budget (â¬)", deadline:"Deadline", desc:"Description", company:"Company",
   projectName:"Project / site name",
   revAspect:"Site aspect", revContent:"Site content", revText:"Text content", revOther:"Other",
-  deliveryUrl:"🚀 Delivery link (Drive, Loom...)",
+  deliveryUrl:"ð Delivery link (Drive, Loom...)",
   deactivate:"Deactivate", reactivate:"Reactivate",
   fullName:"Full name", email:"Email", spec:"Level", phone:"WhatsApp", pwFl:"Password",
   notesLbl:"Internal notes (admin)", avatarUrlLbl:"Profile photo (image URL)",
-  toolsLib:"Resources shared with freelancers.",
+  towaKeyLbl:"🤖 CallMeBot key (auto WA notifs)", olsLib:"Resources shared with freelancers.",
   icon:"Icon", name:"Name", url:"URL", cat:"Category", shortDesc:"Description",
   myOnlyRev:"You only see your assigned revisions.",
   comments:"Comments", addComment:"Add a comment...", send:"Send",
@@ -445,19 +445,19 @@ en:{
   ptypes:["Landing page","Showcase site","E-commerce","Pro site","Blog","Web app"],
   cats:["Fonts","Icons","Plugins","Copywriting","Checklist","How to Deliver","Other"],
   specs:["Level 1","Level 2","Level 3"],
-  waOrder:(n,c,p)=>`Hello ${n} 👋\n\nNew mission on Openshore:\n🎯 *Client:* ${c}\n📦 *Project:* ${p}\n\nLog in to see the details.\n— Openshore`,
-  waRevision:(n,c,p)=>`Hello ${n} 👋\n\nNew revision on Openshore:\n🎯 *Client:* ${c}\n📝 *Project:* ${p}\n⏰ *Deadline: 24h*\n\nLog in to see the details.\n— Openshore`,
+  waOrder:(n,c,p)=>`Hello ${n} ð\n\nNew mission on Openshore:\nð¯ *Client:* ${c}\nð¦ *Project:* ${p}\n\nLog in to see the details.\nâ Openshore`,
+  waRevision:(n,c,p)=>`Hello ${n} ð\n\nNew revision on Openshore:\nð¯ *Client:* ${c}\nð *Project:* ${p}\nâ° *Deadline: 24h*\n\nLog in to see the details.\nâ Openshore`,
 }};
 const t = () => T[S.lang];
 
-// ── HELPERS ──────────────────────────────────────────────────────
+// ââ HELPERS ââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const el = id => document.getElementById(id);
 function uid(){ return Math.random().toString(36).slice(2,9) }
 function d7(){ return new Date(Date.now()+7*864e5).toISOString().slice(0,10) }
-function fmt(iso){ return iso ? new Date(iso).toLocaleDateString("fr-FR",{day:"2-digit",month:"short"}) : "—" }
-function fmtFull(iso){ return iso ? new Date(iso).toLocaleString("fr-FR",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}) : "—" }
+function fmt(iso){ return iso ? new Date(iso).toLocaleDateString("fr-FR",{day:"2-digit",month:"short"}) : "â" }
+function fmtFull(iso){ return iso ? new Date(iso).toLocaleString("fr-FR",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}) : "â" }
 function showErr(id,msg){ const e=el(id); if(!e)return; e.textContent=msg; e.style.display="block"; setTimeout(()=>e.style.display="none",3500) }
-function togglePw(id,btn){ const i=el(id); i.type=i.type==="password"?"text":"password"; btn.textContent=i.type==="password"?"👁":"🙈" }
+function togglePw(id,btn){ const i=el(id); i.type=i.type==="password"?"text":"password"; btn.textContent=i.type==="password"?"ð":"ð" }
 function mkAv(fl, sz=36){
   if(fl?.avatarUrl) return `<div class="av" style="width:${sz}px;height:${sz}px"><img src="${fl.avatarUrl}" onerror="this.parentNode.innerHTML='${(fl.avatar||"?").replace(/'/g,"")}'"/></div>`;
   const ini = typeof fl==="string" ? fl : (fl?.avatar||"?");
@@ -468,23 +468,23 @@ function mkPill(lbl,c="#F0A500"){ return `<span class="pill" style="background:$
 function deadlineRv(iso){
   if(!iso)return"";
   const ms=new Date(iso)-Date.now(), h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000);
-  if(ms<=0) return `<span style="color:var(--red);font-weight:800">⚠️ Dépassée</span>`;
-  if(h<2)   return `<span style="color:var(--red);font-weight:800">🔴 ${h}h${String(m).padStart(2,"0")} restantes</span>`;
-  if(h<6)   return `<span style="color:var(--accent);font-weight:700">🟠 ${h}h${String(m).padStart(2,"0")} restantes</span>`;
-  return `<span style="color:var(--muted)">⏱ ${fmtFull(iso)}</span>`;
+  if(ms<=0) return `<span style="color:var(--red);font-weight:800">â ï¸ DÃ©passÃ©e</span>`;
+  if(h<2)   return `<span style="color:var(--red);font-weight:800">ð´ ${h}h${String(m).padStart(2,"0")} restantes</span>`;
+  if(h<6)   return `<span style="color:var(--accent);font-weight:700">ð  ${h}h${String(m).padStart(2,"0")} restantes</span>`;
+  return `<span style="color:var(--muted)">â± ${fmtFull(iso)}</span>`;
 }
 function deadlineOrder(iso){
   if(!iso)return"";
   const d=Math.ceil((new Date(iso)-Date.now())/864e5);
   const c=d<=0?"var(--red)":d<=2?"var(--accent)":"var(--muted)";
-  return `<span style="font-size:11px;color:${c};font-weight:${d<=2?"700":"400"}">⏱ ${fmt(iso)} (${d<=0?"Dépassé":"J-"+d})</span>`;
+  return `<span style="font-size:11px;color:${c};font-weight:${d<=2?"700":"400"}">â± ${fmt(iso)} (${d<=0?"DÃ©passÃ©":"J-"+d})</span>`;
 }
 function rvTypeTags(rv){
   let tags="";
-  if(rv.revisionAspect)  tags+=`<span class="rv-tag">🎨 Aspect</span>`;
-  if(rv.revisionContent) tags+=`<span class="rv-tag">📄 Contenu</span>`;
-  if(rv.revisionText)    tags+=`<span class="rv-tag">✍️ Texte</span>`;
-  if(rv.revisionOther)   tags+=`<span class="rv-tag">💬 Autre</span>`;
+  if(rv.revisionAspect)  tags+=`<span class="rv-tag">ð¨ Aspect</span>`;
+  if(rv.revisionContent) tags+=`<span class="rv-tag">ð Contenu</span>`;
+  if(rv.revisionText)    tags+=`<span class="rv-tag">âï¸ Texte</span>`;
+  if(rv.revisionOther)   tags+=`<span class="rv-tag">ð¬ Autre</span>`;
   return tags?`<div style="margin-bottom:8px">${tags}</div>`:"";
 }
 function showLoading(){ el("page").innerHTML=`<div class="spinner"><div class="spin"></div><div style="color:var(--muted);font-size:13px">${t().loading}</div></div>` }
@@ -506,7 +506,7 @@ function avgDelayDays(fid){
   return Math.round(total/doneO.length);
 }
 
-// ── THEME ─────────────────────────────────────────────────────────
+// ââ THEME âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 const LOGO_BLANC = "data:image/png;base64,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";
 const LOGO_NOIR  = "data:image/png;base64,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";
@@ -520,7 +520,7 @@ function updateLogos(theme){
 function toggleTheme(){
   S.theme=S.theme==="dark"?"light":"dark";
   document.body.classList.toggle("light",S.theme==="light"); updateLogos(S.theme);
-  const ico=S.theme==="light"?"☀️":"🌙";
+  const ico=S.theme==="light"?"âï¸":"ð";
   if(el("theme-btn"))el("theme-btn").textContent=ico;
   if(el("theme-btn-tb"))el("theme-btn-tb").textContent=ico;
   localStorage.setItem("theme",S.theme);
@@ -528,11 +528,11 @@ function toggleTheme(){
 function initTheme(){
   const saved=localStorage.getItem("theme")||"dark";
   S.theme=saved; document.body.classList.toggle("light",saved==="light");
-  const ico=saved==="light"?"☀️":"🌙";
+  const ico=saved==="light"?"âï¸":"ð";
   setTimeout(()=>{ if(el("theme-btn"))el("theme-btn").textContent=ico; if(el("theme-btn-tb"))el("theme-btn-tb").textContent=ico; updateLogos(saved); },100);
 }
 
-// ── API ── (timeout 15s + retry ×2) ─────────────────────────────
+// ââ API ââ (timeout 15s + retry Ã2) âââââââââââââââââââââââââââââ
 async function apiFetch(method,path,body,attempt=0){
   const ctrl=new AbortController();
   const tid=setTimeout(()=>ctrl.abort(),15000);
@@ -565,10 +565,10 @@ async function loadAll(){
   }catch(e){
     console.error("loadAll:",e);
     el("page").innerHTML=`<div style="padding:48px 20px;text-align:center">
-      <div style="font-size:40px;margin-bottom:14px">⚠️</div>
-      <div style="font-weight:800;font-size:16px;margin-bottom:8px">Impossible de charger les données</div>
-      <div style="color:var(--muted);font-size:12px;margin-bottom:22px">${e.message||"Erreur réseau — vérifiez votre connexion."}</div>
-      <button class="btn btn-p" onclick="loadAll().then(()=>{buildNav();renderPage();})">🔄 Réessayer</button>
+      <div style="font-size:40px;margin-bottom:14px">â ï¸</div>
+      <div style="font-weight:800;font-size:16px;margin-bottom:8px">Impossible de charger les donnÃ©es</div>
+      <div style="color:var(--muted);font-size:12px;margin-bottom:22px">${e.message||"Erreur rÃ©seau â vÃ©rifiez votre connexion."}</div>
+      <button class="btn btn-p" onclick="loadAll().then(()=>{buildNav();renderPage();})">ð RÃ©essayer</button>
     </div>`;
   }
 }
@@ -591,7 +591,7 @@ async function syncData(){
   }
 }
 
-// ── AUTH ──────────────────────────────────────────────────────────
+// ââ AUTH ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function setLang(l){
   S.lang=l;
   ["al","sl","tl"].forEach(p=>{
@@ -614,8 +614,8 @@ function updateAuthUI(){
 async function tryLogin(){
   const email=el("a-email").value.trim(), pw=el("a-pw").value;
   if(!email||!pw) return;
-  el("a-btn").textContent="⏳..."; el("a-btn").disabled=true;
-  const coldTimer=setTimeout(()=>showErr("a-err","⏳ Le serveur démarre, patientez ~20s…"),4000);
+  el("a-btn").textContent="â³..."; el("a-btn").disabled=true;
+  const coldTimer=setTimeout(()=>showErr("a-err","â³ Le serveur dÃ©marre, patientez ~20sâ¦"),4000);
   try{
     const ctrl=new AbortController();
     const tid=setTimeout(()=>ctrl.abort(),30000);
@@ -625,16 +625,16 @@ async function tryLogin(){
     else{ const fl=await res.json(); doLogin("freelancer",fl); }
   }catch(e){
     clearTimeout(coldTimer);
-    if(e.name==="AbortError") showErr("a-err","⏱ Délai dépassé. Réessayez dans quelques secondes.");
-    else showErr("a-err","Erreur de connexion. Vérifiez votre réseau.");
+    if(e.name==="AbortError") showErr("a-err","â± DÃ©lai dÃ©passÃ©. RÃ©essayez dans quelques secondes.");
+    else showErr("a-err","Erreur de connexion. VÃ©rifiez votre rÃ©seau.");
   }
   el("a-btn").textContent=t().loginBtn; el("a-btn").disabled=false;
 }
 function openAdminModal(){ el("admin-modal").style.display="flex"; el("am-pw").value=""; }
 async function tryAdmin(){
   const pw=el("am-pw").value; if(!pw) return;
-  el("am-btn").textContent="⏳..."; el("am-btn").disabled=true;
-  const coldTimer=setTimeout(()=>showErr("am-err","⏳ Le serveur démarre, patientez ~20s…"),4000);
+  el("am-btn").textContent="â³..."; el("am-btn").disabled=true;
+  const coldTimer=setTimeout(()=>showErr("am-err","â³ Le serveur dÃ©marre, patientez ~20sâ¦"),4000);
   try{
     const ctrl=new AbortController();
     const tid=setTimeout(()=>ctrl.abort(),30000);
@@ -644,7 +644,7 @@ async function tryAdmin(){
     else showErr("am-err",t().wrongAdmin);
   }catch(e){
     clearTimeout(coldTimer);
-    if(e.name==="AbortError") showErr("am-err","⏱ Délai dépassé. Réessayez.");
+    if(e.name==="AbortError") showErr("am-err","â± DÃ©lai dÃ©passÃ©. RÃ©essayez.");
     else showErr("am-err","Erreur de connexion.");
   }
   el("am-btn").textContent=t().loginBtn; el("am-btn").disabled=false;
@@ -683,9 +683,9 @@ function tryAutoLogin(){
   }catch(e){ try{localStorage.removeItem("os_session");}catch(_){} }
 }
 
-// ── NAV ───────────────────────────────────────────────────────────
-const ADM_TABS=[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"clients",i:"👤"},{k:"freelancers",i:"👥"},{k:"billing",i:"💰"},{k:"tools",i:"🧰"},{k:"typeform",i:"🔗"}];
-const FL_TABS =[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"tools",i:"🧰"}];
+// ââ NAV âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+const ADM_TABS=[{k:"dashboard",i:"ð"},{k:"orders",i:"ð"},{k:"revisions",i:"ð"},{k:"clients",i:"ð¤"},{k:"freelancers",i:"ð¥"},{k:"billing",i:"ð°"},{k:"tools",i:"ð§°"},{k:"typeform",i:"ð"}];
+const FL_TABS =[{k:"dashboard",i:"ð"},{k:"orders",i:"ð"},{k:"revisions",i:"ð"},{k:"tools",i:"ð§°"}];
 
 function buildNav(){
   const tabs=S.role==="admin"?ADM_TABS:FL_TABS;
@@ -697,7 +697,7 @@ function buildNav(){
     <button class="sb-btn${S.tab===tb.k?" active":""}" onclick="goTab('${tb.k}')">
       <span class="si">${tb.i}</span>${tr[tb.k]||tb.k}
       ${tb.k==="orders"&&newO>0?`<span class="sb-badge">${newO}</span>`:""}
-      ${tb.k==="orders"&&stale>0&&S.role==="admin"?`<span style="margin-left:auto;font-size:9px;color:var(--orange)">⏰${stale}</span>`:""}
+      ${tb.k==="orders"&&stale>0&&S.role==="admin"?`<span style="margin-left:auto;font-size:9px;color:var(--orange)">â°${stale}</span>`:""}
       ${tb.k==="revisions"&&newRV>0?`<span class="sb-badge">${newRV}</span>`:""}
     </button>`).join("");
   if(el("sb-search-lbl"))el("sb-search-lbl").textContent=tr.searchGlobal;
@@ -705,9 +705,9 @@ function buildNav(){
   const me=S.me;
   el("sb-user").innerHTML=me
     ?`${mkAv(me,32)}<div><div style="font-size:12px;font-weight:700">${me.name}</div><div style="font-size:10px;color:var(--muted)">${me.specialty}</div></div>`
-    :`<div style="font-weight:800;color:var(--accent)">⚡ Admin</div>`;
+    :`<div style="font-weight:800;color:var(--accent)">â¡ Admin</div>`;
   el("tb-role").innerHTML=mkPill(S.role==="admin"?tr.admin:(me?me.name.split(" ")[0]:tr.freelancer),S.role==="admin"?"#F0A500":"#BC8CFF");
-  const mTabs=S.role==="admin"?[{k:"dashboard",i:"📊"},{k:"orders",i:"📋"},{k:"revisions",i:"🔁"},{k:"clients",i:"👤"},{k:"tools",i:"🧰"}]:FL_TABS;
+  const mTabs=S.role==="admin"?[{k:"dashboard",i:"ð"},{k:"orders",i:"ð"},{k:"revisions",i:"ð"},{k:"clients",i:"ð¤"},{k:"tools",i:"ð§°"}]:FL_TABS;
   el("bottomnav").innerHTML=mTabs.map(tb=>`
     <button class="bn-btn${S.tab===tb.k?" active":""}" onclick="goTab('${tb.k}')">
       <div class="bn-icon">${tb.i}
@@ -731,7 +731,7 @@ function renderPage(){
   else if(k==="typeform"&&S.role==="admin") renderTF();
 }
 
-// ── KEYBOARD SHORTCUTS ────────────────────────────────────────────
+// ââ KEYBOARD SHORTCUTS ââââââââââââââââââââââââââââââââââââââââââââ
 document.addEventListener("keydown", e=>{
   if(!S.role) return;
   if(e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA") return;
@@ -743,7 +743,7 @@ document.addEventListener("keydown", e=>{
   if(idx>=0&&idx<tabs.length){ goTab(tabs[idx].k); }
 });
 
-// ── GLOBAL SEARCH ─────────────────────────────────────────────────
+// ââ GLOBAL SEARCH âââââââââââââââââââââââââââââââââââââââââââââââââ
 let searchTimer=null;
 function openSearch(){
   el("search-overlay").style.display="block";
@@ -754,13 +754,13 @@ async function doSearch(q){
   clearTimeout(searchTimer);
   const r=el("search-results"); if(!r)return;
   if(!q||q.length<2){ r.innerHTML=""; return; }
-  r.innerHTML=`<div style="padding:12px 16px;color:var(--muted);font-size:12px">Recherche…</div>`;
+  r.innerHTML=`<div style="padding:12px 16px;color:var(--muted);font-size:12px">Rechercheâ¦</div>`;
   searchTimer=setTimeout(async()=>{
     try{
       const res=await api("GET",`/search?q=${encodeURIComponent(q)}`);
       let h="";
       if(res.orders?.length){
-        h+=`<div class="search-section">📋 Commandes</div>`;
+        h+=`<div class="search-section">ð Commandes</div>`;
         res.orders.forEach(o=>{
           const fl=S.freelancers.find(f=>f.id===o.freelanceId);
           h+=`<div class="search-res-item" onclick="closeSearch();S.tab='orders';S.oSearch='${o.clientName.replace(/'/g,"")}';renderOrders();buildNav()">
@@ -770,7 +770,7 @@ async function doSearch(q){
         });
       }
       if(res.revisions?.length){
-        h+=`<div class="search-section">🔁 Révisions</div>`;
+        h+=`<div class="search-section">ð RÃ©visions</div>`;
         res.revisions.forEach(r2=>{
           h+=`<div class="search-res-item" onclick="closeSearch();S.tab='revisions';S.rvSearch='${r2.clientName.replace(/'/g,"")}';renderRevisions();buildNav()">
             <div style="flex:1"><div style="font-weight:700;font-size:12px">${r2.clientName}</div><div style="font-size:10px;color:var(--teal)">${r2.projectName||""}</div></div>
@@ -779,40 +779,40 @@ async function doSearch(q){
         });
       }
       if(res.freelancers?.length){
-        h+=`<div class="search-section">👥 Freelances</div>`;
+        h+=`<div class="search-section">ð¥ Freelances</div>`;
         res.freelancers.forEach(f=>{
           h+=`<div class="search-res-item" onclick="closeSearch();goTab('freelancers')">
             ${mkAv(f,28)}<div><div style="font-weight:700;font-size:12px">${f.name}</div><div style="font-size:10px;color:var(--muted)">${f.specialty}</div></div>
           </div>`;
         });
       }
-      if(!h) h=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:12px">Aucun résultat pour "${q}"</div>`;
+      if(!h) h=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:12px">Aucun rÃ©sultat pour "${q}"</div>`;
       if(r)r.innerHTML=h;
     }catch(e2){ if(r)r.innerHTML=`<div style="padding:12px;color:var(--red);font-size:12px">Erreur.</div>`; }
   },300);
 }
 
-// ── DASHBOARD ─────────────────────────────────────────────────────
+// ââ DASHBOARD âââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderDash(){
   const tr=t();
   const myO =S.role==="freelancer"?S.orders.filter(o=>o.freelanceId===S.me?.id):S.orders;
   const myRV=S.role==="freelancer"?S.revisions.filter(r=>r.freelanceId===S.me?.id):S.revisions;
   const stats=S.role==="admin"?[
-    {l:tr.totalOrders,v:S.orders.length,c:"var(--blue)",i:"📋"},
-    {l:tr.totalRevisions,v:S.revisions.length,c:"var(--teal)",i:"🔁"},
-    {l:tr.rvOpen,v:S.revisions.filter(r=>!["done","cancelled"].includes(r.status)).length,c:"var(--accent)",i:"⏳"},
-    {l:tr.activeFl,v:S.freelancers.filter(f=>f.active).length,c:"var(--purple)",i:"👥"},
+    {l:tr.totalOrders,v:S.orders.length,c:"var(--blue)",i:"ð"},
+    {l:tr.totalRevisions,v:S.revisions.length,c:"var(--teal)",i:"ð"},
+    {l:tr.rvOpen,v:S.revisions.filter(r=>!["done","cancelled"].includes(r.status)).length,c:"var(--accent)",i:"â³"},
+    {l:tr.activeFl,v:S.freelancers.filter(f=>f.active).length,c:"var(--purple)",i:"ð¥"},
   ]:[
-    {l:tr.totalOrders,v:myO.length,c:"var(--blue)",i:"📋"},
-    {l:tr.totalRevisions,v:myRV.length,c:"var(--teal)",i:"🔁"},
-    {l:tr.rvOpen,v:myRV.filter(r=>!["done","cancelled"].includes(r.status)).length,c:"var(--accent)",i:"⏳"},
+    {l:tr.totalOrders,v:myO.length,c:"var(--blue)",i:"ð"},
+    {l:tr.totalRevisions,v:myRV.length,c:"var(--teal)",i:"ð"},
+    {l:tr.rvOpen,v:myRV.filter(r=>!["done","cancelled"].includes(r.status)).length,c:"var(--accent)",i:"â³"},
   ];
   const urgentRV=[...myRV].filter(r=>!["done","cancelled"].includes(r.status)&&r.deadline).sort((a,b)=>new Date(a.deadline)-new Date(b.deadline)).slice(0,4);
   const recentO=[...myO].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,3);
   const stale=S.role==="admin"?getStaleOrders():[];
 
   let h=`<div class="screen">`;
-  if(S.me) h+=`<div style="background:linear-gradient(135deg,rgba(240,165,0,.08),rgba(188,140,255,.08));border:1px solid rgba(240,165,0,.18);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">${mkAv(S.me,42)}<div><div style="font-weight:800;font-size:14px">👋 ${S.me.name}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${S.me.specialty}</div></div></div>`;
+  if(S.me) h+=`<div style="background:linear-gradient(135deg,rgba(240,165,0,.08),rgba(188,140,255,.08));border:1px solid rgba(240,165,0,.18);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px">${mkAv(S.me,42)}<div><div style="font-weight:800;font-size:14px">ð ${S.me.name}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${S.me.specialty}</div></div></div>`;
   h+=`<div class="stats-grid">${stats.map(s=>`<div class="stat"><div class="stat-ico">${s.i}</div><div class="stat-val" style="color:${s.c}">${s.v}</div><div class="stat-lbl">${s.l}</div></div>`).join("")}</div>`;
 
   // Alertes relance
@@ -821,14 +821,14 @@ function renderDash(){
     stale.forEach(o=>{
       const fl=S.freelancers.find(f=>f.id===o.freelanceId);
       const days=Math.floor((Date.now()-new Date(o.createdAt))/864e5);
-      h+=`<div class="stale-item"><div style="display:flex;align-items:center;gap:8px"><div class="stale-dot"></div><div><div style="font-size:12px;font-weight:700">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${fl?.name||"—"} · ${days}j</div></div></div>${mkBadge(o.status,tr.sl)}</div>`;
+      h+=`<div class="stale-item"><div style="display:flex;align-items:center;gap:8px"><div class="stale-dot"></div><div><div style="font-size:12px;font-weight:700">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${fl?.name||"â"} Â· ${days}j</div></div></div>${mkBadge(o.status,tr.sl)}</div>`;
     });
     h+=`</div>`;
   }
 
-  // Révisions urgentes
-  h+=`<div class="card" style="margin-bottom:12px;border-color:rgba(38,198,218,.25)"><div class="card-h"><span style="font-size:13px;font-weight:800">🔁 ${tr.recentRevisions}</span></div>`;
-  if(!urgentRV.length) h+=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">✅ Aucune révision urgente</div>`;
+  // RÃ©visions urgentes
+  h+=`<div class="card" style="margin-bottom:12px;border-color:rgba(38,198,218,.25)"><div class="card-h"><span style="font-size:13px;font-weight:800">ð ${tr.recentRevisions}</span></div>`;
+  if(!urgentRV.length) h+=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">â Aucune rÃ©vision urgente</div>`;
   urgentRV.forEach(r=>{
     const ms=r.deadline?new Date(r.deadline)-Date.now():null;
     const bc=ms!==null&&ms<7200000?"rgba(248,81,73,.5)":ms!==null&&ms<21600000?"rgba(240,165,0,.4)":"var(--border)";
@@ -836,13 +836,13 @@ function renderDash(){
   });
   h+=`</div>`;
 
-  // Commandes récentes
-  h+=`<div class="card" style="margin-bottom:12px"><div class="card-h"><span style="font-size:13px;font-weight:800">📋 ${tr.recentOrders}</span></div>`;
+  // Commandes rÃ©centes
+  h+=`<div class="card" style="margin-bottom:12px"><div class="card-h"><span style="font-size:13px;font-weight:800">ð ${tr.recentOrders}</span></div>`;
   if(!recentO.length) h+=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">${tr.noOrders}</div>`;
-  recentO.forEach(o=>{ h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);gap:8px"><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${o.projectType||""} · ${fmt(o.createdAt)}</div></div>${mkBadge(o.status,tr.sl)}</div>`; });
+  recentO.forEach(o=>{ h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);gap:8px"><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${o.projectType||""} Â· ${fmt(o.createdAt)}</div></div>${mkBadge(o.status,tr.sl)}</div>`; });
   h+=`</div>`;
 
-  // Charge équipe (admin)
+  // Charge Ã©quipe (admin)
   if(S.role==="admin"){
     h+=`<div class="card"><div class="card-h"><span style="font-size:13px;font-weight:800">${tr.flLoad}</span></div>`;
     S.freelancers.filter(f=>f.active).forEach(f=>{
@@ -850,7 +850,7 @@ function renderDash(){
       const cRV=S.revisions.filter(r=>r.freelanceId===f.id&&!["done","cancelled"].includes(r.status)).length;
       const pct=Math.min(100,Math.round((cO+cRV)*20));
       const barC=pct>80?"var(--red)":pct>50?"var(--accent)":"var(--green)";
-      h+=`<div style="display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--border)">${mkAv(f,28)}<div style="flex:1"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:700">${f.name}</span><span style="font-size:10px;color:var(--muted)">${cO} cmd · ${cRV} rév</span></div><div style="height:4px;background:var(--border);border-radius:2px"><div style="height:4px;background:${barC};border-radius:2px;width:${pct}%;transition:width .3s"></div></div></div></div>`;
+      h+=`<div style="display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--border)">${mkAv(f,28)}<div style="flex:1"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px"><span style="font-size:12px;font-weight:700">${f.name}</span><span style="font-size:10px;color:var(--muted)">${cO} cmd Â· ${cRV} rÃ©v</span></div><div style="height:4px;background:var(--border);border-radius:2px"><div style="height:4px;background:${barC};border-radius:2px;width:${pct}%;transition:width .3s"></div></div></div></div>`;
     });
     h+=`</div>`;
   }
@@ -858,7 +858,7 @@ function renderDash(){
   el("page").innerHTML=h;
 }
 
-// ── ORDERS ────────────────────────────────────────────────────────
+// ââ ORDERS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderOrders(){
   const tr=t();
   const pool=S.role==="freelancer"?S.orders.filter(o=>o.freelanceId===S.me?.id):S.orders;
@@ -871,8 +871,8 @@ function renderOrders(){
   let h=`<div class="screen">`;
   h+=`<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap">
     <input class="inp" style="flex:1;min-width:140px" placeholder="${tr.search}" value="${S.oSearch}" oninput="S.oSearch=this.value;renderOrders()"/>
-    <button class="btn btn-ghost btn-sm" onclick="S.oView=S.oView==='list'?'kanban':'list';renderOrders()">${S.oView==="list"?"🔲":"☰"}</button>
-    ${S.role==="admin"?`<button class="btn btn-ghost btn-sm" onclick="exportOrdersCsv()">⬇ CSV</button><button class="btn btn-p btn-sm" onclick="openOrderSheet(null)">${tr.addOrder}</button>`:""}
+    <button class="btn btn-ghost btn-sm" onclick="S.oView=S.oView==='list'?'kanban':'list';renderOrders()">${S.oView==="list"?"ð²":"â°"}</button>
+    ${S.role==="admin"?`<button class="btn btn-ghost btn-sm" onclick="exportOrdersCsv()">â¬ CSV</button><button class="btn btn-p btn-sm" onclick="openOrderSheet(null)">${tr.addOrder}</button>`:""}
   </div>`;
   // Filtre freelance (admin)
   if(S.role==="admin"){
@@ -895,13 +895,13 @@ function renderOrderCard(o){
   const stale=["assigned","inprogress"].includes(o.status)&&(Date.now()-new Date(o.createdAt))/864e5>STALE_DAYS;
   return `<div class="card" style="margin-bottom:10px${stale?";border-color:rgba(255,152,0,.5)":""}">
     <div class="card-h" style="cursor:pointer" onclick="openOrderDetail('${o.id}')"><div style="flex:1;min-width:0">
-      <div style="font-weight:800;font-size:14px">${o.clientName}${stale?` <span style="font-size:9px;color:var(--orange)">⏰ Relance</span>`:""}</div>
+      <div style="font-weight:800;font-size:14px">${o.clientName}${stale?` <span style="font-size:9px;color:var(--orange)">â° Relance</span>`:""}</div>
       ${o.company?`<div style="font-size:10px;color:var(--accent);font-weight:700">${o.company}</div>`:""}
-      <div style="font-size:10px;color:var(--muted)">${[o.clientEmail,o.clientPhone].filter(Boolean).join(" · ")}</div>
+      <div style="font-size:10px;color:var(--muted)">${[o.clientEmail,o.clientPhone].filter(Boolean).join(" Â· ")}</div>
     </div>
     <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
       ${o.source==="typeform"?mkPill("TF","#58A6FF"):""}
-      ${o.budget?`<span style="font-weight:900;color:var(--accent)">${o.budget}€</span>`:""}
+      ${o.budget?`<span style="font-weight:900;color:var(--accent)">${o.budget}â¬</span>`:""}
     </div></div>
     <div class="card-b" style="cursor:pointer" onclick="if(event.target.tagName!=='SELECT'&&!event.target.closest('select')&&!event.target.closest('a'))openOrderDetail('${o.id}')">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
@@ -910,23 +910,23 @@ function renderOrderCard(o){
           ?`<select class="inp" style="width:auto;font-size:10px;padding:4px 8px" onclick="event.stopPropagation()" onchange="chgOrderStatus('${o.id}',this.value)">${Object.entries(tr.sl).map(([k,v])=>`<option value="${k}"${k===o.status?" selected":""}>${v}</option>`).join("")}</select>`
           :mkBadge(o.status,tr.sl)}
       </div>
-      ${o.description?`<p style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.5">${o.description.slice(0,120)}${o.description.length>120?"…":""}</p>`:""}
-      ${o.deliveryUrl?`<a href="${o.deliveryUrl}" target="_blank" onclick="event.stopPropagation()"><div class="delivery-badge" style="margin-bottom:6px">🚀 Livraison disponible</div></a>`:""}
+      ${o.description?`<p style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.5">${o.description.slice(0,120)}${o.description.length>120?"â¦":""}</p>`:""}
+      ${o.deliveryUrl?`<a href="${o.deliveryUrl}" target="_blank" onclick="event.stopPropagation()"><div class="delivery-badge" style="margin-bottom:6px">ð Livraison disponible</div></a>`:""}
       <div style="display:flex;align-items:center;justify-content:space-between">
-        ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
+        ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assignÃ©</span>`}
         ${deadlineOrder(o.deadline)}
       </div>
     </div>
     ${S.role==="admin"?`<div class="card-f">
-      <button class="btn btn-sm btn-blue" onclick="openAssign('${o.id}','order')">👤 ${tr.assign}</button>
-      ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="sendWA('order','${o.id}')">📲</button>`:""}
-      <button class="btn btn-sm btn-ghost" onclick="openOrderSheet('${o.id}')">✏️</button>
-      <button class="btn btn-sm btn-purple" onclick="openComments('${o.id}','order','${o.clientName.replace(/'/g,"")}')">💬</button>
-      <button class="btn btn-sm btn-orange" onclick="openHistory('${o.id}','order','${o.clientName.replace(/'/g,"")}')">📋</button>
-      <button class="btn btn-sm btn-red" onclick="delOrder('${o.id}')">🗑️</button>
+      <button class="btn btn-sm btn-blue" onclick="openAssign('${o.id}','order')">ð¤ ${tr.assign}</button>
+      ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="sendWA('order','${o.id}')">ð²</button>`:""}
+      <button class="btn btn-sm btn-ghost" onclick="openOrderSheet('${o.id}')">âï¸</button>
+      <button class="btn btn-sm btn-purple" onclick="openComments('${o.id}','order','${o.clientName.replace(/'/g,"")}')">ð¬</button>
+      <button class="btn btn-sm btn-orange" onclick="openHistory('${o.id}','order','${o.clientName.replace(/'/g,"")}')">ð</button>
+      <button class="btn btn-sm btn-red" onclick="delOrder('${o.id}')">ðï¸</button>
     </div>`:`<div class="card-f">
-      <button class="btn btn-sm btn-purple" onclick="openComments('${o.id}','order','${o.clientName.replace(/'/g,"")}')">💬 ${tr.comments}</button>
-      ${!o.deliveryUrl?`<button class="btn btn-sm btn-green" onclick="openDelivery('${o.id}','order')">🚀 Livrer</button>`:""}
+      <button class="btn btn-sm btn-purple" onclick="openComments('${o.id}','order','${o.clientName.replace(/'/g,"")}')">ð¬ ${tr.comments}</button>
+      ${!o.deliveryUrl?`<button class="btn btn-sm btn-green" onclick="openDelivery('${o.id}','order')">ð Livrer</button>`:""}
     </div>`}
   </div>`;
 }
@@ -946,10 +946,10 @@ function renderKanban(items, type){
       const kOnclick=type==="order"?"openOrderDetail('"+item.id+"')":" openRevisionDetail('"+item.id+"')";
       h+=`<div class="kanban-card" style="cursor:pointer" onclick="${kOnclick}">
         <div style="font-weight:700;font-size:12px;margin-bottom:4px">${item.clientName}</div>
-        ${type==="order"&&item.budget?`<div style="font-size:10px;color:var(--accent);font-weight:800">${item.budget}€</div>`:""}
+        ${type==="order"&&item.budget?`<div style="font-size:10px;color:var(--accent);font-weight:800">${item.budget}â¬</div>`:""}
         ${type==="revision"&&item.projectName?`<div style="font-size:10px;color:var(--teal)">${item.projectName}</div>`:""}
         <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
-          ${fl?`<div style="display:flex;align-items:center;gap:4px">${mkAv(fl,18)}<span style="font-size:9px">${fl.name.split(" ")[0]}</span></div>`:`<span style="font-size:9px;color:var(--muted)">—</span>`}
+          ${fl?`<div style="display:flex;align-items:center;gap:4px">${mkAv(fl,18)}<span style="font-size:9px">${fl.name.split(" ")[0]}</span></div>`:`<span style="font-size:9px;color:var(--muted)">â</span>`}
           <span style="font-size:9px;color:var(--muted)">${fmt(item.createdAt)}</span>
         </div>
       </div>`;
@@ -991,7 +991,7 @@ function openOrderSheet(id){
 }
 async function saveOrder(id){
   const n=el("of-n").value.trim(); if(!n)return;
-  const btn=el("of-save"); btn.textContent="⏳..."; btn.disabled=true;
+  const btn=el("of-save"); btn.textContent="â³..."; btn.disabled=true;
   const form={clientName:n,clientEmail:el("of-e").value,company:el("of-co").value,
     projectType:el("of-t").value,budget:el("of-b").value,
     deadline:el("of-d").value||d7(),description:el("of-ds").value,deliveryUrl:el("of-dl").value};
@@ -1002,9 +1002,9 @@ async function saveOrder(id){
   }catch(e){showErr("of-err","Erreur.");btn.textContent=t().save;btn.disabled=false;}
 }
 
-// ── EXPORT CSV ────────────────────────────────────────────────────
+// ââ EXPORT CSV ââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function exportOrdersCsv(){
-  const headers=["Nom","Email","Téléphone","Entreprise","Projet","Statut","Budget","Deadline","Freelance","Créé le"];
+  const headers=["Nom","Email","TÃ©lÃ©phone","Entreprise","Projet","Statut","Budget","Deadline","Freelance","CrÃ©Ã© le"];
   const rows=S.orders.map(o=>{
     const fl=S.freelancers.find(f=>f.id===o.freelanceId);
     return [o.clientName,o.clientEmail,o.clientPhone,o.company,o.projectType,o.status,o.budget,o.deadline?.slice(0,10),fl?.name||"",o.createdAt?.slice(0,10)].map(v=>`"${(v||"").replace(/"/g,'""')}"`);
@@ -1014,7 +1014,7 @@ function exportOrdersCsv(){
   a.download="commandes-openshore.csv"; a.click();
 }
 function exportRevisionsCsv(){
-  const headers=["Nom","Email","Téléphone","Projet","Statut","Deadline","Freelance","Créé le"];
+  const headers=["Nom","Email","TÃ©lÃ©phone","Projet","Statut","Deadline","Freelance","CrÃ©Ã© le"];
   const rows=S.revisions.map(r=>{
     const fl=S.freelancers.find(f=>f.id===r.freelanceId);
     return [r.clientName,r.clientEmail,r.clientPhone,r.projectName,r.status,r.deadline?.slice(0,10),fl?.name||"",r.createdAt?.slice(0,10)].map(v=>`"${(v||"").replace(/"/g,'""')}"`);
@@ -1024,7 +1024,7 @@ function exportRevisionsCsv(){
   a.download="revisions-openshore.csv"; a.click();
 }
 
-// ── REVISIONS ─────────────────────────────────────────────────────
+// ââ REVISIONS âââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderRevisions(){
   const tr=t();
   const pool=S.role==="freelancer"?S.revisions.filter(r=>r.freelanceId===S.me?.id):S.revisions;
@@ -1036,11 +1036,11 @@ function renderRevisions(){
   });
   list=[...list].sort((a,b)=>{if(!a.deadline&&!b.deadline)return 0;if(!a.deadline)return 1;if(!b.deadline)return -1;return new Date(a.deadline)-new Date(b.deadline);});
   let h=`<div class="screen">`;
-  if(S.role==="freelancer") h+=`<div class="alert alert-i" style="margin-bottom:12px">🔁 ${tr.myOnlyRev}</div>`;
+  if(S.role==="freelancer") h+=`<div class="alert alert-i" style="margin-bottom:12px">ð ${tr.myOnlyRev}</div>`;
   h+=`<div style="display:flex;gap:8px;margin-bottom:8px;align-items:center;flex-wrap:wrap">
     <input class="inp" style="flex:1;min-width:140px" placeholder="${tr.search}" value="${S.rvSearch}" oninput="S.rvSearch=this.value;renderRevisions()"/>
-    <button class="btn btn-ghost btn-sm" onclick="S.rvView=S.rvView==='list'?'kanban':'list';renderRevisions()">${S.rvView==="list"?"🔲":"☰"}</button>
-    ${S.role==="admin"?`<button class="btn btn-ghost btn-sm" onclick="exportRevisionsCsv()">⬇ CSV</button><button class="btn btn-teal btn-sm" onclick="openRevisionSheet(null)">${tr.addRevision}</button>`:""}
+    <button class="btn btn-ghost btn-sm" onclick="S.rvView=S.rvView==='list'?'kanban':'list';renderRevisions()">${S.rvView==="list"?"ð²":"â°"}</button>
+    ${S.role==="admin"?`<button class="btn btn-ghost btn-sm" onclick="exportRevisionsCsv()">â¬ CSV</button><button class="btn btn-teal btn-sm" onclick="openRevisionSheet(null)">${tr.addRevision}</button>`:""}
   </div>`;
   if(S.role==="admin"){
     h+=`<div class="filters"><button class="fbtn${S.rvFlFilter==="all"?" active":""}" onclick="S.rvFlFilter='all';renderRevisions()">${tr.allFl}</button>`;
@@ -1066,12 +1066,12 @@ function renderRevisionCard(r){
     <div class="card-h" style="cursor:pointer" onclick="openRevisionDetail('${r.id}')">
       <div style="flex:1;min-width:0">
         <div style="font-weight:800;font-size:14px">${r.clientName}</div>
-        ${r.projectName?`<div style="font-size:11px;color:var(--teal);font-weight:700">📁 ${r.projectName}</div>`:""}
-        <div style="font-size:10px;color:var(--muted)">${[r.clientEmail,r.clientPhone].filter(Boolean).join(" · ")}</div>
+        ${r.projectName?`<div style="font-size:11px;color:var(--teal);font-weight:700">ð ${r.projectName}</div>`:""}
+        <div style="font-size:10px;color:var(--muted)">${[r.clientEmail,r.clientPhone].filter(Boolean).join(" Â· ")}</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">
         ${r.source==="typeform"?mkPill("TF","#58A6FF"):""}
-        ${isUrgent?`<span class="badge" style="background:rgba(248,81,73,.15);color:var(--red);border:1px solid rgba(248,81,73,.4)">🔴 Urgent</span>`:""}
+        ${isUrgent?`<span class="badge" style="background:rgba(248,81,73,.15);color:var(--red);border:1px solid rgba(248,81,73,.4)">ð´ Urgent</span>`:""}
       </div>
     </div>
     <div class="card-b" style="cursor:pointer" onclick="if(event.target.tagName!=='SELECT'&&!event.target.closest('select')&&!event.target.closest('a'))openRevisionDetail('${r.id}')">
@@ -1082,25 +1082,25 @@ function renderRevisionCard(r){
         <div style="font-size:11px">${deadlineRv(r.deadline)}</div>
       </div>
       ${rvTypeTags(r)}
-      ${r.revisionAspect?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">🎨 ${r.revisionAspect.slice(0,100)}…</div>`:""}
-      ${r.revisionContent?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">📄 ${r.revisionContent.slice(0,100)}…</div>`:""}
-      ${r.revisionText?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">✍️ ${r.revisionText.slice(0,100)}…</div>`:""}
-      ${r.deliveryUrl?`<a href="${r.deliveryUrl}" target="_blank" onclick="event.stopPropagation()"><div class="delivery-badge" style="margin-top:6px">🚀 Livraison disponible</div></a>`:""}
+      ${r.revisionAspect?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">ð¨ ${r.revisionAspect.slice(0,100)}â¦</div>`:""}
+      ${r.revisionContent?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">ð ${r.revisionContent.slice(0,100)}â¦</div>`:""}
+      ${r.revisionText?`<div style="font-size:11px;color:var(--muted);margin-bottom:3px;line-height:1.4">âï¸ ${r.revisionText.slice(0,100)}â¦</div>`:""}
+      ${r.deliveryUrl?`<a href="${r.deliveryUrl}" target="_blank" onclick="event.stopPropagation()"><div class="delivery-badge" style="margin-top:6px">ð Livraison disponible</div></a>`:""}
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
-        ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assigné</span>`}
+        ${fl?`<div style="display:flex;align-items:center;gap:6px">${mkAv(fl,22)}<span style="font-size:11px;font-weight:600">${fl.name}</span></div>`:`<span style="font-size:11px;color:var(--muted);font-style:italic">Non assignÃ©</span>`}
         <span style="font-size:10px;color:var(--muted)">${fmt(r.createdAt)}</span>
       </div>
     </div>
     ${S.role==="admin"?`<div class="card-f">
-      <button class="btn btn-sm btn-blue" onclick="openAssign('${r.id}','revision')">👤 ${tr.assign}</button>
-      ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="sendWA('revision','${r.id}')">📲</button>`:""}
-      <button class="btn btn-sm btn-ghost" onclick="openRevisionSheet('${r.id}')">✏️</button>
-      <button class="btn btn-sm btn-purple" onclick="openComments('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">💬</button>
-      <button class="btn btn-sm btn-orange" onclick="openHistory('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">📋</button>
-      <button class="btn btn-sm btn-red" onclick="delRevision('${r.id}')">🗑️</button>
+      <button class="btn btn-sm btn-blue" onclick="openAssign('${r.id}','revision')">ð¤ ${tr.assign}</button>
+      ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="sendWA('revision','${r.id}')">ð²</button>`:""}
+      <button class="btn btn-sm btn-ghost" onclick="openRevisionSheet('${r.id}')">âï¸</button>
+      <button class="btn btn-sm btn-purple" onclick="openComments('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">ð¬</button>
+      <button class="btn btn-sm btn-orange" onclick="openHistory('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">ð</button>
+      <button class="btn btn-sm btn-red" onclick="delRevision('${r.id}')">ðï¸</button>
     </div>`:`<div class="card-f">
-      <button class="btn btn-sm btn-purple" onclick="openComments('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">💬 ${tr.comments}</button>
-      ${!r.deliveryUrl?`<button class="btn btn-sm btn-green" onclick="openDelivery('${r.id}','revision')">🚀 Livrer</button>`:""}
+      <button class="btn btn-sm btn-purple" onclick="openComments('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">ð¬ ${tr.comments}</button>
+      ${!r.deliveryUrl?`<button class="btn btn-sm btn-green" onclick="openDelivery('${r.id}','revision')">ð Livrer</button>`:""}
     </div>`}
   </div>`;
 }
@@ -1124,10 +1124,10 @@ function openRevisionSheet(id){
       <div class="field"><label class="lbl">${tr.clientE}</label><input class="inp" type="email" id="rv-e" value="${r?.clientEmail||""}"/></div>
       <div class="field"><label class="lbl">${tr.phone}</label><input class="inp" id="rv-ph" value="${r?.clientPhone||""}"/></div>
     </div>
-    <div class="field"><label class="lbl">🎨 ${tr.revAspect}</label><textarea class="inp" id="rv-asp" style="min-height:52px">${r?.revisionAspect||""}</textarea></div>
-    <div class="field"><label class="lbl">📄 ${tr.revContent}</label><textarea class="inp" id="rv-cnt" style="min-height:52px">${r?.revisionContent||""}</textarea></div>
-    <div class="field"><label class="lbl">✍️ ${tr.revText}</label><textarea class="inp" id="rv-txt" style="min-height:52px">${r?.revisionText||""}</textarea></div>
-    <div class="field"><label class="lbl">💬 ${tr.revOther}</label><textarea class="inp" id="rv-oth" style="min-height:52px">${r?.revisionOther||""}</textarea></div>
+    <div class="field"><label class="lbl">ð¨ ${tr.revAspect}</label><textarea class="inp" id="rv-asp" style="min-height:52px">${r?.revisionAspect||""}</textarea></div>
+    <div class="field"><label class="lbl">ð ${tr.revContent}</label><textarea class="inp" id="rv-cnt" style="min-height:52px">${r?.revisionContent||""}</textarea></div>
+    <div class="field"><label class="lbl">âï¸ ${tr.revText}</label><textarea class="inp" id="rv-txt" style="min-height:52px">${r?.revisionText||""}</textarea></div>
+    <div class="field"><label class="lbl">ð¬ ${tr.revOther}</label><textarea class="inp" id="rv-oth" style="min-height:52px">${r?.revisionOther||""}</textarea></div>
     <div class="field"><label class="lbl">${tr.deliveryUrl}</label><input class="inp" id="rv-dl" value="${r?.deliveryUrl||""}" placeholder="https://"/></div>
     <div id="rv-err" class="alert alert-e" style="display:none"></div>
     <div class="two-col">
@@ -1137,7 +1137,7 @@ function openRevisionSheet(id){
 }
 async function saveRevision(id){
   const n=el("rv-n").value.trim(); if(!n)return;
-  const btn=el("rv-save"); btn.textContent="⏳..."; btn.disabled=true;
+  const btn=el("rv-save"); btn.textContent="â³..."; btn.disabled=true;
   const form={clientName:n,clientEmail:el("rv-e").value,clientPhone:el("rv-ph").value,
     projectName:el("rv-pn").value,revisionAspect:el("rv-asp").value,revisionContent:el("rv-cnt").value,
     revisionText:el("rv-txt").value,revisionOther:el("rv-oth").value,deliveryUrl:el("rv-dl").value};
@@ -1148,15 +1148,15 @@ async function saveRevision(id){
   }catch(e){showErr("rv-err","Erreur.");btn.textContent=t().save;btn.disabled=false;}
 }
 
-// ── DELIVERY ──────────────────────────────────────────────────────
+// ââ DELIVERY ââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function openDelivery(id, type){
   const tr=t();
-  openSheet("🚀 Soumettre la livraison",`
+  openSheet("ð Soumettre la livraison",`
     <p style="color:var(--muted);font-size:12px;margin-bottom:4px">Colle le lien Drive, Loom, Figma ou tout autre lien :</p>
     <div class="field"><input class="inp" id="dl-url" placeholder="https://" /></div>
     <div class="two-col">
       <button class="btn btn-ghost btn-full" onclick="closeSheet()">${tr.cancel}</button>
-      <button class="btn btn-green btn-full" onclick="saveDelivery('${id}','${type}')">🚀 Livrer</button>
+      <button class="btn btn-green btn-full" onclick="saveDelivery('${id}','${type}')">ð Livrer</button>
     </div>`);
 }
 async function saveDelivery(id, type){
@@ -1172,7 +1172,7 @@ async function saveDelivery(id, type){
   }catch(e){alert("Erreur: "+e.message);}
 }
 
-// ── ASSIGN ────────────────────────────────────────────────────────
+// ââ ASSIGN ââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function openAssign(itemId,type){
   const tr=t();
   const item=type==="revision"?S.revisions.find(x=>x.id===itemId):S.orders.find(x=>x.id===itemId);
@@ -1185,16 +1185,16 @@ function openAssign(itemId,type){
       ${mkAv(f)}<div style="flex:1">
         <div style="font-weight:700;font-size:13px">${f.name}</div>
         <div style="font-size:11px;color:var(--muted)">${f.specialty}</div>
-        ${f.phone?`<div style="font-size:10px;color:var(--wa)">📲 ${f.phone}</div>`:""}
+        ${f.phone?`<div style="font-size:10px;color:var(--wa)">ð² ${f.phone}</div>`:""}
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">
         <span style="font-size:9px;background:rgba(88,166,255,.1);color:var(--blue);border-radius:4px;padding:2px 6px">${cO} cmd</span>
-        <span style="font-size:9px;background:rgba(38,198,218,.1);color:var(--teal);border-radius:4px;padding:2px 6px">${cRV} rév</span>
+        <span style="font-size:9px;background:rgba(38,198,218,.1);color:var(--teal);border-radius:4px;padding:2px 6px">${cRV} rÃ©v</span>
       </div>
     </div>`;
   });
   if(item?.freelanceId) h+=`<button class="btn btn-red btn-full" onclick="doAssign('${itemId}','${type}','')">${tr.unassign}</button>`;
-  openSheet(`${tr.assignTo} — ${item?.clientName||""}`,h);
+  openSheet(`${tr.assignTo} â ${item?.clientName||""}`,h);
 }
 async function doAssign(itemId,type,fid){
   const isRev=type==="revision";
@@ -1224,13 +1224,13 @@ function sendWA(type,id){
   window.open(`https://wa.me/${fl.phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`,"_blank");
 }
 
-// ── COMMENTS ─────────────────────────────────────────────────────
+// ââ COMMENTS âââââââââââââââââââââââââââââââââââââââââââââââââââââ
 async function openComments(itemId,type,name){
   const tr=t();
-  openSheet(`💬 ${tr.comments} — ${name}`,`<div id="cmt-list" style="min-height:60px"><div class="spinner"><div class="spin"></div></div></div>
+  openSheet(`ð¬ ${tr.comments} â ${name}`,`<div id="cmt-list" style="min-height:60px"><div class="spinner"><div class="spin"></div></div></div>
     <div style="display:flex;gap:8px;margin-top:8px">
       <textarea class="inp" id="cmt-input" placeholder="${tr.addComment}" style="flex:1;min-height:44px;resize:none"></textarea>
-      <button class="btn btn-p" onclick="postComment('${itemId}','${type}')" style="align-self:flex-end">➤</button>
+      <button class="btn btn-p" onclick="postComment('${itemId}','${type}')" style="align-self:flex-end">â¤</button>
     </div>`);
   await loadComments(itemId,type);
 }
@@ -1265,10 +1265,10 @@ async function postComment(itemId,type){
   }catch(e){alert("Erreur: "+e.message);}
 }
 
-// ── HISTORY ───────────────────────────────────────────────────────
+// ââ HISTORY âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 async function openHistory(itemId,type,name){
   const tr=t();
-  openSheet(`📋 ${tr.history} — ${name}`,`<div id="hist-list"><div class="spinner"><div class="spin"></div></div></div>`);
+  openSheet(`ð ${tr.history} â ${name}`,`<div id="hist-list"><div class="spinner"><div class="spin"></div></div></div>`);
   try{
     const hist=await api("GET",`/history/${type}/${itemId}`);
     const wrap=el("hist-list"); if(!wrap)return;
@@ -1282,16 +1282,16 @@ async function openHistory(itemId,type,name){
         <div style="flex:1;padding-bottom:8px">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
             <span class="badge" style="background:${c}20;color:${c};border:1px solid ${c}40">${statusMap[h.newStatus]||h.newStatus}</span>
-            ${h.oldStatus?`<span style="font-size:10px;color:var(--muted)">← ${statusMap[h.oldStatus]||h.oldStatus}</span>`:""}
+            ${h.oldStatus?`<span style="font-size:10px;color:var(--muted)">â ${statusMap[h.oldStatus]||h.oldStatus}</span>`:""}
           </div>
-          <div style="font-size:10px;color:var(--muted)">${fmtFull(h.createdAt)} · ${h.changedBy}</div>
+          <div style="font-size:10px;color:var(--muted)">${fmtFull(h.createdAt)} Â· ${h.changedBy}</div>
         </div>
       </div>`;
     }).join("")+`</div>`;
   }catch(e){const w=el("hist-list");if(w)w.innerHTML=`<div style="color:var(--red)">Erreur.</div>`;}
 }
 
-// ── CLIENTS ───────────────────────────────────────────────────────
+// ââ CLIENTS âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderClients(){
   const tr=t();
   // Grouper par email
@@ -1307,7 +1307,7 @@ function renderClients(){
     byEmail[k].revisions.push(r);
   });
   const clients=Object.values(byEmail).sort((a,b)=>b.orders.length+b.revisions.length-(a.orders.length+a.revisions.length));
-  let h=`<div class="screen"><div style="color:var(--muted);font-size:12px;margin-bottom:14px">${clients.length} client${clients.length>1?"s":""} trouvés</div>`;
+  let h=`<div class="screen"><div style="color:var(--muted);font-size:12px;margin-bottom:14px">${clients.length} client${clients.length>1?"s":""} trouvÃ©s</div>`;
   if(!clients.length){h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted)">${tr.noClients}</div></div>`;h+=`</div>`;el("page").innerHTML=h;return;}
   clients.forEach(c=>{
     const totalBudget=c.orders.filter(o=>o.budget).reduce((acc,o)=>acc+(parseFloat(o.budget)||0),0);
@@ -1319,28 +1319,28 @@ function renderClients(){
         <div style="flex:1;min-width:0">
           <div style="font-weight:800;font-size:14px">${c.name}</div>
           ${c.company?`<div style="font-size:11px;color:var(--accent);font-weight:700">${c.company}</div>`:""}
-          <div style="font-size:10px;color:var(--muted)">${[c.email,c.phone].filter(Boolean).join(" · ")}</div>
+          <div style="font-size:10px;color:var(--muted)">${[c.email,c.phone].filter(Boolean).join(" Â· ")}</div>
         </div>
-        ${totalBudget>0?`<div style="font-size:18px;font-weight:900;color:var(--accent)">${totalBudget}€</div>`:""}
+        ${totalBudget>0?`<div style="font-size:18px;font-weight:900;color:var(--accent)">${totalBudget}â¬</div>`:""}
       </div>
       <div class="card-b">
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-          <span style="font-size:11px;background:rgba(88,166,255,.1);color:var(--blue);border-radius:6px;padding:3px 8px;font-weight:700">📋 ${c.orders.length} commande${c.orders.length>1?"s":""}</span>
-          <span style="font-size:11px;background:rgba(38,198,218,.1);color:var(--teal);border-radius:6px;padding:3px 8px;font-weight:700">🔁 ${c.revisions.length} révision${c.revisions.length>1?"s":""}</span>
-          ${lastOrder?`<span style="font-size:11px;color:var(--muted)">Dernière : ${fmt(lastOrder.createdAt)}</span>`:""}
+          <span style="font-size:11px;background:rgba(88,166,255,.1);color:var(--blue);border-radius:6px;padding:3px 8px;font-weight:700">ð ${c.orders.length} commande${c.orders.length>1?"s":""}</span>
+          <span style="font-size:11px;background:rgba(38,198,218,.1);color:var(--teal);border-radius:6px;padding:3px 8px;font-weight:700">ð ${c.revisions.length} rÃ©vision${c.revisions.length>1?"s":""}</span>
+          ${lastOrder?`<span style="font-size:11px;color:var(--muted)">DerniÃ¨re : ${fmt(lastOrder.createdAt)}</span>`:""}
         </div>
         ${fls.length?`<div style="display:flex;align-items:center;gap:6px">${fls.map(f=>mkAv(f,22)).join("")}<span style="font-size:10px;color:var(--muted)">${fls.map(f=>f.name.split(" ")[0]).join(", ")}</span></div>`:""}
         ${c.orders.length?`<div style="margin-top:10px">
           ${c.orders.slice(0,3).map(o=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 8px;background:var(--bg);border-radius:6px;margin-bottom:4px">
-            <div style="font-size:11px;font-weight:600">${o.projectType||"—"}</div>
-            <div style="display:flex;gap:6px;align-items:center">${o.budget?`<span style="font-size:10px;color:var(--accent);font-weight:700">${o.budget}€</span>`:""}${mkBadge(o.status,t().sl)}</div>
+            <div style="font-size:11px;font-weight:600">${o.projectType||"â"}</div>
+            <div style="display:flex;gap:6px;align-items:center">${o.budget?`<span style="font-size:10px;color:var(--accent);font-weight:700">${o.budget}â¬</span>`:""}${mkBadge(o.status,t().sl)}</div>
           </div>`).join("")}
           ${c.orders.length>3?`<div style="font-size:10px;color:var(--muted);text-align:center;padding:4px">+${c.orders.length-3} autres</div>`:""}
         </div>`:""}
       </div>
       <div class="card-f">
-        ${c.email?`<a href="mailto:${c.email}"><button class="btn btn-sm btn-blue">✉️ Email</button></a>`:""}
-        ${c.phone?`<a href="https://wa.me/${c.phone.replace(/\D/g,"")}"><button class="btn btn-sm btn-wa">📲 WhatsApp</button></a>`:""}
+        ${c.email?`<a href="mailto:${c.email}"><button class="btn btn-sm btn-blue">âï¸ Email</button></a>`:""}
+        ${c.phone?`<a href="https://wa.me/${c.phone.replace(/\D/g,"")}"><button class="btn btn-sm btn-wa">ð² WhatsApp</button></a>`:""}
       </div>
     </div>`;
   });
@@ -1348,7 +1348,7 @@ function renderClients(){
   el("page").innerHTML=h;
 }
 
-// ── FREELANCERS ───────────────────────────────────────────────────
+// ââ FREELANCERS âââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderFL(){
   const tr=t();
   let h=`<div class="screen"><div style="display:flex;justify-content:flex-end;margin-bottom:14px"><button class="btn btn-p" onclick="openFlSheet(null)">${tr.addFl}</button></div>`;
@@ -1366,21 +1366,21 @@ function renderFL(){
           <div style="flex:1;min-width:0">
             <div style="font-weight:800;font-size:15px">${f.name}</div>
             <div style="font-size:11px;color:var(--muted)">${f.email}</div>
-            ${f.phone?`<div style="font-size:10px;color:var(--wa);margin-top:2px">📲 ${f.phone}</div>`:""}
+            ${f.phone?`<div style="font-size:10px;color:var(--wa);margin-top:2px">ð² ${f.phone}</div>`:""}
           </div>
           <span class="pill" style="background:${lvlColor}18;color:${lvlColor};border:1px solid ${lvlColor}33">${f.specialty}</span>
         </div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:${f.notes?"12px":"4px"}">
           <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:18px;font-weight:900;color:var(--blue)">${cO}</div><div style="font-size:8px;color:var(--muted)">En cours</div></div>
-          <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:18px;font-weight:900;color:var(--teal)">${cRV}</div><div style="font-size:8px;color:var(--muted)">Révisions</div></div>
-          <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:18px;font-weight:900;color:var(--green)">${doneO+doneRV}</div><div style="font-size:8px;color:var(--muted)">Livrées</div></div>
-          <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:14px;font-weight:900;color:var(--accent)">${totalBudget>0?totalBudget+"€":"—"}</div><div style="font-size:8px;color:var(--muted)">CA</div></div>
+          <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:18px;font-weight:900;color:var(--teal)">${cRV}</div><div style="font-size:8px;color:var(--muted)">RÃ©visions</div></div>
+          <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:18px;font-weight:900;color:var(--green)">${doneO+doneRV}</div><div style="font-size:8px;color:var(--muted)">LivrÃ©es</div></div>
+          <div style="background:var(--bg);border-radius:8px;padding:8px 6px;text-align:center"><div style="font-size:14px;font-weight:900;color:var(--accent)">${totalBudget>0?totalBudget+"â¬":"â"}</div><div style="font-size:8px;color:var(--muted)">CA</div></div>
         </div>
-        ${f.notes?`<div style="background:rgba(240,165,0,.06);border:1px solid rgba(240,165,0,.2);border-radius:8px;padding:8px 10px;font-size:11px;line-height:1.5;color:var(--muted);margin-bottom:10px">📝 ${f.notes}</div>`:""}
+        ${f.notes?`<div style="background:rgba(240,165,0,.06);border:1px solid rgba(240,165,0,.2);border-radius:8px;padding:8px 10px;font-size:11px;line-height:1.5;color:var(--muted);margin-bottom:10px">ð ${f.notes}</div>`:""}
         <div style="display:flex;gap:7px;flex-wrap:wrap">
-          <button class="btn btn-sm btn-ghost" onclick="openFlSheet('${f.id}')">✏️ ${tr.edit}</button>
+          <button class="btn btn-sm btn-ghost" onclick="openFlSheet('${f.id}')">âï¸ ${tr.edit}</button>
           <button class="btn btn-sm ${f.active?"btn-red":"btn-green"}" onclick="toggleFl('${f.id}','${f.active}')">${f.active?tr.deactivate:tr.reactivate}</button>
-          <button class="btn btn-sm btn-red" onclick="delFl('${f.id}')">🗑️</button>
+          <button class="btn btn-sm btn-red" onclick="delFl('${f.id}')">ðï¸</button>
         </div>
       </div>
     </div>`;
@@ -1410,6 +1410,11 @@ function openFlSheet(id){
     </div>
     <div class="field"><label class="lbl">${tr.avatarUrlLbl}</label><input class="inp" id="ff-av" value="${f?.avatarUrl||""}" placeholder="https://..."/></div>
     <div class="field"><label class="lbl">${tr.notesLbl}</label><textarea class="inp" id="ff-notes" style="min-height:60px">${f?.notes||""}</textarea></div>
+    <div class="field">
+      <label class="lbl">${tr.waKeyLbl}</label>
+      <input class="inp" id="ff-wak" value="${f?.apiKeyWA||''}" placeholder="ex: 1234567"/>
+      <div style="font-size:10px;color:var(--muted);margin-top:3px">Le freelance envoie <b>I allow callmebot to send me messages</b> au <b>+34 644 597 219</b> sur WhatsApp pour obtenir sa clé.</div>
+    </div>
     <div id="ff-err" class="alert alert-e" style="display:none"></div>
     <div class="two-col">
       <button class="btn btn-ghost btn-full" onclick="closeSheet()">${tr.cancel}</button>
@@ -1418,10 +1423,10 @@ function openFlSheet(id){
 }
 async function saveFl(id){
   const n=el("ff-n").value.trim(); if(!n)return;
-  const btn=el("ff-save"); btn.textContent="⏳..."; btn.disabled=true;
+  const btn=el("ff-save"); btn.textContent="â³..."; btn.disabled=true;
   const ini=n.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
   const form={name:n,email:el("ff-e").value,password:el("ff-p").value,phone:el("ff-ph").value,
-    specialty:el("ff-s").value,avatar:ini,avatarUrl:el("ff-av").value,notes:el("ff-notes").value,active:true};
+    specialty:el("ff-s").value,avatar:ini,avatarUrl:el("ff-av").value,notes:el("ff-notes").value,apiKeyWA:el("ff-wak").value.trim(),active:true};
   try{
     if(id){const u=await api("PUT",`/freelancers/${id}`,{...S.freelancers.find(f=>f.id===id),...form});S.freelancers=S.freelancers.map(f=>f.id===id?u:f);}
     else{const c=await api("POST","/freelancers",{...form,id:uid()});S.freelancers=[...S.freelancers,c];}
@@ -1429,7 +1434,7 @@ async function saveFl(id){
   }catch(e){showErr("ff-err","Erreur.");btn.textContent=t().save;btn.disabled=false;}
 }
 
-// ── BILLING ───────────────────────────────────────────────────────
+// ââ BILLING âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderBilling(){
   const tr=t();
   const done=S.orders.filter(o=>["done","delivered"].includes(o.status));
@@ -1442,14 +1447,14 @@ function renderBilling(){
   });
   const months=Object.keys(byMonth).sort((a,b)=>b.localeCompare(a));
   let h=`<div class="screen"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-    <h2 style="font-size:16px;font-weight:900">💰 ${tr.billingTitle}</h2>
-    <button class="btn btn-ghost btn-sm" onclick="exportOrdersCsv()">⬇ ${tr.exportCsv}</button>
+    <h2 style="font-size:16px;font-weight:900">ð° ${tr.billingTitle}</h2>
+    <button class="btn btn-ghost btn-sm" onclick="exportOrdersCsv()">â¬ ${tr.exportCsv}</button>
   </div>`;
-  if(!months.length){h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted)">Aucune commande terminée.</div></div>`;h+=`</div>`;el("page").innerHTML=h;return;}
+  if(!months.length){h+=`<div class="card"><div style="padding:32px;text-align:center;color:var(--muted)">Aucune commande terminÃ©e.</div></div>`;h+=`</div>`;el("page").innerHTML=h;return;}
   months.forEach(mk=>{
     const m=byMonth[mk];
     const label=new Date(mk+"-01").toLocaleDateString("fr-FR",{month:"long",year:"numeric"});
-    h+=`<div class="billing-month"><div class="billing-month-h"><span>📅 ${label}</span><span style="color:var(--accent)">${m.total>0?m.total+"€ · ":""}${m.orders.length} mission${m.orders.length>1?"s":""}</span></div>`;
+    h+=`<div class="billing-month"><div class="billing-month-h"><span>ð ${label}</span><span style="color:var(--accent)">${m.total>0?m.total+"â¬ Â· ":""}${m.orders.length} mission${m.orders.length>1?"s":""}</span></div>`;
     const byFl={};
     m.orders.forEach(o=>{ const fid=o.freelanceId||"unassigned"; if(!byFl[fid])byFl[fid]=[]; byFl[fid].push(o); });
     Object.entries(byFl).forEach(([fid,orders])=>{
@@ -1458,14 +1463,14 @@ function renderBilling(){
       h+=`<div style="padding:10px 14px;border-top:1px solid var(--border)">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
           ${fl?mkAv(fl,24):mkAv("?",24)}
-          <span style="font-weight:700;font-size:13px">${fl?.name||"Non assigné"}</span>
+          <span style="font-weight:700;font-size:13px">${fl?.name||"Non assignÃ©"}</span>
           ${fl?`<span class="pill" style="background:rgba(188,140,255,.1);color:var(--purple);border:1px solid rgba(188,140,255,.25)">${fl.specialty}</span>`:""}
-          <span style="margin-left:auto;font-weight:800;color:var(--accent)">${flTotal>0?flTotal+"€":""}</span>
+          <span style="margin-left:auto;font-weight:800;color:var(--accent)">${flTotal>0?flTotal+"â¬":""}</span>
         </div>
         ${orders.map(o=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--bg);border-radius:8px;margin-bottom:4px">
           <div><div style="font-size:12px;font-weight:600">${o.clientName}</div><div style="font-size:10px;color:var(--muted)">${o.projectType||""}</div></div>
           <div style="display:flex;align-items:center;gap:8px">
-            ${o.budget?`<span style="font-weight:800;color:var(--accent);font-size:12px">${o.budget}€</span>`:""}
+            ${o.budget?`<span style="font-weight:800;color:var(--accent);font-size:12px">${o.budget}â¬</span>`:""}
             <span style="font-size:10px;color:var(--muted)">${fmt(o.createdAt)}</span>
           </div>
         </div>`).join("")}
@@ -1474,12 +1479,12 @@ function renderBilling(){
     h+=`</div>`;
   });
   const grandTotal=done.reduce((acc,o)=>acc+(parseFloat(o.budget)||0),0);
-  if(grandTotal>0) h+=`<div style="background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.25);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-top:4px"><span style="font-weight:800">💰 Total global</span><span style="font-size:20px;font-weight:900;color:var(--accent)">${grandTotal}€</span></div>`;
+  if(grandTotal>0) h+=`<div style="background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.25);border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-top:4px"><span style="font-weight:800">ð° Total global</span><span style="font-size:20px;font-weight:900;color:var(--accent)">${grandTotal}â¬</span></div>`;
   h+=`</div>`;
   el("page").innerHTML=h;
 }
 
-// ── TOOLS ─────────────────────────────────────────────────────────
+// ââ TOOLS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderTools(){
   const tr=t();
   const cats=[...new Set(S.tools.map(x=>x.category))];
@@ -1495,7 +1500,7 @@ function renderTools(){
           <div style="min-width:0"><div style="font-weight:700;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${tl.name}</div>
           <div style="font-size:10px;color:var(--muted);margin-top:2px;line-height:1.3">${tl.description}</div></div>
         </div></a>
-        ${S.role==="admin"?`<button onclick="event.preventDefault();event.stopPropagation();deleteTool('${tl.id}','${tl.name}')" style="position:absolute;top:6px;right:6px;background:#e53e3e;border:none;border-radius:6px;color:#fff;width:22px;height:22px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">×</button>`:""}
+        ${S.role==="admin"?`<button onclick="event.preventDefault();event.stopPropagation();deleteTool('${tl.id}','${tl.name}')" style="position:absolute;top:6px;right:6px;background:#e53e3e;border:none;border-radius:6px;color:#fff;width:22px;height:22px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">Ã</button>`:""}
       </div>`;
     });
     h+=`</div>`;
@@ -1507,7 +1512,7 @@ function openToolSheet(){
   const tr=t();
   openSheet(tr.addTool,`
     <div class="two-col">
-      <div class="field"><label class="lbl">${tr.icon}</label><input class="inp" id="tl-i" value="🔗"/></div>
+      <div class="field"><label class="lbl">${tr.icon}</label><input class="inp" id="tl-i" value="ð"/></div>
       <div class="field"><label class="lbl">${tr.name}</label><input class="inp" id="tl-n"/></div>
     </div>
     <div class="field"><label class="lbl">${tr.url}</label><input class="inp" id="tl-u" placeholder="https://"/></div>
@@ -1532,7 +1537,7 @@ async function saveTool(){
   catch(e){alert("Erreur");}
 }
 
-// ── TYPEFORM ─────────────────────────────────────────────────────
+// ââ TYPEFORM âââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderTF(){
   const newO=S.orders.filter(o=>o.source==="typeform"&&o.status==="new").length;
   const newRV=S.revisions.filter(r=>r.source==="typeform"&&r.status==="new").length;
@@ -1540,33 +1545,33 @@ function renderTF(){
     <div class="section-title">Commandes</div>
     <div class="card" style="margin-bottom:14px"><div class="card-b">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-        <div><h3 style="font-size:13px;font-weight:800">📋 Formulaire Commandes</h3>
+        <div><h3 style="font-size:13px;font-weight:800">ð Formulaire Commandes</h3>
         <p style="font-size:10px;color:var(--muted);margin-top:2px">Webhook : <code style="color:var(--accent);font-size:9px">${API}/webhook/typeform</code></p></div>
         <div style="background:rgba(88,166,255,.1);color:var(--blue);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:800">${newO} new</div>
       </div>
-      <a href="${FORM_ORDERS}" target="_blank"><button class="btn btn-blue btn-sm">🔗 Ouvrir</button></a>
+      <a href="${FORM_ORDERS}" target="_blank"><button class="btn btn-blue btn-sm">ð Ouvrir</button></a>
     </div></div>
-    <div class="section-title">Révisions</div>
+    <div class="section-title">RÃ©visions</div>
     <div class="card" style="margin-bottom:14px;border-color:rgba(38,198,218,.3)"><div class="card-b">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-        <div><h3 style="font-size:13px;font-weight:800">🔁 Formulaire Révisions</h3>
+        <div><h3 style="font-size:13px;font-weight:800">ð Formulaire RÃ©visions</h3>
         <p style="font-size:10px;color:var(--muted);margin-top:2px">Webhook : <code style="color:var(--teal);font-size:9px">${API}/webhook/typeform-revision</code></p></div>
         <div style="background:rgba(38,198,218,.1);color:var(--teal);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:800">${newRV} new</div>
       </div>
-      ${FORM_REVISIONS?`<a href="${FORM_REVISIONS}" target="_blank"><button class="btn btn-teal btn-sm">🔗 Ouvrir</button></a>`:`<div class="alert alert-w">⚠️ Colle l'URL dans FORM_REVISIONS</div>`}
+      ${FORM_REVISIONS?`<a href="${FORM_REVISIONS}" target="_blank"><button class="btn btn-teal btn-sm">ð Ouvrir</button></a>`:`<div class="alert alert-w">â ï¸ Colle l'URL dans FORM_REVISIONS</div>`}
     </div></div>
     <div style="background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.2);border-radius:12px;padding:12px 14px;margin-bottom:10px">
-      <div style="font-size:12px;font-weight:800;color:var(--green)">🔗 Auto-assignation activée</div>
-      <div style="font-size:11px;color:var(--muted);margin-top:4px">Quand un client soumet une révision, le CRM retrouve automatiquement la commande liée (par email) et assigne la révision au même freelance. La commande passe en statut <strong>En révision</strong>.</div>
+      <div style="font-size:12px;font-weight:800;color:var(--green)">ð Auto-assignation activÃ©e</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Quand un client soumet une rÃ©vision, le CRM retrouve automatiquement la commande liÃ©e (par email) et assigne la rÃ©vision au mÃªme freelance. La commande passe en statut <strong>En rÃ©vision</strong>.</div>
     </div>
     <div style="background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.2);border-radius:12px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:800;color:var(--blue)">📧 Notifications email</div>
+      <div style="font-size:12px;font-weight:800;color:var(--blue)">ð§ Notifications email</div>
       <div style="font-size:11px;color:var(--muted);margin-top:4px">Pour activer les emails automatiques, ajoute <code style="color:var(--accent)">RESEND_API_KEY</code> dans les variables Railway.</div>
     </div>
   </div>`;
 }
 
-// ── ORDER DETAIL POPUP ────────────────────────────────────────────
+// ââ ORDER DETAIL POPUP ââââââââââââââââââââââââââââââââââââââââââââ
 function openOrderDetail(id){
   const o=S.orders.find(x=>x.id===id); if(!o)return;
   const tr=t();
@@ -1585,54 +1590,54 @@ function openOrderDetail(id){
             ${o.company?`<div style="font-size:12px;color:var(--accent);font-weight:700;margin-top:2px">${o.company}</div>`:""}
             <div style="display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap">
               <span class="badge" style="background:${stColor}20;color:${stColor};border:1px solid ${stColor}40;font-size:11px">${stLabel}</span>
-              ${o.budget?`<span style="font-weight:900;font-size:15px;color:var(--accent)">${o.budget}€</span>`:""}
+              ${o.budget?`<span style="font-weight:900;font-size:15px;color:var(--accent)">${o.budget}â¬</span>`:""}
               ${o.source==="typeform"?mkPill("Typeform","#58A6FF"):""}
             </div>
           </div>
-          <button class="detail-close" onclick="closeDetail()">×</button>
+          <button class="detail-close" onclick="closeDetail()">Ã</button>
         </div>
         <div class="detail-body">
           <div class="detail-grid">
             <div class="detail-field">
-              <div class="detail-label">📧 Email</div>
-              <div class="detail-value">${o.clientEmail||`<span style="color:var(--muted)">—</span>`}</div>
+              <div class="detail-label">ð§ Email</div>
+              <div class="detail-value">${o.clientEmail||`<span style="color:var(--muted)">â</span>`}</div>
             </div>
             <div class="detail-field">
-              <div class="detail-label">📱 Téléphone</div>
-              <div class="detail-value">${o.clientPhone||`<span style="color:var(--muted)">—</span>`}</div>
+              <div class="detail-label">ð± TÃ©lÃ©phone</div>
+              <div class="detail-value">${o.clientPhone||`<span style="color:var(--muted)">â</span>`}</div>
             </div>
             <div class="detail-field">
-              <div class="detail-label">📦 Type de projet</div>
-              <div class="detail-value">${o.projectType||`<span style="color:var(--muted)">—</span>`}</div>
+              <div class="detail-label">ð¦ Type de projet</div>
+              <div class="detail-value">${o.projectType||`<span style="color:var(--muted)">â</span>`}</div>
             </div>
             <div class="detail-field">
-              <div class="detail-label">📅 Deadline</div>
-              <div class="detail-value">${o.deadline?`${fmt(o.deadline)} <span style="font-size:11px;color:${dColor};font-weight:700">(J${dDays>0?"-"+dDays:dDays===0?"our J":"+"+Math.abs(dDays)})</span>`:`<span style="color:var(--muted)">—</span>`}</div>
+              <div class="detail-label">ð Deadline</div>
+              <div class="detail-value">${o.deadline?`${fmt(o.deadline)} <span style="font-size:11px;color:${dColor};font-weight:700">(J${dDays>0?"-"+dDays:dDays===0?"our J":"+"+Math.abs(dDays)})</span>`:`<span style="color:var(--muted)">â</span>`}</div>
             </div>
             <div class="detail-field">
-              <div class="detail-label">👤 Freelance assigné</div>
-              <div class="detail-value">${fl?`<div style="display:flex;align-items:center;gap:8px">${mkAv(fl,24)}<span>${fl.name}</span></div>`:`<span style="color:var(--muted);font-style:italic">Non assigné</span>`}</div>
+              <div class="detail-label">ð¤ Freelance assignÃ©</div>
+              <div class="detail-value">${fl?`<div style="display:flex;align-items:center;gap:8px">${mkAv(fl,24)}<span>${fl.name}</span></div>`:`<span style="color:var(--muted);font-style:italic">Non assignÃ©</span>`}</div>
             </div>
             <div class="detail-field">
-              <div class="detail-label">🕒 Créé le</div>
+              <div class="detail-label">ð CrÃ©Ã© le</div>
               <div class="detail-value">${fmtFull(o.createdAt)}</div>
             </div>
             ${o.deliveryUrl?`<div class="detail-field full">
-              <div class="detail-label">🚀 Lien de livraison</div>
+              <div class="detail-label">ð Lien de livraison</div>
               <div class="detail-value"><a href="${o.deliveryUrl}" target="_blank" style="color:var(--green);text-decoration:underline;word-break:break-all">${o.deliveryUrl}</a></div>
             </div>`:""}
             ${o.description?`<div class="detail-field full">
-              <div class="detail-label">📝 Description complète</div>
+              <div class="detail-label">ð Description complÃ¨te</div>
               <div class="detail-desc">${o.description}</div>
             </div>`:""}
           </div>
         </div>
         ${S.role==="admin"?`<div class="detail-actions">
-          <button class="btn btn-sm btn-blue" onclick="closeDetail();openAssign('${o.id}','order')">👤 ${tr.assign}</button>
-          <button class="btn btn-sm btn-ghost" onclick="closeDetail();openOrderSheet('${o.id}')">✏️ ${tr.edit}</button>
-          <button class="btn btn-sm btn-purple" onclick="closeDetail();openComments('${o.id}','order','${o.clientName.replace(/'/g,"")}')">💬 ${tr.comments}</button>
-          <button class="btn btn-sm btn-orange" onclick="closeDetail();openHistory('${o.id}','order','${o.clientName.replace(/'/g,"")}')">📋 ${S.lang==="fr"?"Historique":"History"}</button>
-          ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="closeDetail();sendWA('order','${o.id}')">📲 WhatsApp</button>`:""}
+          <button class="btn btn-sm btn-blue" onclick="closeDetail();openAssign('${o.id}','order')">ð¤ ${tr.assign}</button>
+          <button class="btn btn-sm btn-ghost" onclick="closeDetail();openOrderSheet('${o.id}')">âï¸ ${tr.edit}</button>
+          <button class="btn btn-sm btn-purple" onclick="closeDetail();openComments('${o.id}','order','${o.clientName.replace(/'/g,"")}')">ð¬ ${tr.comments}</button>
+          <button class="btn btn-sm btn-orange" onclick="closeDetail();openHistory('${o.id}','order','${o.clientName.replace(/'/g,"")}')">ð ${S.lang==="fr"?"Historique":"History"}</button>
+          ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="closeDetail();sendWA('order','${o.id}')">ð² WhatsApp</button>`:""}
         </div>`:""}
       </div>
     </div>`;
@@ -1652,84 +1657,84 @@ function openRevisionDetail(id){
         <div class="detail-header">
           <div class="detail-header-info" style="flex:1;min-width:0">
             <h2>${r.clientName}</h2>
-            ${r.projectName?`<div style="font-size:12px;color:var(--teal);font-weight:700;margin-top:2px">📁 ${r.projectName}</div>`:""}
+            ${r.projectName?`<div style="font-size:12px;color:var(--teal);font-weight:700;margin-top:2px">ð ${r.projectName}</div>`:""}
             <div style="display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap">
               <span class="badge" style="background:${stColor}20;color:${stColor};border:1px solid ${stColor}40;font-size:11px">${stLabel}</span>
               ${r.source==="typeform"?mkPill("Typeform","#58A6FF"):""}
             </div>
           </div>
-          <button class="detail-close" onclick="closeDetail()">×</button>
+          <button class="detail-close" onclick="closeDetail()">Ã</button>
         </div>
         <div class="detail-body">
           <div class="detail-grid">
             <div class="detail-field">
-              <div class="detail-label">📧 Email</div>
-              <div class="detail-value">${r.clientEmail||`<span style="color:var(--muted)">—</span>`}</div>
+              <div class="detail-label">ð§ Email</div>
+              <div class="detail-value">${r.clientEmail||`<span style="color:var(--muted)">â</span>`}</div>
             </div>
             <div class="detail-field">
-              <div class="detail-label">📱 Téléphone</div>
-              <div class="detail-value">${r.clientPhone||`<span style="color:var(--muted)">—</span>`}</div>
+              <div class="detail-label">ð± TÃ©lÃ©phone</div>
+              <div class="detail-value">${r.clientPhone||`<span style="color:var(--muted)">â</span>`}</div>
             </div>
             <div class="detail-field">
-              <div class="detail-label">📅 Deadline</div>
-              <div class="detail-value">${r.deadline?deadlineRv(r.deadline):`<span style="color:var(--muted)">—</span>`}</div>
+              <div class="detail-label">ð Deadline</div>
+              <div class="detail-value">${r.deadline?deadlineRv(r.deadline):`<span style="color:var(--muted)">â</span>`}</div>
             </div>
             <div class="detail-field">
-              <div class="detail-label">👤 Freelance assigné</div>
-              <div class="detail-value">${fl?`<div style="display:flex;align-items:center;gap:8px">${mkAv(fl,24)}<span>${fl.name}</span></div>`:`<span style="color:var(--muted);font-style:italic">Non assigné</span>`}</div>
+              <div class="detail-label">ð¤ Freelance assignÃ©</div>
+              <div class="detail-value">${fl?`<div style="display:flex;align-items:center;gap:8px">${mkAv(fl,24)}<span>${fl.name}</span></div>`:`<span style="color:var(--muted);font-style:italic">Non assignÃ©</span>`}</div>
             </div>
             <div class="detail-field">
-              <div class="detail-label">🕒 Créé le</div>
+              <div class="detail-label">ð CrÃ©Ã© le</div>
               <div class="detail-value">${fmtFull(r.createdAt)}</div>
             </div>
             ${r.deliveryUrl?`<div class="detail-field full">
-              <div class="detail-label">🚀 Lien de livraison</div>
+              <div class="detail-label">ð Lien de livraison</div>
               <div class="detail-value"><a href="${r.deliveryUrl}" target="_blank" style="color:var(--green);text-decoration:underline;word-break:break-all">${r.deliveryUrl}</a></div>
             </div>`:""}
             <div class="detail-divider"></div>
             ${r.revisionAspect?`<div class="detail-field full">
-              <div class="detail-label">🎨 Aspect du site</div>
+              <div class="detail-label">ð¨ Aspect du site</div>
               <div class="detail-desc">${r.revisionAspect}</div>
             </div>`:""}
             ${r.revisionContent?`<div class="detail-field full">
-              <div class="detail-label">📄 Contenu du site</div>
+              <div class="detail-label">ð Contenu du site</div>
               <div class="detail-desc">${r.revisionContent}</div>
             </div>`:""}
             ${r.revisionText?`<div class="detail-field full">
-              <div class="detail-label">✍️ Contenu textuel</div>
+              <div class="detail-label">âï¸ Contenu textuel</div>
               <div class="detail-desc">${r.revisionText}</div>
             </div>`:""}
             ${r.revisionOther?`<div class="detail-field full">
-              <div class="detail-label">📝 Autre</div>
+              <div class="detail-label">ð Autre</div>
               <div class="detail-desc">${r.revisionOther}</div>
             </div>`:""}
           </div>
         </div>
         ${S.role==="admin"?`<div class="detail-actions">
-          <button class="btn btn-sm btn-blue" onclick="closeDetail();openAssign('${r.id}','revision')">👤 ${tr.assign}</button>
-          <button class="btn btn-sm btn-ghost" onclick="closeDetail();openRevisionSheet('${r.id}')">✏️ ${tr.edit}</button>
-          <button class="btn btn-sm btn-purple" onclick="closeDetail();openComments('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">💬 ${tr.comments}</button>
-          <button class="btn btn-sm btn-orange" onclick="closeDetail();openHistory('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">📋 ${S.lang==="fr"?"Historique":"History"}</button>
-          ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="closeDetail();sendWA('revision','${r.id}')">📲 WhatsApp</button>`:""}
+          <button class="btn btn-sm btn-blue" onclick="closeDetail();openAssign('${r.id}','revision')">ð¤ ${tr.assign}</button>
+          <button class="btn btn-sm btn-ghost" onclick="closeDetail();openRevisionSheet('${r.id}')">âï¸ ${tr.edit}</button>
+          <button class="btn btn-sm btn-purple" onclick="closeDetail();openComments('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">ð¬ ${tr.comments}</button>
+          <button class="btn btn-sm btn-orange" onclick="closeDetail();openHistory('${r.id}','revision','${r.clientName.replace(/'/g,"")}')">ð ${S.lang==="fr"?"Historique":"History"}</button>
+          ${fl&&fl.phone?`<button class="btn btn-sm btn-wa" onclick="closeDetail();sendWA('revision','${r.id}')">ð² WhatsApp</button>`:""}
         </div>`:""}
       </div>
     </div>`;
 }
 
-// ── SHEET ─────────────────────────────────────────────────────────
+// ââ SHEET âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function openSheet(title,body){
   el("sheet-wrap").innerHTML=`
     <div class="overlay" onclick="if(event.target.classList.contains('overlay'))closeSheet()">
       <div class="sheet">
         <div class="sheet-handle"><div class="sheet-handle-bar"></div></div>
-        <div class="sheet-head"><h3 style="font-size:15px;font-weight:800">${title}</h3><button class="sheet-x" onclick="closeSheet()">×</button></div>
+        <div class="sheet-head"><h3 style="font-size:15px;font-weight:800">${title}</h3><button class="sheet-x" onclick="closeSheet()">Ã</button></div>
         <div class="sheet-body">${body}</div>
       </div>
     </div>`;
 }
 function closeSheet(){ el("sheet-wrap").innerHTML=""; }
 
-// ── INIT ─────────────────────────────────────────────────────────
+// ââ INIT âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 initTheme();
 setLang("fr");
 tryAutoLogin();

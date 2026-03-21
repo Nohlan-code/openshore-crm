@@ -385,7 +385,7 @@ fr:{
   deliveryUrl:"ð Lien de livraison (Drive, Loom...)",
   deactivate:"DÃ©sactiver", reactivate:"RÃ©activer",
   fullName:"Nom complet", email:"Email", spec:"Niveau", phone:"WhatsApp", pwFl:"Mot de passe",
-  notesLbl:"Notes internes (admin)", waKeyLbl:"🤖 Clé CallMeBot (notifs WA auto)", avatarUrlLbl:"Photo de profil (URL image)",
+  notesLbl:"Notes internes (admin)", avatarUrlLbl:"Photo de profil (URL image)",
   toolsLib:"Ressources partagÃ©es avec les freelances.",
   icon:"IcÃ´ne", name:"Nom", url:"URL", cat:"CatÃ©gorie", shortDesc:"Description",
   myOnlyRev:"Vous ne voyez que vos rÃ©visions assignÃ©es.",
@@ -431,7 +431,7 @@ en:{
   deactivate:"Deactivate", reactivate:"Reactivate",
   fullName:"Full name", email:"Email", spec:"Level", phone:"WhatsApp", pwFl:"Password",
   notesLbl:"Internal notes (admin)", avatarUrlLbl:"Profile photo (image URL)",
-  towaKeyLbl:"🤖 CallMeBot key (auto WA notifs)", olsLib:"Resources shared with freelancers.",
+  toolsLib:"Resources shared with freelancers.",
   icon:"Icon", name:"Name", url:"URL", cat:"Category", shortDesc:"Description",
   myOnlyRev:"You only see your assigned revisions.",
   comments:"Comments", addComment:"Add a comment...", send:"Send",
@@ -1410,10 +1410,6 @@ function openFlSheet(id){
     </div>
     <div class="field"><label class="lbl">${tr.avatarUrlLbl}</label><input class="inp" id="ff-av" value="${f?.avatarUrl||""}" placeholder="https://..."/></div>
     <div class="field"><label class="lbl">${tr.notesLbl}</label><textarea class="inp" id="ff-notes" style="min-height:60px">${f?.notes||""}</textarea></div>
-    <div class="field">
-      <label class="lbl">${tr.waKeyLbl}</label>
-      <input class="inp" id="ff-wak" value="${f?.apiKeyWA||''}" placeholder="ex: 1234567"/>
-      <div style="font-size:10px;color:var(--muted);margin-top:3px">Le freelance envoie <b>I allow callmebot to send me messages</b> au <b>+34 644 597 219</b> sur WhatsApp pour obtenir sa clé.</div>
     </div>
     <div id="ff-err" class="alert alert-e" style="display:none"></div>
     <div class="two-col">
@@ -1426,7 +1422,7 @@ async function saveFl(id){
   const btn=el("ff-save"); btn.textContent="â³..."; btn.disabled=true;
   const ini=n.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
   const form={name:n,email:el("ff-e").value,password:el("ff-p").value,phone:el("ff-ph").value,
-    specialty:el("ff-s").value,avatar:ini,avatarUrl:el("ff-av").value,notes:el("ff-notes").value,apiKeyWA:el("ff-wak").value.trim(),active:true};
+    specialty:el("ff-s").value,avatar:ini,avatarUrl:el("ff-av").value,notes:el("ff-notes").value,active:true};
   try{
     if(id){const u=await api("PUT",`/freelancers/${id}`,{...S.freelancers.find(f=>f.id===id),...form});S.freelancers=S.freelancers.map(f=>f.id===id?u:f);}
     else{const c=await api("POST","/freelancers",{...form,id:uid()});S.freelancers=[...S.freelancers,c];}

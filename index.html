@@ -532,31 +532,63 @@ function initTheme(){
   setTimeout(()=>{ if(el("theme-btn"))el("theme-btn").textContent=ico; if(el("theme-btn-tb"))el("theme-btn-tb").textContent=ico; updateLogos(saved); },100);
 }
 
-// ── API ───────────────────────────────────────────────────────────
-async function api(method,path,body){
-  const opts={method,headers:{"Content-Type":"application/json"}};
-  if(body) opts.body=JSON.stringify(body);
-  const res=await fetch(API+path,opts);
-  if(!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+// ── API ── (timeout 15s + retry ×2) ─────────────────────────────
+async function apiFetch(method,path,body,attempt=0){
+  const ctrl=new AbortController();
+  const tid=setTimeout(()=>ctrl.abort(),15000);
+  try{
+    const opts={method,headers:{"Content-Type":"application/json"},signal:ctrl.signal};
+    if(body) opts.body=JSON.stringify(body);
+    const res=await fetch(API+path,opts);
+    clearTimeout(tid);
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  }catch(e){
+    clearTimeout(tid);
+    if(attempt<2&&(e.name==="AbortError"||e.message==="Failed to fetch")){
+      await new Promise(r=>setTimeout(r,2000*(attempt+1)));
+      return apiFetch(method,path,body,attempt+1);
+    }
+    throw e;
+  }
 }
+async function api(method,path,body){ return apiFetch(method,path,body); }
 async function loadAll(){
   showLoading();
-  try {
+  try{
     const [orders,freelancers,tools,revisions]=await Promise.all([
       api("GET","/orders"), api("GET","/freelancers"),
       api("GET","/tools"),  api("GET","/revisions"),
     ]);
     S.orders=orders; S.freelancers=freelancers; S.tools=tools; S.revisions=revisions;
-  } catch(e){ console.error("loadAll:",e); }
+    S._lastSync=Date.now();
+  }catch(e){
+    console.error("loadAll:",e);
+    el("page").innerHTML=`<div style="padding:48px 20px;text-align:center">
+      <div style="font-size:40px;margin-bottom:14px">⚠️</div>
+      <div style="font-weight:800;font-size:16px;margin-bottom:8px">Impossible de charger les données</div>
+      <div style="color:var(--muted);font-size:12px;margin-bottom:22px">${e.message||"Erreur réseau — vérifiez votre connexion."}</div>
+      <button class="btn btn-p" onclick="loadAll().then(()=>{buildNav();renderPage();})">🔄 Réessayer</button>
+    </div>`;
+  }
 }
+let _syncErrors=0;
 async function syncData(){
   if(!S.role)return;
-  try {
+  if(document.hidden)return;
+  try{
     const [orders,revisions]=await Promise.all([api("GET","/orders"),api("GET","/revisions")]);
     S.orders=orders; S.revisions=revisions;
+    S._lastSync=Date.now(); _syncErrors=0;
     buildNav(); renderPage();
-  } catch(e){}
+  }catch(e){
+    _syncErrors++;
+    if(_syncErrors>=3){
+      clearInterval(S.syncTimer);
+      const delay=Math.min(30000*_syncErrors,300000);
+      S.syncTimer=setInterval(syncData,delay);
+    }
+  }
 }
 
 // ── AUTH ──────────────────────────────────────────────────────────
@@ -583,39 +615,72 @@ async function tryLogin(){
   const email=el("a-email").value.trim(), pw=el("a-pw").value;
   if(!email||!pw) return;
   el("a-btn").textContent="⏳..."; el("a-btn").disabled=true;
-  try {
-    const res=await fetch(API+"/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password:pw})});
+  const coldTimer=setTimeout(()=>showErr("a-err","⏳ Le serveur démarre, patientez ~20s…"),4000);
+  try{
+    const ctrl=new AbortController();
+    const tid=setTimeout(()=>ctrl.abort(),30000);
+    const res=await fetch(API+"/auth/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,password:pw}),signal:ctrl.signal});
+    clearTimeout(tid); clearTimeout(coldTimer);
     if(!res.ok){ showErr("a-err",t().wrongPw); }
-    else { const fl=await res.json(); doLogin("freelancer",fl); }
-  } catch(e){ showErr("a-err","Erreur de connexion."); }
+    else{ const fl=await res.json(); doLogin("freelancer",fl); }
+  }catch(e){
+    clearTimeout(coldTimer);
+    if(e.name==="AbortError") showErr("a-err","⏱ Délai dépassé. Réessayez dans quelques secondes.");
+    else showErr("a-err","Erreur de connexion. Vérifiez votre réseau.");
+  }
   el("a-btn").textContent=t().loginBtn; el("a-btn").disabled=false;
 }
 function openAdminModal(){ el("admin-modal").style.display="flex"; el("am-pw").value=""; }
 async function tryAdmin(){
   const pw=el("am-pw").value; if(!pw) return;
   el("am-btn").textContent="⏳..."; el("am-btn").disabled=true;
-  try {
-    const res=await fetch(API+"/auth/admin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw})});
+  const coldTimer=setTimeout(()=>showErr("am-err","⏳ Le serveur démarre, patientez ~20s…"),4000);
+  try{
+    const ctrl=new AbortController();
+    const tid=setTimeout(()=>ctrl.abort(),30000);
+    const res=await fetch(API+"/auth/admin",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw}),signal:ctrl.signal});
+    clearTimeout(tid); clearTimeout(coldTimer);
     if(res.ok){ el("admin-modal").style.display="none"; doLogin("admin",null); }
     else showErr("am-err",t().wrongAdmin);
-  } catch(e){ showErr("am-err","Erreur de connexion."); }
+  }catch(e){
+    clearTimeout(coldTimer);
+    if(e.name==="AbortError") showErr("am-err","⏱ Délai dépassé. Réessayez.");
+    else showErr("am-err","Erreur de connexion.");
+  }
   el("am-btn").textContent=t().loginBtn; el("am-btn").disabled=false;
 }
+let _visHandler=null;
 async function doLogin(role,me){
   S.role=role; S.me=me; S.tab="dashboard";
+  try{ localStorage.setItem("os_session",JSON.stringify({role,me,ts:Date.now()})); }catch(_){}
   el("auth").classList.add("hidden");
   el("app").classList.add("visible");
   await loadAll();
   buildNav(); renderPage();
-  S.syncTimer=setInterval(syncData,10000);
-  document.addEventListener("visibilitychange",()=>{ if(!document.hidden) syncData(); });
+  if(S.syncTimer) clearInterval(S.syncTimer);
+  _syncErrors=0;
+  S.syncTimer=setInterval(syncData,30000);
+  if(_visHandler) document.removeEventListener("visibilitychange",_visHandler);
+  _visHandler=()=>{ if(!document.hidden) syncData(); };
+  document.addEventListener("visibilitychange",_visHandler);
 }
 function logout(){
   S.role=null; S.me=null;
-  if(S.syncTimer)clearInterval(S.syncTimer);
+  if(S.syncTimer) clearInterval(S.syncTimer);
+  if(_visHandler){ document.removeEventListener("visibilitychange",_visHandler); _visHandler=null; }
+  try{ localStorage.removeItem("os_session"); }catch(_){}
   el("app").classList.remove("visible");
   el("auth").classList.remove("hidden");
   el("a-email").value=""; el("a-pw").value="";
+}
+function tryAutoLogin(){
+  try{
+    const raw=localStorage.getItem("os_session");
+    if(!raw) return;
+    const {role,me,ts}=JSON.parse(raw);
+    if(Date.now()-ts>8*3600*1000){ localStorage.removeItem("os_session"); return; }
+    doLogin(role,me);
+  }catch(e){ try{localStorage.removeItem("os_session");}catch(_){} }
 }
 
 // ── NAV ───────────────────────────────────────────────────────────
@@ -1667,6 +1732,7 @@ function closeSheet(){ el("sheet-wrap").innerHTML=""; }
 // ── INIT ─────────────────────────────────────────────────────────
 initTheme();
 setLang("fr");
+tryAutoLogin();
 </script>
 </body>
 </html>

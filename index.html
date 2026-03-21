@@ -91,15 +91,32 @@ a{color:inherit;text-decoration:none}
 @keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(-14px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 @keyframes toastOut{to{opacity:0;transform:translateX(-50%) translateY(-8px)}}
 .notif-toast{position:fixed;top:22px;left:50%;transform:translateX(-50%);z-index:99999;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 22px;box-shadow:var(--shadow-xl);font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px;animation:toastIn .28s cubic-bezier(.16,1,.3,1);pointer-events:none;white-space:nowrap;}
-.track-wrap{min-height:100vh;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px;}
-.track-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:480px;width:100%;box-shadow:var(--shadow-xl);}
-.track-status-row{display:flex;align-items:center;gap:10px;margin:16px 0;}
-.track-step{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;}
-.track-dot{width:28px;height:28px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:font-size:13px;transition:.3s;}
-.track-dot.done{background:var(--green);box-shadow:0 0 12px rgba(34,197,94,.35);}
-.track-dot.active{background:var(--accent);box-shadow:0 0 12px rgba(245,166,35,.4);animation:badgePulse 1.4s ease infinite;}
-.track-line{flex:1;height:2px;background:var(--border);margin:0 2px;}
-.track-line.done{background:var(--green);}
+.track-wrap{min-height:100vh;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px 16px;}
+.track-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:32px 28px;max-width:440px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,.6);}
+.track-header{text-align:center;padding-bottom:22px;border-bottom:1px solid var(--border);margin-bottom:22px;}
+.track-brand{font-size:10px;font-weight:800;letter-spacing:.18em;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
+.track-name{font-size:30px;font-weight:900;color:var(--text);letter-spacing:-.5px;line-height:1.1;}
+.track-sub{font-size:13px;font-weight:700;color:var(--text-2);margin-top:6px;}
+.track-progress-wrap{margin-bottom:18px;}
+.track-bar-bg{height:3px;background:var(--border);border-radius:3px;overflow:hidden;}
+.track-bar-fill{height:3px;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .6s ease;}
+.track-pct{font-size:10px;color:var(--text-3);text-align:right;margin-top:5px;font-weight:700;letter-spacing:.05em;}
+.track-steps{display:flex;align-items:flex-start;margin:0 0 20px;}
+.track-step-item{display:flex;flex-direction:column;align-items:center;flex:1;}
+.track-conn{flex:1;height:2px;background:var(--border);margin-top:16px;transition:.4s;}
+.track-conn.done{background:var(--green);}
+.track-circle{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;transition:.3s;border:2px solid var(--border);background:var(--surface);color:var(--text-3);}
+.track-circle.done{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 0 14px rgba(34,197,94,.3);font-size:14px;}
+.track-circle.active{background:var(--accent);border-color:var(--accent);color:var(--bg);box-shadow:0 0 18px rgba(245,166,35,.5);animation:badgePulse 1.6s ease infinite;}
+.track-steplabel{font-size:8px;color:var(--text-3);margin-top:5px;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.04em;line-height:1.25;max-width:42px;}
+.track-steplabel.done{color:var(--green);}
+.track-steplabel.active{color:var(--accent);}
+.track-status-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center;margin-bottom:16px;}
+.track-status-lbl{font-size:9px;color:var(--text-3);text-transform:uppercase;letter-spacing:.12em;font-weight:800;margin-bottom:7px;}
+.track-status-val{font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px;}
+.track-deadline-row{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--text-2);margin-bottom:16px;}
+.track-wa-btn{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--green-dim);color:var(--green);border-radius:14px;padding:14px;font-size:13px;font-weight:800;text-decoration:none;border:1.5px solid rgba(34,197,94,.2);width:100%;}
+.track-powered{text-align:center;margin-top:14px;font-size:10px;color:var(--text-3);}
 .sb-footer{padding:12px 10px;border-top:1px solid var(--border);background:var(--dim);}
 .sb-user{display:flex;align-items:center;gap:10px;padding:9px 12px;margin-bottom:8px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);}
 .sb-langs{display:flex;gap:5px;padding:0 4px;margin-bottom:6px}
@@ -1883,14 +1900,14 @@ const TRACK_STEPS=[
   {key:"assigned",label:"Assignée",icon:"👤"},
   {key:"inprogress",label:"En cours",icon:"⚙️"},
   {key:"review",label:"Révision",icon:"🔍"},
-  {key:"done",label:"Terminée",icon:"✅"},
+  {key:"done",label:"Terminée",icon:"🏁"},
   {key:"delivered",label:"Livrée",icon:"🚀"},
 ];
 const TRACK_REV_STEPS=[
   {key:"new",label:"Reçue",icon:"📥"},
   {key:"assigned",label:"Assignée",icon:"👤"},
   {key:"inprogress",label:"En cours",icon:"⚙️"},
-  {key:"done",label:"Terminée",icon:"✅"},
+  {key:"done",label:"Terminée",icon:"🏁"},
   {key:"delivered",label:"Livrée",icon:"🚀"},
 ];
 function trackStepIdx(status,steps){
@@ -1900,11 +1917,14 @@ function trackStepIdx(status,steps){
 function buildStepsHtml(status,steps){
   if(status==="cancelled")return"";
   const si=trackStepIdx(status,steps);
-  let h=`<div class="track-status-row">`;
+  const pct=steps.length<=1?100:Math.round(si/(steps.length-1)*100);
+  let h=`<div class="track-progress-wrap"><div class="track-bar-bg"><div class="track-bar-fill" style="width:${pct}%"></div></div><div class="track-pct">${pct}% complété</div></div>`;
+  h+=`<div class="track-steps">`;
   steps.forEach((st,i)=>{
-    const isDone=i<si, isActive=i===si;
-    if(i>0) h+=`<div class="track-line${isDone?" done":""}"></div>`;
-    h+=`<div class="track-step"><div class="track-dot${isDone?" done":isActive?" active":""}">${isDone?"✓":st.icon}</div><div style="font-size:9px;color:var(--text-2);margin-top:3px;font-weight:600">${st.label}</div></div>`;
+    const isDone=i<si,isActive=i===si;
+    const cls=isDone?"done":isActive?"active":"";
+    if(i>0) h+=`<div class="track-conn${isDone?" done":""}"></div>`;
+    h+=`<div class="track-step-item"><div class="track-circle ${cls}">${isDone?"✓":isActive?st.icon:(i+1)}</div><div class="track-steplabel ${cls}">${st.label}</div></div>`;
   });
   return h+`</div>`;
 }
@@ -1928,20 +1948,20 @@ async function showTrackPage(id){
     const typeLabel=isRev?"Suivi de révision":"Suivi de mission";
     const currentStep=steps[si];
     wrap.innerHTML=`<div class="track-card">
-      <div style="text-align:center;margin-bottom:20px">
-        <div style="font-size:13px;font-weight:800;color:var(--text-2);letter-spacing:.05em;text-transform:uppercase">${typeLabel}</div>
-        <div style="font-size:28px;font-weight:900;margin:6px 0">${o.clientName}</div>
-        ${subtitle?`<div style="font-size:12px;color:var(--accent);font-weight:700">${subtitle}</div>`:""}
+      <div class="track-header">
+        <div class="track-brand">Openshore · ${typeLabel}</div>
+        <div class="track-name">${o.clientName}</div>
+        ${subtitle?`<div class="track-sub">${subtitle}</div>`:""}
       </div>
       ${buildStepsHtml(o.status,steps)}
-      <div style="background:var(--dim);border-radius:12px;padding:14px 18px;margin-top:16px;text-align:center">
-        <div style="font-size:11px;color:var(--text-2);margin-bottom:4px">Statut actuel</div>
-        <div style="font-size:16px;font-weight:900;color:${statusColor}">${cancelled?"❌ Annulée":(currentStep?.icon||"")+" "+(currentStep?.label||o.status)}</div>
+      <div class="track-status-box">
+        <div class="track-status-lbl">Statut actuel</div>
+        <div class="track-status-val" style="color:${statusColor}">${cancelled?"❌ Annulée":(currentStep?.icon||"")+" "+(currentStep?.label||o.status)}</div>
       </div>
-      ${o.deadline?`<div style="text-align:center;margin-top:12px;font-size:11px;color:var(--text-2)">📅 Délai prévu : <strong>${new Date(o.deadline).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}</strong></div>`:""}
-      ${o.deliveryUrl&&["done","delivered"].includes(o.status)?`<a href="${o.deliveryUrl}" target="_blank" style="display:block;margin-top:18px"><div class="delivery-badge" style="text-align:center;font-size:13px;padding:12px">🚀 Accéder à la livraison</div></a>`:""}
-      <div style="text-align:center;margin-top:20px"><a href="https://wa.me/33768067199" style="display:inline-flex;align-items:center;gap:7px;background:var(--green-dim);color:var(--green);border-radius:10px;padding:9px 18px;font-size:12px;font-weight:700;text-decoration:none;border:1px solid rgba(34,197,94,.2)">📲 Contacter via WhatsApp</a></div>
-      <div style="text-align:center;margin-top:14px;font-size:10px;color:var(--text-3)">Powered by <strong style="color:var(--accent)">Openshore</strong></div>
+      ${o.deadline?`<div class="track-deadline-row">📅 Délai prévu :&nbsp;<strong style="color:var(--text)">${new Date(o.deadline).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})}</strong></div>`:""}
+      ${o.deliveryUrl&&["done","delivered"].includes(o.status)?`<a href="${o.deliveryUrl}" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent-dim);color:var(--accent);border:1.5px solid var(--accent);border-radius:14px;padding:14px;font-size:13px;font-weight:800;text-decoration:none;margin-bottom:12px">🚀 Accéder à la livraison</a>`:""}
+      <a href="https://wa.me/33768067199" class="track-wa-btn">📲 Contacter via WhatsApp</a>
+      <div class="track-powered">Powered by <strong style="color:var(--accent)">Openshore</strong></div>
     </div>`;
   }catch(e){
     wrap.innerHTML=`<div class="track-card" style="text-align:center"><div style="font-size:40px;margin-bottom:12px">🔍</div><div style="font-size:16px;font-weight:800;margin-bottom:8px">${e.message||"Introuvable"}</div><div style="font-size:12px;color:var(--text-2)">Vérifiez le lien ou contactez votre agence.</div></div>`;
